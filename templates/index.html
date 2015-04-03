@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<ul class="tags">
+<h1>tags</h1>
+{% for tag in show_tags %}
+  <li>{{ tag }}
+{% endfor %}
+</ul>
+<ul class="objects">
+<h1>objects</h1>
+{% for obj in show_objects %}
+  <li>{{ obj }}
+{% endfor %}
+</ul>
+</body>
+</html>
