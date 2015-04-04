@@ -21,5 +21,12 @@ def tag_page(tag):
     	return render_template('404.html', show_name=tag)
     return render_template('tag.html', show_name=tag)
 
+@app.route('/api/<test>')
+def tags_f():
+#    app.logger.debug('name is %d', test)
+    response.status_code(500)
+    response.data(test)
+    return 'test %d' % test
+
 if __name__ == "__main__":
     app.run()
