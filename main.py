@@ -14,5 +14,13 @@ objects = db['objects']
 def hello():
     return render_template('index.html', show_tags=[tag['name'] for tag in tags.find()], show_objects=[obj['name'] for obj in objects.find()])
 
+@app.route('/api/<test>')
+def tags():
+#    app.logger.debug('name is %d', test)
+    response.status_code(500)
+    response.data(test)
+    return 'test %d' % test
+
+
 if __name__ == "__main__":
     app.run()
