@@ -13,12 +13,8 @@ tags = db['tags']
 objects = db['objects']
 
 
-#конвертер в JSON - почему-то не работает
+# конвертер в JSON - не работает
 def output_json(obj, code, headers=None):
-    """
-    This is needed because we need to use a custom JSON converter
-    that knows how to translate MongoDB types to JSON.
-    """
     resp = make_response(dumps(obj), code)
     resp.headers.extend(headers or {})
     return resp
@@ -42,16 +38,19 @@ def get_tag(id):
         name=id
     )
 
-# получить коллекцию тегов в JSON,
-# У роута должно быть два параметра limit и offset, для слайса выборки
-# TODO: возможно сменить url ы для API на
-#  'api/tags' - метод GET и POST (чтобы можно было туда оправлить новый тег),
-#  'api/tags/<id>' - методы GET, PUT, DELETE для работы с конкретным тегом
+"""
+ получить коллекцию тегов в JSON,
+ У роута должно быть два параметра limit и offset, для слайса выборки
+ TODO:
+ стоит сменить url для API на
+ 'api/tags' - метод GET и POST (чтобы можно было туда оправлить новый тег),
+ 'api/tags/<id>' - методы GET, PUT, DELETE для работы с конкретным тегом
+"""
 @app.route('/api/tags')
 def tags_list():
     if request.method == 'GET':
-#        limit = int(request.args.get('limit', 10))
-#        offset = int(request.args.get('offset', 0))
+#       limit = int(request.args.get('limit', 10))
+#       offset = int(request.args.get('offset', 0))
         json_results = []
         json_docs = [json.dumps(doc, default=json_util.default) for doc in tags.find()]
         return str(json_docs)
