@@ -1,7 +1,6 @@
 # coding: utf-8
 from pymongo import MongoClient
 from flask import Flask, render_template, abort, request, url_for
-from urlparse import urlparse, urljoin
 from bson.json_util import dumps
 
 app = Flask(__name__)
@@ -21,7 +20,8 @@ def output_json(obj, code, headers=None):
 
 @app.route("/")
 def hello():
-    return render_template('index.html', show_tags=[tag['name'] for tag in tags.find()], show_objects=[obj['name'] for obj in objects.find()])
+    _tags = db.tags.find().sort()
+    return render_template('index.html', show_tags=[tag['name'] for tag in _tags], show_objects=[obj['name'] for obj in objects.find()])
 
 @app.route('/<tag>')
 def tag_page(tag):
