@@ -51,7 +51,9 @@ def get_tag(id):
 @app.route('/api/tags/')
 def tags_list():
     course_list = list( objects.find() )
-    resp = jsonify({'tags-collection': [
+    resp = jsonify(
+    # если вписать сюда просто {'tags-collection': course_list} то не может спарсить ObjectID
+        {'tags-collection': [
         {'_id': 'OBJ', 'name': 'WTF'},
         {'_id': 'OBJ', 'name': 'WTF'},
         {'_id': 'OBJ', 'name': 'WTF'},
