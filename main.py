@@ -11,13 +11,6 @@ db = client['boojom']
 tags = db.tags
 objects = db.objects
 
-
-# конвертер в JSON - не работает
-def output_json(obj, code, headers=None):
-    resp = make_response(dumps(obj), code)
-    resp.headers.extend(headers or {})
-    return resp
-
 @app.route("/")
 def hello():
     _tags = tags.find()
@@ -57,6 +50,7 @@ def get_tag(name):
     if request.method == 'POST':
         # почему-то после отправки стандартным способом не показывает тег, но если снова зайти на страницу то ОК - видно JSON
         tags.insert({'name': name})
+        app.logger.info(request.query_string)
     if request.method == 'PUT':
         tags.update({'name': name}, {'name': name})
     if request.method == 'DELETE':
