@@ -19,9 +19,9 @@ def hello():
 
 @app.route('/<tag>')
 def tag_page(tag):
-    tag = tags.find_one({'name': tag})
-    if tag:
-        return render_template('tag.html', show_name=tag['name'])
+    _tag = tags.find_one({'name': tag})
+    if _tag:
+        return render_template('tag.html', show_name=_tag['name'])
     else:
         return render_template('404.html', show_name=tag)
 
