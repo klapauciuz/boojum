@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import pymongo
 from pymongo import MongoClient
-from flask import Flask, render_template, abort, json, jsonify
+from flask import Flask, render_template, abort, request
 import json
 from bson import Binary, Code
 from bson.json_util import dumps
@@ -48,10 +48,19 @@ def tags_list():
     resp = dumps(tags.find())
     return resp
 
-@app.route('/api/tags/<name>')
+@app.route('/api/tags/<name>', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def get_tag(name):
-    current_tag = tags.find_one({'name': name})
-    return dumps(current_tag)
+    if request.method == 'GET':
+        current_tag = tags.find_one({'name': name})
+        return dumps(current_tag)
+    #TODO: refact
+    if request.method == 'POST':
+        tags.insert({'name': name})
+    if request.method == 'PUT':
+        tags.update({'name': name}, {'name': name})
+    if request.method == 'DELETE':
+        tags.remove({'name': name}, {justOne: true})
+
 
 if __name__ == "__main__":
     app.run(debug=True)
