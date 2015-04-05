@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+Add new tag <br>
+<form id="add" action="/api/tags/{{ tag_name }}" method="post">
+    <label>Name: </label>
+    <input type="text" name="name" placeholder="Name" value="{{ tag_name }}"/>
+    <button type="submit" form="add">+ Add +</button>
+</form>
+</body>
+</html>

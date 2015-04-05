@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
-import pymongo
+# coding: utf-8
 from pymongo import MongoClient
-from flask import Flask, render_template, abort, request
-import json
-from bson import Binary, Code
+from flask import Flask, render_template, abort, request, url_for
+from urlparse import urlparse, urljoin
 from bson.json_util import dumps
 
 app = Flask(__name__)
@@ -33,7 +31,9 @@ def tag_page(tag):
     else:
         return render_template('404.html', show_name=tag)
 
-
+@app.route('/<tag>/add')
+def add_tag_page(tag):
+    return render_template('add_tag.html', tag_name=tag)
 
 """
  получить коллекцию тегов в JSON,
@@ -53,8 +53,9 @@ def get_tag(name):
     if request.method == 'GET':
         current_tag = tags.find_one({'name': name})
         return dumps(current_tag)
-    #TODO: refact
+    #TODO: refact, возможно для добавления лучше url без переменной /api/tags/add
     if request.method == 'POST':
+        # почему-то после отправки стандартным способом не показывает тег, но если снова зайти на страницу то ОК - видно JSON
         tags.insert({'name': name})
     if request.method == 'PUT':
         tags.update({'name': name}, {'name': name})
