@@ -13,6 +13,16 @@ tags = db['tags']
 objects = db['objects']
 
 
+#конвертер в JSON - почему-то не работает
+def output_json(obj, code, headers=None):
+    """
+    This is needed because we need to use a custom JSON converter
+    that knows how to translate MongoDB types to JSON.
+    """
+    resp = make_response(dumps(obj), code)
+    resp.headers.extend(headers or {})
+    return resp
+
 @app.route("/")
 def hello():
     return render_template('index.html', show_tags=[tag['name'] for tag in tags.find()], show_objects=[obj['name'] for obj in objects.find()])
@@ -25,21 +35,18 @@ def tag_page(tag):
     else:
         return render_template('404.html', show_name=tag)
 
+# просто тест переменной роута и выдачей JSON
 @app.route('/api/tag/<id>')
 def get_tag(id):
     return jsonify(
         name=id
     )
-def output_json(obj, code, headers=None):
-    """
-    This is needed because we need to use a custom JSON converter
-    that knows how to translate MongoDB types to JSON.
-    """
-    resp = make_response(dumps(obj), code)
-    resp.headers.extend(headers or {})
 
-    return resp
-
+# получить коллекцию тегов в JSON,
+# У роута должно быть два параметра limit и offset, для слайса выборки
+# TODO: возможно сменить url ы для API на
+#  'api/tags' - метод GET и POST (чтобы можно было туда оправлить новый тег),
+#  'api/tags/<id>' - методы GET, PUT, DELETE для работы с конкретным тегом
 @app.route('/api/tags')
 def tags_list():
     if request.method == 'GET':
