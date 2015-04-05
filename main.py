@@ -43,7 +43,7 @@ def tag_page(tag):
  'api/tags' - метод GET и POST (чтобы можно было туда оправлить новый тег),
  'api/tags/<id>' - методы GET, PUT, DELETE для работы с конкретным тегом
 """
-@app.route('/api/tags/')
+@app.route('/api/tags/',  methods=['GET'])
 def tags_list():
     resp = dumps(tags.find())
     return resp
