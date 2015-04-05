@@ -1,6 +1,6 @@
 # coding: utf-8
 from pymongo import MongoClient
-from flask import Flask, render_template, abort, request, url_for, redirect
+from flask import Flask, render_template, abort, request, url_for
 from bson.json_util import dumps
 
 app = Flask(__name__)
@@ -11,10 +11,6 @@ db = client['boojom']
 tags = db.tags
 objects = db.objects
 
-def redirect_url():
-    return request.args.get('next') or \
-           request.referrer or \
-           url_for('index')
 
 @app.route("/")
 def hello():
