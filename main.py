@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import pymongo
 from pymongo import MongoClient
 from flask import Flask, render_template, abort, json, jsonify
@@ -27,7 +28,7 @@ def hello():
 def tag_page(tag):
     current_tag = tags.find_one({'name': tag})
     if current_tag:
-        return render_template('tag.html', show_name=current_tag['name'])
+        return render_template('tag.html', name=current_tag['name'], id=current_tag['_id'])
     else:
         return render_template('404.html', show_name=tag)
 
