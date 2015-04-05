@@ -8,8 +8,8 @@ app = Flask(__name__)
 client = MongoClient('localhost', 27017)
 
 db = client['boojom']
-tags = db['tags']
-objects = db['objects']
+tags = db.tags
+objects = db.objects
 
 
 # конвертер в JSON - не работает
@@ -20,7 +20,7 @@ def output_json(obj, code, headers=None):
 
 @app.route("/")
 def hello():
-    _tags = db.tags.find().sort()
+    _tags = tags.find()
     return render_template('index.html', show_tags=[tag['name'] for tag in _tags], show_objects=[obj['name'] for obj in objects.find()])
 
 @app.route('/<tag>')
