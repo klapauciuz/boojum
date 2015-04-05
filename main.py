@@ -1,6 +1,6 @@
 # coding: utf-8
 from pymongo import MongoClient
-from flask import Flask, render_template, abort, request, url_for
+from flask import Flask, render_template, abort, request, url_for, redirect
 from bson.json_util import dumps
 
 app = Flask(__name__)
@@ -10,6 +10,11 @@ client = MongoClient('localhost', 27017)
 db = client['boojom']
 tags = db.tags
 objects = db.objects
+
+def redirect_url():
+    return request.args.get('next') or \
+           request.referrer or \
+           url_for('index')
 
 @app.route("/")
 def hello():
@@ -34,8 +39,9 @@ def add_tag_page(tag):
  TODO:
  стоит сменить url для API на
  'api/tags' - метод GET и POST (чтобы можно было туда оправлить новый тег),
- 'api/tags/<id>' - методы GET, PUT, DELETE для работы с конкретным тегом
+ 'api/tags/<name>' - методы GET, PUT, DELETE для работы с конкретным тегом
 """
+
 @app.route('/api/tags/',  methods=['GET'])
 def tags_list():
     resp = dumps(tags.find())
@@ -52,6 +58,7 @@ def get_tag(name):
         tags.insert({'name': name})
         # https://gist.github.com/ibeex/3257877
         app.logger.info('params are: %s', request.query_string)
+        return redirect('/'+name)
     if request.method == 'PUT':
         tags.update({'name': name}, {'name': name})
     if request.method == 'DELETE':
