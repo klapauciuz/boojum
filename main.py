@@ -1,6 +1,6 @@
 # coding: utf-8
 from pymongo import MongoClient
-from flask import Flask, render_template, abort, request, url_for
+from flask import Flask, render_template, abort, request, url_for, redirect
 from bson.json_util import dumps
 
 app = Flask(__name__)
