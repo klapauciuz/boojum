@@ -3,7 +3,8 @@ import pymongo
 from pymongo import MongoClient
 from flask import Flask, render_template, abort, json, jsonify
 import json
-from bson import json_util, ObjectId
+from bson import Binary, Code
+from bson.json_util import dumps
 
 app = Flask(__name__)
 
@@ -32,13 +33,7 @@ def tag_page(tag):
     else:
         return render_template('404.html', show_name=tag)
 
-# просто тест переменной роута и выдачей JSON
-@app.route('/api/tags/<id>')
-def get_tag(id):
-    current_tag = tags.find_one({'name': id})
-    return jsonify(
-        name=id
-    )
+
 
 """
  получить коллекцию тегов в JSON,
@@ -50,24 +45,13 @@ def get_tag(id):
 """
 @app.route('/api/tags/')
 def tags_list():
-    course_list = list( objects.find() )
-    resp = jsonify(
-    # если вписать сюда просто {'tags-collection': course_list} то не может спарсить ObjectID
-        {'tags-collection': [
-        {'_id': 'OBJ', 'name': 'WTF'},
-        {'_id': 'OBJ', 'name': 'WTF'},
-        {'_id': 'OBJ', 'name': 'WTF'},
-        {'_id': 'OBJ', 'name': 'WTF'},
-        {'_id': 'OBJ', 'name': 'WTF'},
-        {'_id': 'OBJ', 'name': 'WTF'}
-    ]})
-    resp.status_code = 200
+    resp = dumps(tags.find())
     return resp
-#       limit = int(request.args.get('limit', 10))
-#       offset = int(request.args.get('offset', 0))
-#        json_results = []
 
-
+@app.route('/api/tags/<name>')
+def get_tag(name):
+    current_tag = tags.find_one({'name': name})
+    return dumps(current_tag)
 
 if __name__ == "__main__":
     app.run(debug=True)
