@@ -50,7 +50,8 @@ def get_tag(name):
     if request.method == 'POST':
         # почему-то после отправки стандартным способом не показывает тег, но если снова зайти на страницу то ОК - видно JSON
         tags.insert({'name': name})
-        app.logger.info(request.query_string)
+        # https://gist.github.com/ibeex/3257877
+        app.logger.info('params are: %s', request.query_string)
     if request.method == 'PUT':
         tags.update({'name': name}, {'name': name})
     if request.method == 'DELETE':
