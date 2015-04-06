@@ -1,7 +1,8 @@
 # coding: utf-8
 from pymongo import MongoClient
-from flask import Flask, render_template, abort, request, url_for, redirect
+from flask import Flask, render_template, abort, request, url_for, redirect, request
 from bson.json_util import dumps
+from urlparse import urlparse
 
 app = Flask(__name__)
 
@@ -43,23 +44,34 @@ def tags_list():
     resp = dumps(tags.find())
     return resp
 
-@app.route('/api/tags/<name>', methods=['GET', 'POST', 'PUT', 'DELETE'])
+@app.route('/api/tags/<name>', methods=['GET', 'PUT', 'DELETE'])
 def get_tag(name):
     if request.method == 'GET':
         current_tag = tags.find_one({'name': name})
+        app.logger.info('params are: %s', request.url)
         return dumps(current_tag)
-    #TODO: refact, возможно для добавления лучше url без переменной /api/tags/add
+    if request.method == 'PUT':
+        tags.update({'name': name}, {'name': name})
+    if request.method == 'DELETE':
+        tags.remove({'name': name}, {justOne: true})
+    '''
+    возможно понадобиться
     if request.method == 'POST':
         # почему-то после отправки стандартным способом не показывает тег, но если снова зайти на страницу то ОК - видно JSON
         tags.insert({'name': name})
         # https://gist.github.com/ibeex/3257877
         app.logger.info('params are: %s', request.query_string)
         return redirect('/'+name)
-    if request.method == 'PUT':
-        tags.update({'name': name}, {'name': name})
-    if request.method == 'DELETE':
-        tags.remove({'name': name}, {justOne: true})
+    '''
 
+
+@app.route('/api/add/tag', methods=['POST'])
+def add_tag():
+    if request.method == 'POST':
+        app.logger.info('name is: %s', request.form)
+        name = request.form['name']
+        tags.insert({'name': name})
+        return redirect('/'+name)
 
 if __name__ == "__main__":
     app.run(debug=True)

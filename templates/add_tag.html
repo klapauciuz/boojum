@@ -7,11 +7,11 @@
 <body>
 <ul>
 <h2>add new tag "{{ tag_name }}"</h2>
-<form id="add" action="/api/tags/{{ tag_name }}" method="post">
+<form id="add" action="/api/add/tag" method="post">
     <h3>
     <label>name </label>
     <input type="text" name="name" placeholder="Name" value="{{ tag_name }}"/>
-    <button type="submit" form="add">add</button>
+    <input type="submit" form="add" value="add"/>
     </h3>
 </ul>
 </form>
