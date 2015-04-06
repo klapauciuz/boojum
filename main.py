@@ -1,6 +1,6 @@
 # coding: utf-8
 from pymongo import MongoClient
-from flask import Flask, render_template, abort, request, url_for, redirect, request
+from flask import Flask, render_template, abort, request, url_for, redirect, request, jsonify
 from bson.json_util import dumps
 
 app = Flask(__name__)
@@ -76,6 +76,10 @@ def add_tag():
         tags.insert({'name': name})
         # return redirect('/'+name)
         # return tags.find_one({'name': name})
+        response = jsonify(message=str('ну ок'))
+        response.status_code = 500
+        return response
+
 
 if __name__ == "__main__":
     app.run(debug=True)
