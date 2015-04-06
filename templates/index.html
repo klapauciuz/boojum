@@ -5,6 +5,10 @@
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+<big>
+    <a href="/tag/add">Add new tag</a>
+</big>
+<hr style="border-color: gray">
 <ul class="tags">
 <h1>tags</h1>
 {% for tag in show_tags %}

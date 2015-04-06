@@ -26,9 +26,9 @@ def tag_page(tag):
     else:
         return render_template('404.html', show_name=tag)
 
-@app.route('/<tag>/add')
-def add_tag_page(tag):
-    return render_template('add_tag.html', tag_name=tag)
+@app.route('/tag/add')
+def add_tag_page():
+    return render_template('add_tag.html', tag_name=request.args.get('name'))
 
 """
  получить коллекцию тегов в JSON,
