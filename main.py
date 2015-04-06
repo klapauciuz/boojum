@@ -2,7 +2,6 @@
 from pymongo import MongoClient
 from flask import Flask, render_template, abort, request, url_for, redirect, request
 from bson.json_util import dumps
-from urlparse import urlparse
 
 app = Flask(__name__)
 
@@ -75,7 +74,8 @@ def add_tag():
         app.logger.info('name is: %s', request.form)
         name = request.form['name']
         tags.insert({'name': name})
-        return redirect('/'+name)
+        # return redirect('/'+name)
+        # return tags.find_one({'name': name})
 
 if __name__ == "__main__":
     app.run(debug=True)
