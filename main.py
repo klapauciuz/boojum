@@ -76,8 +76,8 @@ def add_tag():
         tags.insert({'name': name})
         # return redirect('/'+name)
         # return tags.find_one({'name': name})
-        response = jsonify(message=str('ну ок'))
-        response.status_code = 500
+        response = jsonify(message=str('ЗБС'))
+        response.status_code = 200
         return response
 
 
