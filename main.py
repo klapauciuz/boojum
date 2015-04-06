@@ -28,7 +28,11 @@ def tag_page(tag):
 
 @app.route('/tag/add')
 def add_tag_page():
-    return render_template('add_tag.html', tag_name=request.args.get('name'))
+    name = request.args.get('name')
+    #OMG_))
+    if name == None:
+        name = ''
+    return render_template('add_tag.html', tag_name=name)
 
 """
  получить коллекцию тегов в JSON,
