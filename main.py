@@ -34,12 +34,12 @@ def add_tag_page():
     return render_template('add_tag.html', tag_name=name)
 
 """
- получить коллекцию тегов в JSON,
- У роута должно быть два параметра limit и offset, для слайса выборки
- TODO:
- стоит сменить url для API на
- 'api/tags' - метод GET и POST (чтобы можно было туда оправлить новый тег),
- 'api/tags/<name>' - методы GET, PUT, DELETE для работы с конкретным тегом
+получить коллекцию тегов в JSON,
+У роута должно быть два параметра limit и offset, для слайса выборки
+TODO:
+стоит сменить url для API на
+'api/tags' - метод GET и POST (чтобы можно было туда оправлить новый тег),
+'api/tags/<name>' - методы GET, PUT, DELETE для работы с конкретным тегом
 """
 
 @app.route('/api/tags/',  methods=['GET'])
@@ -57,16 +57,16 @@ def get_tag(name):
         tags.update({'name': name}, {'name': name})
     if request.method == 'DELETE':
         tags.remove({'name': name}, {justOne: true})
-    '''
-    возможно понадобиться
-    if request.method == 'POST':
-        # почему-то после отправки стандартным способом не показывает тег, но если снова зайти на страницу то ОК - видно JSON
-        tags.insert({'name': name})
-        # https://gist.github.com/ibeex/3257877
-        app.logger.info('params are: %s', request.query_string)
-        return redirect('/'+name)
-    '''
 
+"""
+возможно понадобится
+if request.method == 'POST':
+    # почему-то после отправки стандартным способом не показывает тег, но если снова зайти на страницу то ОК - видно JSON
+    tags.insert({'name': name})
+    # https://gist.github.com/ibeex/3257877
+    app.logger.info('params are: %s', request.query_string)
+    return redirect('/'+name)
+"""
 
 @app.route('/api/add/tag', methods=['POST'])
 def add_tag():

@@ -34,6 +34,7 @@ input[type="submit"] {
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
     color: white;
+    cursor: pointer;
 }
 
 div.page {
@@ -191,3 +192,4 @@ li{
     display: inline-block;
     float: : left;
 }
+

@@ -7,11 +7,13 @@
   <script type="text/javascript" src="{{ url_for('static', filename='scripts/send.js') }}"></script>
 </head>
 <body>
-<h2>Добавить новый тег {{ tag_name }}</h2>
+<ul>
+<h2>add new tag {{ tag_name }}</h2>
 <form id="add" action="" >
-    <label>Название тега</label>
-    <input type="text" name="name" placeholder="Name" value="{{ tag_name }}"/>
+    <label>name </label>
+    <input type="text" name="name" placeholder="e.g. creepy" value="{{ tag_name }}"/>
     <input type="submit" form="add" value="add"/>
 </form>
+</ul>
 </body>
 </html>
