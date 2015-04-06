@@ -8,8 +8,9 @@ $(document).ready(function(){
         url : '/api/add/tag',
         type: 'POST',
         data : postData,
-        success:function() {
-            console.log('на сервер успешно отправлены данные в виде: %s', JSON.stringify(postData))
+        success:function(response) {
+            console.log('на сервер успешно отправлены данные в виде: %s/n', JSON.stringify(postData))
+            console.log('ответ сервера: %s', JSON.stringify(response))
         },
         error: function(err) {
           console.log(JSON.stringify(err));
