@@ -1,7 +1,19 @@
 # coding: utf-8
 from pymongo import MongoClient
-from flask import Flask, render_template, abort, request, url_for, redirect, request, jsonify
+from flask import Flask, render_template, abort, request, url_for, redirect, request, jsonify, flash, session, session, g
 from bson.json_util import dumps
+from werkzeug import check_password_hash, generate_password_hash
+from wtforms import Form, BooleanField, TextField, PasswordField, validators
+
+class RegistrationForm(Form):
+    username = TextField('Username', [validators.Length(min=4, max=25)])
+    email = TextField('Email Address', [validators.Length(min=6, max=35)])
+    password = PasswordField('New Password', [
+        validators.Required(),
+        validators.EqualTo('confirm', message='Passwords must match')
+    ])
+    confirm = PasswordField('Repeat Password')
+    accept_tos = BooleanField('I accept the TOS', [validators.Required()])
 
 app = Flask(__name__)
 
@@ -79,21 +91,49 @@ def add_tag():
 
 
 """Auth"""
-@app.route('/signup')
-def login_page():
-    return render_template('signup.html')
+# @app.route('/register')
+# def login_page():
+#     return render_template('register.html')
 
-@app.route('/api/signup', methods=['POST'])
-def add_user():
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    error = None
     if request.method == 'POST':
-        username = request.form['username']
-        email = request.form['email']
-        users.insert({'username': username, 'email': email})
-        response = jsonify(message=str('OK'))
-        response.status_code = 200
-        return response
+        if not request.form['username']:
+            error = 'You have to enter a username'
+        elif not request.form['email'] or '@' not in request.form['email']:
+            error = 'You have to enter a valid email address'
+        elif not request.form['password']:
+            error = 'You have to enter a password'
+        elif request.form['password'] != request.form['password2']:
+            error = 'The two passwords do not match'
+        else:
+            username = request.form['username']
+            email = request.form['username']
+            password = generate_password_hash(request.form['password'])
+            users.insert({'username': username, 'email': email, 'password': password})
+            flash('You were successfully registered and can login now')
+            return redirect('/login')
+    return render_template('register.html', error=error)
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    error = None
+    if request.method == 'POST':
+        user = users.find_one({'username': request.form['username']})
+        if user is None:
+            error = 'Invalid username'
+        elif not check_password_hash(user['password'],
+                                     request.form['password']):
+            error = 'Invalid password'
+        else:
+            flash('You were logged in, ' + user['username'])
+            return redirect('/')
+    return render_template('login.html', error=error)
 
 if __name__ == "__main__":
+    app.secret_key = 'super secret key'
+    app.config['SESSION_TYPE'] = 'filesystem'
     app.run(debug=True)
 
 """

@@ -1,11 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-<ul>
 <h2>add new tag {{ tag_name }}</h2>
 <form id="add" action="" >
     <label>name </label>
     <input type="text" name="name" placeholder="e.g. creepy" value="{{ tag_name }}"/>
     <input type="submit" form="add" value="add"/>
 </form>
-</ul>
 {% endblock content %}

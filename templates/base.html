@@ -10,12 +10,21 @@
 {% block header %}
   <big>
       <a href="/tag/add">add new tag</a> |
-      <a href="/signup">sign up</a> |
+      <a href="/login">login</a>/<a href="/register">sign up</a> |
       <a href="/trends">popular tags</a> |
       <a href="/pop">popular objects</a>
   </big>
   <hr style="border-color: gray">
 {% endblock header %}
+{% with flashes = get_flashed_messages() %}
+  {% if flashes %}
+    <ul class="flashes">
+    {% for message in flashes %}
+      <li>{{ message }}
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
 {% block content %}{% endblock  %}
 </body>
 </html>
