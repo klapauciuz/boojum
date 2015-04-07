@@ -9,11 +9,20 @@
 <body>
 {% block header %}
   <big>
-      <a href="/tag/add">add new tag</a> |
-      <a href="/login">login</a>/<a href="/register">sign up</a> |
-      <a href="/trends">popular tags</a> |
-      <a href="/pop">popular objects</a>
+    <a href="/tag/add">add new tag</a> |
+    <a href="/trends">popular tags</a> |
+    <a href="/pop">popular objects</a>
   </big>
+  {% if g.user %}
+  <big style='float:right;'>
+    <a href="/collection">my collection</a> |
+    <a href="/logout">logout</a>
+  </big>
+  {% else %}
+  <big style='float:right;'>
+    <a href="/login">login</a>/<a href="/register">sign up</a>
+  </big>
+  {% endif %}
   <hr style="border-color: gray">
 {% endblock header %}
 {% with flashes = get_flashed_messages() %}

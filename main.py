@@ -22,9 +22,6 @@ def before_request():
 @app.route("/")
 def hello():
     _tags = tags.find()
-    if 'username' not in session:
-        flash('Log in, please')
-        return redirect('/login')
     return render_template('index.html', show_tags=[tag['name'] for tag in _tags], show_objects=[obj['name'] for obj in objects.find()])
 
 @app.route('/<tag>')
@@ -131,6 +128,12 @@ def login():
             session['username'] = user['username']
             return redirect('/')
     return render_template('login.html', error=error)
+
+@app.route('/logout')
+def logout():
+    flash('Bye bye, ' + session['username'])
+    session.pop('username', None)
+    return redirect('/')
 
 if __name__ == "__main__":
     app.secret_key = 'super secret key'
