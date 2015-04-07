@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title></title>
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-<ul>
+{% extends "base.html" %}
+{% block content %}
 <h2>{{ name }}</h2>
 <h3>{{ id }}</h3>
 <h4>description</h4>
 <h5>linked objects</h5>
-</ul>
-</body>
-</html>
+{% endblock content %}
