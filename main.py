@@ -114,7 +114,8 @@ def register():
             users.insert({'username': username, 'email': email, 'password': password})
             flash('You were successfully registered and can login now')
             return redirect('/login')
-    return render_template('register.html', error=error)
+    if request.method == 'GET':
+        return render_template('register.html', error=error)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -129,7 +130,8 @@ def login():
         else:
             flash('You were logged in, ' + user['username'])
             return redirect('/')
-    return render_template('login.html', error=error)
+    if request.method == 'GET':
+        return render_template('login.html', error=error)
 
 if __name__ == "__main__":
     app.secret_key = 'super secret key'
