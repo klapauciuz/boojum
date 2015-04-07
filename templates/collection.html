@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
-  <ul class="tags">
+  <ul class="my tags">
   <h1>tags</h1>
   {% for tag in show_tags %}
     <li><a href="{{ url_for('tag_page', tag=tag) }}">{{ tag }}</a>
   {% endfor %}
   </ul>
-  <ul class="objects">
+ <!--  <ul class="objects">
   <h1>objects</h1>
   {% for obj in show_objects %}
     <li>{{ obj }}
   {% endfor %}
-  </ul>
+  </ul> -->
 {% endblock  %}
