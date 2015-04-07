@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+{% block header %}
+  <big>
+      <a href="/tag/add">add new tag</a> |
+      <a href="/signup">sign up</a> |
+      <a href="/trends">popular tags</a> |
+      <a href="/pop">popular objects</a>
+  </big>
+  <hr style="border-color: gray">
+{% endblock header %}
+{% block content %}{% endblock  %}
+</body>
+</html>

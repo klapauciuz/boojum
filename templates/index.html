@@ -1,28 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title></title>
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-<big>
-    <a href="/tag/add">add new tag</a> |
-    <a href="/signup">sign up</a> |
-    <a href="/trends">popular tags</a> |
-    <a href="/pop">popular objects</a>
-</big>
-<hr style="border-color: gray">
-<ul class="tags">
-<h1>tags</h1>
-{% for tag in show_tags %}
-  <li><a href="{{ url_for('tag_page', tag=tag) }}">{{ tag }}</a>
-{% endfor %}
-</ul>
-<ul class="objects">
-<h1>objects</h1>
-{% for obj in show_objects %}
-  <li>{{ obj }}
-{% endfor %}
-</ul>
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+  <ul class="tags">
+  <h1>tags</h1>
+  {% for tag in show_tags %}
+    <li><a href="{{ url_for('tag_page', tag=tag) }}">{{ tag }}</a>
+  {% endfor %}
+  </ul>
+  <ul class="objects">
+  <h1>objects</h1>
+  {% for obj in show_objects %}
+    <li>{{ obj }}
+  {% endfor %}
+  </ul>
+{% endblock  %}
