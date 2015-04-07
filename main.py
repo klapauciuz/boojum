@@ -1,19 +1,8 @@
 # coding: utf-8
 from pymongo import MongoClient
-from flask import Flask, render_template, abort, request, url_for, redirect, request, jsonify, flash, session, session, g
+from flask import Flask, render_template, abort, request, url_for, redirect, request, jsonify, flash, session, g
 from bson.json_util import dumps
 from werkzeug import check_password_hash, generate_password_hash
-from wtforms import Form, BooleanField, TextField, PasswordField, validators
-
-class RegistrationForm(Form):
-    username = TextField('Username', [validators.Length(min=4, max=25)])
-    email = TextField('Email Address', [validators.Length(min=6, max=35)])
-    password = PasswordField('New Password', [
-        validators.Required(),
-        validators.EqualTo('confirm', message='Passwords must match')
-    ])
-    confirm = PasswordField('Repeat Password')
-    accept_tos = BooleanField('I accept the TOS', [validators.Required()])
 
 app = Flask(__name__)
 
@@ -24,10 +13,18 @@ tags = db.tags
 objects = db.objects
 users = db.users
 
+@app.before_request
+def before_request():
+    g.user = None
+    if 'username' in session:
+        g.user = users.find_one({'username': session['username']})
 
 @app.route("/")
 def hello():
     _tags = tags.find()
+    if 'username' not in session:
+        flash('Log in, please')
+        return redirect('/login')
     return render_template('index.html', show_tags=[tag['name'] for tag in _tags], show_objects=[obj['name'] for obj in objects.find()])
 
 @app.route('/<tag>')
@@ -42,6 +39,9 @@ def tag_page(tag):
 def add_tag_page():
     name = request.args.get('name')
     #OMG_))
+    if 'username' not in session:
+        flash('Log in, please')
+        return redirect('/login')
     if name == None:
         name = ''
     return render_template('add_tag.html', tag_name=name)
@@ -89,14 +89,11 @@ def add_tag():
         response.status_code = 200
         return response
 
-
-"""Auth"""
-# @app.route('/register')
-# def login_page():
-#     return render_template('register.html')
-
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    if 'username' in session:
+        flash('You are already registered in Boojom, ' + session['username'])
+        return redirect('/')
     error = None
     if request.method == 'POST':
         if not request.form['username']:
@@ -112,12 +109,15 @@ def register():
             email = request.form['username']
             password = generate_password_hash(request.form['password'])
             users.insert({'username': username, 'email': email, 'password': password})
-            flash('You were successfully registered and can login now')
+            flash('Welcome to Boojom, ' + username)
             return redirect('/login')
     return render_template('register.html', error=error)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if 'username' in session:
+        flash('You are already in Boojom, ' + session['username'])
+        return redirect('/')
     error = None
     if request.method == 'POST':
         user = users.find_one({'username': request.form['username']})
@@ -127,7 +127,8 @@ def login():
                                      request.form['password']):
             error = 'Invalid password'
         else:
-            flash('You were logged in, ' + user['username'])
+            flash('Nice to see you again, ' + user['username'])
+            session['username'] = user['username']
             return redirect('/')
     return render_template('login.html', error=error)
 
