@@ -86,12 +86,12 @@ div.page div.footer {
     font-size: 12px;
 }
 
-div.page div.followstatus {
+span.followstatus {
     border: 1px solid #ccc;
     background: #E3EBEA;
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
-    padding: 3px;
+    padding: 4px;
     font-size: 13px;
 }
 

@@ -26,8 +26,10 @@ def hello():
 
 #_____Collection
 @app.route('/collection')
-def collection():  
-    
+def collection():
+    if 'username' not in session:
+        flash('Log in, please')
+        return redirect('/login')
     my_tags =  g.user['tags']
     return render_template('collection.html', show_tags=[tag['name'] for tag in my_tags])
 
@@ -38,6 +40,7 @@ def tag_page(tag):
     """Tag page and tag adding to collection"""
     current_tag = tags.find_one({'name': tag})
     if request.method == 'POST':
+
         db.users.update({"username":session["username"]}, 
              {'$push': { 
                         "tags":{ "name": current_tag['name'] } 

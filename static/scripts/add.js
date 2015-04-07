@@ -9,7 +9,6 @@ $(document).ready(function(){
         data : tagName,
         success:function(response) {
             $('#add_tag').val('success!');
-            
         },
         error: function(err) {
           console.log(JSON.stringify(err));
