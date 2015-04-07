@@ -10,6 +10,7 @@ client = MongoClient('localhost', 27017)
 db = client['boojom']
 tags = db.tags
 objects = db.objects
+users = db.users
 
 
 @app.route("/")
@@ -40,6 +41,13 @@ TODO:
 стоит сменить url для API на
 'api/tags' - метод GET и POST (чтобы можно было туда оправлить новый тег),
 'api/tags/<name>' - методы GET, PUT, DELETE для работы с конкретным тегом
+возможно понадобится
+if request.method == 'POST':
+    # почему-то после отправки стандартным способом не показывает тег, но если снова зайти на страницу то ОК - видно JSON
+    tags.insert({'name': name})
+    # https://gist.github.com/ibeex/3257877
+    app.logger.info('params are: %s', request.query_string)
+    return redirect('/'+name)
 """
 
 @app.route('/api/tags/',  methods=['GET'])
@@ -58,15 +66,6 @@ def get_tag(name):
     if request.method == 'DELETE':
         tags.remove({'name': name}, {justOne: true})
 
-"""
-возможно понадобится
-if request.method == 'POST':
-    # почему-то после отправки стандартным способом не показывает тег, но если снова зайти на страницу то ОК - видно JSON
-    tags.insert({'name': name})
-    # https://gist.github.com/ibeex/3257877
-    app.logger.info('params are: %s', request.query_string)
-    return redirect('/'+name)
-"""
 
 @app.route('/api/add/tag', methods=['POST'])
 def add_tag():
@@ -74,12 +73,25 @@ def add_tag():
         app.logger.info('name is: %s', request.form)
         name = request.form['name']
         tags.insert({'name': name})
-        # return redirect('/'+name)
-        # return tags.find_one({'name': name})
-        response = jsonify(message=str('ЗБС'))
+        response = jsonify(message=str('OK'))
         response.status_code = 200
         return response
 
+
+"""Auth"""
+@app.route('/signup')
+def login_page():
+    return render_template('signup.html')
+
+@app.route('/api/signup', methods=['POST'])
+def add_user():
+    if request.method == 'POST':
+        username = request.form['username']
+        email = request.form['email']
+        users.insert({'username': username, 'email': email})
+        response = jsonify(message=str('OK'))
+        response.status_code = 200
+        return response
 
 if __name__ == "__main__":
     app.run(debug=True)
