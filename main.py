@@ -24,9 +24,25 @@ def hello():
     _tags = tags.find()
     return render_template('index.html', show_tags=[tag['name'] for tag in _tags], show_objects=[obj['name'] for obj in objects.find()])
 
-@app.route('/<tag>')
+#_____Collection
+@app.route('/collection')
+def collection():
+    my_tags = g.user['tags']
+    print my_tags
+    #return render_template('collection.html', show_tags=[tag['name'] for tag in _tags], show_objects=[obj['name'] for obj in objects.find()])
+#_____Collection/
+#_____Tags
+@app.route('/<tag>', methods=['GET', 'POST'])
 def tag_page(tag):
     current_tag = tags.find_one({'name': tag})
+    if request.method == 'POST':
+        
+        db.users.update({"username":session["username"]}, 
+             {'$push': { 
+                        "tags":{ "name": current_tag['name'] } 
+                      }
+             }
+             )
     if current_tag:
         return render_template('tag.html', name=current_tag['name'], id=current_tag['_id'])
     else:
@@ -75,7 +91,6 @@ def get_tag(name):
     if request.method == 'DELETE':
         tags.remove({'name': name}, {justOne: true})
 
-
 @app.route('/api/add/tag', methods=['POST'])
 def add_tag():
     if request.method == 'POST':
@@ -85,7 +100,8 @@ def add_tag():
         response = jsonify(message=str('OK'))
         response.status_code = 200
         return response
-
+#_____Tags/
+#_____Auth
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if 'username' in session:
@@ -139,6 +155,8 @@ if __name__ == "__main__":
     app.secret_key = 'super secret key'
     app.config['SESSION_TYPE'] = 'filesystem'
     app.run(debug=True)
+#_____Auth/
+
 
 """
 не пашит :-(
