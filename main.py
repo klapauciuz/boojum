@@ -83,3 +83,10 @@ def add_tag():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+"""
+не пашит :-(
+if app.debug:
+    from flaskext.stylus2css import stylus2css
+    stylus2css(app, css_folder='static/css', stylus_folder='stylus')
+"""
