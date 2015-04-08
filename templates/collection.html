@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-  <ul class="tags">
+  <ul class="my tags">
   <h1>tags</h1>
   {% for tag in show_tags %}
     <li><a href="{{ url_for('tag_page', tag=tag) }}">{{ tag }}</a>
