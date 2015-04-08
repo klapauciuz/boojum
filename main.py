@@ -24,7 +24,7 @@ def hello():
     _tags = tags.find()
     return render_template('index.html', show_tags=[tag['name'] for tag in _tags], show_objects=[obj['name'] for obj in objects.find()])
 
-#_____Collection
+#   Collection
 @app.route('/collection')
 def collection():
     my_tags = g.user['tags']
@@ -39,8 +39,8 @@ def tag_page(tag):
         
         db.users.update({"username":session["username"]}, 
              {'$push': { 
-                        "tags":{ "name": current_tag['name'] } 
-                      }
+                    "tags":{ "name": current_tag['name'] }
+                  }
              }
              )
     if current_tag:
