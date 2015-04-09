@@ -30,8 +30,11 @@ def collection():
     if 'username' not in session:
         flash('Log in, please')
         return redirect('/login')
-    my_tags =  g.user['tags']
-    return render_template('collection.html', show_tags=[tag['name'] for tag in my_tags])
+
+    # берём айди тегов юзера
+    my_tags_id = [my_tag_id['_id'] for my_tag_id in g.user['tags']]
+    # и выводим в шаблон их имена
+    return render_template('collection.html', show_tags=[i['name'] for i in db.tags.find({'_id':{'$in': my_tags_id}})])
 
 #_____Collection/
 #_____Tags
@@ -42,23 +45,22 @@ def tag_page(tag):
 
     # проверяем залогиненность что бы взять теги из юзера
     if g.user:
-        user_tags = [user_tag['name'] for user_tag in g.user['tags']]
+        user_tags = [user_tag['_id'] for user_tag in g.user['tags']]
     if request.method == 'POST':
-        print current_tag["name"]
+        print current_tag["_id"]
         print user_tags
-        if current_tag["name"] not in user_tags:
+        if current_tag["_id"] not in user_tags:
             db.users.update({"username":session["username"]}, 
                  {'$push': { 
-                            "tags":{ "name": current_tag['name'] } 
+                            "tags":{ "_id": current_tag['_id'] } 
                           }
                  }
                  )
         else:
-            flash('This tag already in your collection, ' + session["username"])
-            return redirect('/<tag>')
+            pass
 
     if current_tag:
-        if g.user and current_tag['name'] in user_tags:
+        if g.user and current_tag['_id'] in user_tags:
             return render_template('tag.html', name=current_tag['name'], id=current_tag['_id'], myTag=True)
         return render_template('tag.html', name=current_tag['name'], id=current_tag['_id'])
     else:
@@ -73,12 +75,6 @@ def add_tag_page():
     if name == None:
         name = ''
     return render_template('add_tag.html', tag_name=name)
-
-
-@app.route('/api/tags/',  methods=['GET'])
-def tags_list():
-    resp = dumps(tags.find())
-    return resp
 
 @app.route('/api/tags/<name>', methods=['GET', 'PUT', 'DELETE'])
 def get_tag(name):
@@ -124,8 +120,7 @@ def register():
             users.insert({'username': username, 'email': email, 'password': password, 'tags': []})
             flash('Welcome to Boojom, ' + username)
             return redirect('/login')
-    if request.method == 'GET':
-        return render_template('register.html', error=error)
+    return render_template('register.html', error=error)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -144,8 +139,7 @@ def login():
             flash('Nice to see you again, ' + user['username'])
             session['username'] = user['username']
             return redirect('/')
-    if request.method == 'GET':
-        return render_template('login.html', error=error)
+    return render_template('login.html', error=error)
 
 @app.route('/logout')
 def logout():
