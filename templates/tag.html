@@ -5,7 +5,11 @@
 <h4>description</h4>
 <h5>linked objects</h5>
 {% if g.user %}
-<div class="actions"><input id="add_tag" type="submit" value="add tag to collection"></div>
+	{% if myTag %}
+		<span class="already">this tag already in <a href="/collection">your collection</a></span>
+	{% else %}
+		<input id="add_tag" type="submit" value="add tag to collection"></div>
+	{% endif %}
 {% else %}
 <span class='followstatus'>..<a href="/login">login</a> or <a href="/register">sign up</a> and put this tag in your own collection</span>
 {% endif %}
