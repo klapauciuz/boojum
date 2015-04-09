@@ -15,7 +15,8 @@
   </big>
   {% if g.user %}
   <big style='float:right;'>
-    <a href="/collection">my collection</a> |
+
+    <a href="/collection">my collection</a> <span id='profile'>[{{ g.user['username'] }}]</span> |
     <a href="/logout">logout</a>
   </big>
   {% else %}

@@ -8,7 +8,7 @@ a {
     color: #26776F;
 }
 
-a:hover {
+a:hover, #profile a:hover {
     color: #333;
 }
 
@@ -24,7 +24,7 @@ input[type="password"] {
     color: #105751;
 }
 
-input[type="submit"] {
+input[type="submit"], span#add_tag {
     background: #105751;
     border: 1px solid #073B36;
     padding: 1px 3px;
@@ -203,4 +203,22 @@ li{
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
     color: white;
+}
+
+span.error {
+    background: #FAE4E4;
+    border: 1px solid #DD6F6F;
+    border-left: 0px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    padding: 1px 3px;
+    margin-left: -4px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+#profile, #profile a {
+    text-decoration: none;
+    opacity: 0.6;
+    color: #26776F;
 }
