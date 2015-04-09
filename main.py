@@ -22,7 +22,8 @@ def before_request():
 @app.route("/")
 def hello():
     _tags = tags.find()
-    return render_template('index.html', show_tags=[tag['name'] for tag in _tags], show_objects=[obj['name'] for obj in objects.find()])
+    _objects = objects.find()
+    return render_template('index.html', show_tags=[tag['name'] for tag in _tags], show_objects=[obj['name'] for obj in _objects])
 
 #_____Collection
 @app.route('/collection')
@@ -56,7 +57,7 @@ def tag_page(tag):
                           }
                  }
                  )
-           
+
         else:
             db.users.update({"username":session["username"]}, 
                  {'$pull': { 
@@ -68,8 +69,8 @@ def tag_page(tag):
     if current_tag:
         if g.user and current_tag['_id'] in user_tags:
             # проверяем есть ли тег в коллекции у юзера
-            return render_template('tag.html', name=current_tag['name'], id=current_tag['_id'], myTag=True)
-        return render_template('tag.html', name=current_tag['name'], id=current_tag['_id'])
+            return render_template('tag.html', description=current_tag['description'], name=current_tag['name'], id=current_tag['_id'], myTag=True)
+        return render_template('tag.html', description=current_tag['description'], name=current_tag['name'], id=current_tag['_id'])
     else:
         return render_template('404.html', show_name=tag)
 
@@ -87,7 +88,6 @@ def add_tag_page():
 def get_tag(name):
     if request.method == 'GET':
         current_tag = tags.find_one({'name': name})
-        app.logger.info('params are: %s', request.url)
         return dumps(current_tag)
     if request.method == 'PUT':
         tags.update({'name': name}, {'name': name})
@@ -97,13 +97,24 @@ def get_tag(name):
 @app.route('/api/add/tag', methods=['POST'])
 def add_tag():
     if request.method == 'POST':
-        app.logger.info('name is: %s', request.form)
         name = request.form['name']
-        tags.insert({'name': name})
+        description = request.form['description']
+        tags.insert({'name': name, 'description': description})
         response = jsonify(message=str('OK'))
         response.status_code = 200
         return response
+
 #_____Tags/
+#_____Objects
+# не работает, кидает на <tag> почему то
+@app.route('/<obj>', methods=['GET', 'POST'])
+def obj_page(obj):
+    """Object page"""
+    current_object = objects.find_one({'name': obj})
+    print 'OBJEEEEEEDCHCHCHCHCH', current_object
+    return render_template('object.html', name=current_object['name'], id=current_object['_id'])
+
+#_____Objects/
 #_____Auth
 @app.route('/register', methods=['GET', 'POST'])
 def register():
