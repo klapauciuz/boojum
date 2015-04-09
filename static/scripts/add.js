@@ -35,8 +35,9 @@ $(document).ready(function(){
             type: 'POST',
             data : tagName,
             success:function(response) {
-                self.text(' ! ')
-                self.delay( 600 )
+                self.css('opacity', '0');
+               /* self.text(' ! ');*/
+                self.delay( 300 );
                 self.animate({
                     opacity: 0,
                 }, 300, function(){
