@@ -9,7 +9,7 @@
   <ul class="objects">
   <h1>objects</h1>
   {% for obj in show_objects %}
-    <li>{{ obj }}
+    <li><a href="{{ url_for('obj_page', obj=obj) }}">{{ obj }}</a>
   {% endfor %}
   </ul>
 {% endblock  %}

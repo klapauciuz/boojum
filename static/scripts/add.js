@@ -40,7 +40,7 @@ $(document).ready(function(){
 */               /* self.text(' ! ');*/
                 /*self.delay( 300 );*/
                 self.css('display','none');
-                $('.already').delay(240);
+                $('.already').delay(340);
                 $('.already').animate({
                     opacity: 0,
                 }, 120, function(){
