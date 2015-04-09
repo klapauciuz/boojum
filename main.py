@@ -39,15 +39,27 @@ def collection():
 def tag_page(tag):
     """Tag page and tag adding to collection"""
     current_tag = tags.find_one({'name': tag})
-    if request.method == 'POST':
 
-        db.users.update({"username":session["username"]}, 
-             {'$push': { 
-                        "tags":{ "name": current_tag['name'] } 
-                      }
-             }
-             )
+    # проверяем залогиненность что бы взять теги из юзера
+    if g.user:
+        user_tags = [user_tag['name'] for user_tag in g.user['tags']]
+    if request.method == 'POST':
+        print current_tag["name"]
+        print user_tags
+        if current_tag["name"] not in user_tags:
+            db.users.update({"username":session["username"]}, 
+                 {'$push': { 
+                            "tags":{ "name": current_tag['name'] } 
+                          }
+                 }
+                 )
+        else:
+            flash('This tag already in your collection, ' + session["username"])
+            return redirect('/<tag>')
+
     if current_tag:
+        if g.user and current_tag['name'] in user_tags:
+            return render_template('tag.html', name=current_tag['name'], id=current_tag['_id'], myTag=True)
         return render_template('tag.html', name=current_tag['name'], id=current_tag['_id'])
     else:
         return render_template('404.html', show_name=tag)
@@ -109,7 +121,7 @@ def register():
             username = request.form['username']
             email = request.form['username']
             password = generate_password_hash(request.form['password'])
-            users.insert({'username': username, 'email': email, 'password': password})
+            users.insert({'username': username, 'email': email, 'password': password, 'tags': []})
             flash('Welcome to Boojom, ' + username)
             return redirect('/login')
     if request.method == 'GET':
