@@ -10,7 +10,7 @@ $(document).ready(function(){
         success:function(response) {
             self.animate({
                 opacity: 0,
-          }, 400, function() {
+          }, 120, function() {
             /*self.text('success!');*/
             self.css('cursor', 'default');
             self.animate({
@@ -35,15 +35,20 @@ $(document).ready(function(){
             type: 'POST',
             data : tagName,
             success:function(response) {
-                self.css('opacity', '0');
-               /* self.text(' ! ');*/
-                self.delay( 300 );
-                self.animate({
+
+/*                self.css('opacity', '0');
+*/               /* self.text(' ! ');*/
+                /*self.delay( 300 );*/
+                self.css('display','none');
+                $('.already').delay(240);
+                $('.already').animate({
                     opacity: 0,
-                }, 300, function(){
-                    window.location.replace('/'+tagName);
+                }, 120, function(){
+                    
+                    setTimeout(function () {
+                        location.href = '/'+tagName
+                    }, 300);
                 });
-                /*self.delay( 600 )*/
              
             },
             error: function(err) {
