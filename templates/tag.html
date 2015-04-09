@@ -7,8 +7,9 @@
 {% if g.user %}
 	{% if myTag %}
 		<span class="already">this tag already in <a href="/collection">your collection</a></span>
+		<span id="del_tag" class='error' type="submit">x</span>
 	{% else %}
-		<input id="add_tag" type="submit" value="add tag to collection"></div>
+		<span id="add_tag" type="submit">add tag to collection</span>
 	{% endif %}
 {% else %}
 <span class='followstatus'>..<a href="/login">login</a> or <a href="/register">sign up</a> and put this tag in your own collection</span>

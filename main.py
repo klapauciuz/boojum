@@ -47,8 +47,8 @@ def tag_page(tag):
     if g.user:
         user_tags = [user_tag['_id'] for user_tag in g.user['tags']]
     if request.method == 'POST':
-        print current_tag["_id"]
-        print user_tags
+        # print current_tag["_id"]
+        # print user_tags
         if current_tag["_id"] not in user_tags:
             db.users.update({"username":session["username"]}, 
                  {'$push': { 
@@ -56,11 +56,18 @@ def tag_page(tag):
                           }
                  }
                  )
+           
         else:
-            pass
+            db.users.update({"username":session["username"]}, 
+                 {'$pull': { 
+                            "tags":{ "_id": current_tag['_id'] } 
+                          }
+                 }
+                 )
 
     if current_tag:
         if g.user and current_tag['_id'] in user_tags:
+            # проверяем есть ли тег в коллекции у юзера
             return render_template('tag.html', name=current_tag['name'], id=current_tag['_id'], myTag=True)
         return render_template('tag.html', name=current_tag['name'], id=current_tag['_id'])
     else:
