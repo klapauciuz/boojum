@@ -8,7 +8,16 @@ $(document).ready(function(){
         type: 'POST',
         data : tagName,
         success:function(response) {
-            $('#add_tag').val('success!');
+            self.animate({
+                opacity: 0,
+          }, 400, function() {
+            self.val('success!');
+            self.css('cursor', 'default');
+            self.animate({
+                opacity: 1,
+            });
+            self.attr('disabled', 'disabled');
+          });
         },
         error: function(err) {
           console.log(JSON.stringify(err));
