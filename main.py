@@ -42,7 +42,6 @@ def collection():
 def tag_page(tag):
     """Tag page and tag adding to collection"""
     current_tag = tags.find_one({'name': tag})
-
     # проверяем залогиненность что бы взять теги из юзера
     if g.user:
         user_tags = [user_tag['_id'] for user_tag in g.user['tags']]
@@ -55,25 +54,14 @@ def tag_page(tag):
                             "tags":{ "_id": current_tag['_id'] } 
                           }
                  }
-                 )
-           
+             )
         else:
             db.users.update({"username":session["username"]}, 
                  {'$pull': { 
                             "tags":{ "_id": current_tag['_id'] } 
                           }
                  }
-                 )
-
-<<<<<<< HEAD
-        db.users.update({"username":session["username"]}, 
-             {'$push': { 
-                    "tags":{ "name": current_tag['name'] }
-                  }
-             }
              )
-=======
->>>>>>> 578d95d214ec7c64e5ba1216bcefd814b307a968
     if current_tag:
         if g.user and current_tag['_id'] in user_tags:
             # проверяем есть ли тег в коллекции у юзера
