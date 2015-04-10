@@ -10,13 +10,14 @@ linked tags
   {% endfor %}
 </span>
   {% if g.user %}
-  <form id="add_linked_tag" style="display:inline">
+  <form style="display:inline">
+  	<span id="add_linked_tag" class='add' type="submit">+</span>
     <select>
       {% for ut in user_tags %}
         <option value="{{ut._id}}">{{ut.name}}</option>
       {% endfor %}
     </select>
-    <input class="add" type="submit" value="+"/>
+    
   </form>
   {% else %}
   {% endif %}

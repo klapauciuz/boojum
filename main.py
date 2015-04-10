@@ -134,6 +134,7 @@ def obj_page(obj):
     if request.method == 'POST':
         data = json.loads(request.form.get('data'))
         print data['value']
+        print data['name']
         db.objects.update({"name":obj}, 
                  {'$push': { 
                             "tags":{ "_id": ObjectId(data['value'])} 

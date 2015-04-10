@@ -1,11 +1,12 @@
 $(document).ready(function(){
-  $('form#add_linked_tag').submit(function(event) {
+  $('#add_linked_tag').click(function(event) {
     event.preventDefault();
     var self = $(this);
     var objName = $('h2').text();
     var data = {
           data: JSON.stringify({
-                            "value": $('option').val()
+                            "value": $('option:selected').val(),
+                            "name": $('option').text()
                         })
        };
     $.ajax({
