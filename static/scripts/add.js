@@ -4,7 +4,7 @@ $(document).ready(function(){
     var self = $(this),
     tagName = $('h2').text();
     $.ajax({
-        url : '/'+tagName,
+        url : '/tags/'+tagName,
         type: 'POST',
         data : tagName,
         success:function(response) {
@@ -18,7 +18,7 @@ $(document).ready(function(){
             });
             self.prop('disabled', 'disabled');
             self.delay( 600 )
-            window.location.replace('/'+tagName);
+            window.location.replace('/tags/'+tagName);
           });
         },
         error: function(err) {
@@ -31,7 +31,7 @@ $(document).ready(function(){
         var self = $(this),
         tagName = $('h2').text();
         $.ajax({
-            url : '/'+tagName,
+            url : '/tags/'+tagName,
             type: 'POST',
             data : tagName,
             success:function(response) {
@@ -40,13 +40,13 @@ $(document).ready(function(){
 */               /* self.text(' ! ');*/
                 /*self.delay( 300 );*/
                 self.css('display','none');
-                $('.already').delay(240);
+                $('.already').delay(340);
                 $('.already').animate({
                     opacity: 0,
                 }, 120, function(){
                     
                     setTimeout(function () {
-                        location.href = '/'+tagName
+                        location.href = '/tags/'+tagName
                     }, 300);
                 });
              

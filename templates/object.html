@@ -3,11 +3,13 @@
 <h2>{{ name }}</h2>
 <h3>{{ id }}</h3>
 <h4>{{ description }}</h4>
-linked objects
+linked tags
 <span class='linked'>
+  {% for tag in show_tags %}
+<a href="{{ url_for('tag_page', tag=tag) }}">{{ tag }}</a>  
+  {% endfor %}
 </span>
-<br><br>
-{% if g.user %}
+<!-- {% if g.user %}
 	{% if myTag %}
 		<span class="already">tag in <a href="/collection">your collection</a></span>
 		<span id="del_tag" class='error' type="submit">x</span>
@@ -16,5 +18,5 @@ linked objects
 	{% endif %}
 {% else %}
 <span class='followstatus'>..<a href="/login">login</a> or <a href="/register">sign up</a> and put this tag in your own collection</span>
-{% endif %}
+{% endif %} -->
 {% endblock content %}
