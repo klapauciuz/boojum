@@ -205,6 +205,11 @@ li{
     color: white;
 }
 
+.already a {
+    color: #CAECE9;
+    text-decoration: none;
+}
+
 span.error {
     background: #FAE4E4;
     border: 1px solid #DD6F6F;
@@ -233,6 +238,6 @@ span.error {
     -webkit-border-radius: 2px;
 }
 
-.linked a:hover {
+.linked a:hover, .already a:hover {
     color: white;
 }
