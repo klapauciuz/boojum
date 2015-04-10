@@ -25,6 +25,11 @@ def hello():
     _objects = objects.find()
     return render_template('index.html', show_tags=[tag['name'] for tag in _tags], show_objects=[obj['name'] for obj in _objects])
 
+@app.route("/objects/")
+@app.route("/tags/")
+def gotohome():
+    return redirect('/')
+
 #_____Collection
 @app.route('/collection')
 def collection():
@@ -41,6 +46,11 @@ def collection():
 
 #_____Collection/
 #_____Tags
+
+@app.route('/<tag>')
+def unknown_tag(tag):
+    return render_template('404.html', show_name=tag)
+
 @app.route('/tags/<tag>', methods=['GET', 'POST'])
 def tag_page(tag):
     """Tag page and tag adding to collection"""
