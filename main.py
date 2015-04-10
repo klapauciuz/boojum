@@ -1,8 +1,9 @@
 # coding: utf-8
 from pymongo import MongoClient
-from flask import Flask, render_template, abort, request, url_for, redirect, request, jsonify, flash, session, g
+from flask import Flask, render_template, abort, request, url_for, redirect, request, jsonify, flash, session, g, json
 from bson.json_util import dumps
 from werkzeug import check_password_hash, generate_password_hash
+from bson.objectid import ObjectId
 
 app = Flask(__name__)
 
@@ -130,12 +131,27 @@ def obj_page(obj):
     """Object page"""
     current_object = objects.find_one({'name': obj})
 
+    if request.method == 'POST':
+        data = json.loads(request.form.get('data'))
+        print data['value']
+        db.objects.update({"name":obj}, 
+                 {'$push': { 
+                            "tags":{ "_id": ObjectId(data['value'])} 
+                          }
+                 }
+                 )
+
     # берём айди тегов объекта
     object_tags_id = [my_tag_id['_id'] for my_tag_id in current_object['tags']]
-    print object_tags_id
-    print [i['name'] for i in db.tags.find({'_id':{'$in': object_tags_id}})]
-    my_tags_id = [my_tag_id['_id'] for my_tag_id in g.user['tags']]
+    # print object_tags_id
+    # print [i['name'] for i in db.tags.find({'_id':{'$in': object_tags_id}})]
 
+    # проверяем залогиненность, что бы взять теги у юзера для вывода в список
+    if g.user:
+        my_tags_id = [my_tag_id['_id'] for my_tag_id in g.user['tags']]
+        my_tags_name = [i for i in db.tags.find({'_id':{'$in': my_tags_id}})]
+    else:
+        my_tags_name = []
     # и выводим в шаблон их имена
     return render_template(
         'object.html',
@@ -143,7 +159,7 @@ def obj_page(obj):
         name=current_object['name'],
         description=current_object['description'],
         id=current_object['_id'],
-        user_tags=[i for i in db.tags.find({'_id':{'$in': my_tags_id}})]
+        user_tags=my_tags_name
     )
 
 #_____Objects/
