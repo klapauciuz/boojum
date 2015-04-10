@@ -8,10 +8,13 @@ dataset2 = []
 
 for _ in range(0,150):
   dataset1.append(
-    {"name": fake.color_name()}
+    {"name": fake.color_name(),
+     "description": fake.text(max_nb_chars=50)}
   )
   dataset2.append(
-    {"name": fake.name()}
+    {"name": fake.name(),
+     "description": fake.text(max_nb_chars=100),
+     "tags": []}
   )
 
 client = MongoClient('localhost', 27017)
