@@ -226,10 +226,8 @@ span.del {
 #add_linked_tag {
     background: #CAECE9;
     border: 1px solid #105751;
-    background: ;
-    border-left: 0px;
-    -moz-border-radius: 0px 2px 2px 0px;
-    -webkit-border-radius: 0px 2px 2px 0px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
     padding: 1px 3px;
     font-size: 14px;
     cursor: pointer;
@@ -238,7 +236,6 @@ span.del {
 
 #add_linked_tag:hover {
     background: #F0FAF9;
-    border-left: 0px;
 
 }
 
@@ -268,8 +265,16 @@ span.del:hover {
     color: white;
 }
 select {
-    border: 0px solid #fff;
+    border: 1px solid #105751;
     background-color: transparent;
+    color: #26776F;
+    padding: 0px 3px;
+    font-size: 14px;
+    border-radius: 0px 2px 2px 0px;
+    -moz-border-radius: 0px 2px 2px 0px;
+    -webkit-border-radius: 0px 2px 2px 0px;
+    margin-left: 0px;
+    border-left: 0px;
 }
 
 select:hover {
