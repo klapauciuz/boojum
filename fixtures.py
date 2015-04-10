@@ -1,4 +1,3 @@
-import pymongo
 from pymongo import MongoClient
 from faker import Factory
 fake = Factory.create('ru_RU')

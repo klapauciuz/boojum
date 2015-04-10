@@ -134,8 +134,17 @@ def obj_page(obj):
     object_tags_id = [my_tag_id['_id'] for my_tag_id in current_object['tags']]
     print object_tags_id
     print [i['name'] for i in db.tags.find({'_id':{'$in': object_tags_id}})]
+    my_tags_id = [my_tag_id['_id'] for my_tag_id in g.user['tags']]
+
     # и выводим в шаблон их имена
-    return render_template('object.html', show_tags=[i['name'] for i in db.tags.find({'_id':{'$in': object_tags_id}})], name=current_object['name'], description=current_object['description'], id=current_object['_id'])
+    return render_template(
+        'object.html',
+        show_tags=[i['name'] for i in db.tags.find({'_id':{'$in': object_tags_id}})],
+        name=current_object['name'],
+        description=current_object['description'],
+        id=current_object['_id'],
+        user_tags=[i for i in db.tags.find({'_id':{'$in': my_tags_id}})]
+    )
 
 #_____Objects/
 #_____Auth
