@@ -20,7 +20,6 @@ client = MongoClient('localhost', 27017)
 
 db = client['boojom']
 
-
 db.tags.remove()
 db.objects.remove()
 

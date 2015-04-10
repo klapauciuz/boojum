@@ -8,17 +8,20 @@ linked tags
   {% for tag in show_tags %}
 <a href="{{ url_for('tag_page', tag=tag) }}">{{ tag }}</a>  
   {% endfor %}
+</span>
   {% if g.user %}
-  <select>
-    {% for ut in user_tags %}
-    <option value="{{ut._id}}">{{ut.name}}</option>
-    {% endfor %}
-  </select>
+  <form id="add_linked_tag" style="margin-top: 30px;">
+    <p>Add my tag</p>
+    <select>
+      {% for ut in user_tags %}
+        <option value="{{ut._id}}">{{ut.name}}</option>
+      {% endfor %}
+    </select>
+  <input type="submit" value="+"/>
+  </form>
   {% else %}
   {% endif %}
 
-</span>
-<span id="add_linked_tag" class='add' type="submit">+</span>
 <!-- {% if g.user %}
 	{% if myTag %}
 		<span class="already">tag in <a href="/collection">your collection</a></span>

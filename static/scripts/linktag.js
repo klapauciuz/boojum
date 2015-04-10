@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  $('#add_linked_tag').click(function(event) {
+  $('form#add_linked_tag').submit(function(event) {
     event.preventDefault();
     var self = $(this);
     var objName = $('h2').text();
