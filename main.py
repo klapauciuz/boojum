@@ -111,7 +111,13 @@ def add_tag():
     if request.method == 'POST':
         name = request.form['name']
         description = request.form['description']
-        tags.insert({'name': name, 'description': description})
+        _id = tags.insert({'name': name, 'description': description})
+        db.users.update({"username":session["username"]}, 
+                 {'$push': { 
+                            "tags":{ "_id": _id } 
+                          }
+                 }
+                 )
         response = jsonify(message=str('OK'))
         response.status_code = 200
         return response

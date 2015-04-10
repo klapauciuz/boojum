@@ -210,17 +210,40 @@ li{
     text-decoration: none;
 }
 
-span.error {
+span.del {
     background: #FAE4E4;
     border: 1px solid #DD6F6F;
     border-left: 0px;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    padding: 1px 3px;
+    -moz-border-radius: 0px 2px 2px 0px;
+    -webkit-border-radius: 0px 2px 2px 0px;
+    padding: 0px 3px;
     margin-left: -4px;
+
     font-size: 13px;
     cursor: pointer;
 }
+
+span.add {
+    border: 1px solid #105751;
+    border-left: 0px;
+    -moz-border-radius: 0px 2px 2px 0px;
+    -webkit-border-radius: 0px 2px 2px 0px;
+    padding: 1px 3px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+span.add:hover {
+    background: #F0FAF9;
+    border-left: 0px;
+
+}
+
+span.del:hover {
+    background: #DD6F6F;
+}
+
+
 
 #profile, #profile a {
     text-decoration: none;
