@@ -225,15 +225,14 @@ span.error {
 
 .linked, .linked a {
     text-decoration: none;
-    color: white;
-    background-color: #99CC33;
-    border: 4px solid #99CC33;
+    color: #CAECE9;
+    background-color: #105751;
+    border: 4px solid #105751;
     border-radius: 2px;
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
 }
 
 .linked a:hover {
-    color: #333;
-    
+    color: white;
 }
