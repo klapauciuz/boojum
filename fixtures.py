@@ -17,5 +17,11 @@ for _ in range(0,150):
 client = MongoClient('localhost', 27017)
 
 db = client['boojom']
+
+
+db.tags.remove()
+db.objects.remove()
+
 db.tags.insert(dataset1)
 db.objects.insert(dataset2)
+
