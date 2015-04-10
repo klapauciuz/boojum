@@ -2,8 +2,13 @@
 {% block content %}
 <h2>{{ name }}</h2>
 <h3>{{ id }}</h3>
-<h4>description</h4>
-<h5>linked tags</h5>
+<h4>{{ description }}</h4>
+linked tags
+<span class='linked'>
+  {% for tag in show_tags %}
+<a href="{{ url_for('tag_page', tag=tag) }}">{{ tag }}</a>  
+  {% endfor %}
+</span>
 <!-- {% if g.user %}
 	{% if myTag %}
 		<span class="already">tag in <a href="/collection">your collection</a></span>

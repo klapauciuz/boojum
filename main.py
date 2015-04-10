@@ -34,12 +34,14 @@ def collection():
 
     # берём айди тегов юзера
     my_tags_id = [my_tag_id['_id'] for my_tag_id in g.user['tags']]
+    print my_tags_id
+    print [i['name'] for i in db.tags.find({'_id':{'$in': my_tags_id}})]
     # и выводим в шаблон их имена
     return render_template('collection.html', show_tags=[i['name'] for i in db.tags.find({'_id':{'$in': my_tags_id}})])
 
 #_____Collection/
 #_____Tags
-@app.route('/<tag>', methods=['GET', 'POST'])
+@app.route('/tags/<tag>', methods=['GET', 'POST'])
 def tag_page(tag):
     """Tag page and tag adding to collection"""
     current_tag = tags.find_one({'name': tag})
@@ -74,7 +76,7 @@ def tag_page(tag):
     else:
         return render_template('404.html', show_name=tag)
 
-@app.route('/tag/add')
+@app.route('/tags/add')
 def add_tag_page():
     name = request.args.get('name')
     if 'username' not in session:
@@ -106,13 +108,18 @@ def add_tag():
 
 #_____Tags/
 #_____Objects
-# не работает, кидает на <tag> почему то
-@app.route('/<obj>', methods=['GET', 'POST'])
+
+@app.route('/objects/<obj>', methods=['GET', 'POST'])
 def obj_page(obj):
     """Object page"""
     current_object = objects.find_one({'name': obj})
-    print 'OBJEEEEEEDCHCHCHCHCH', current_object
-    return render_template('object.html', name=current_object['name'], id=current_object['_id'])
+
+    # берём айди тегов объекта
+    object_tags_id = [my_tag_id['_id'] for my_tag_id in current_object['tags']]
+    print object_tags_id
+    print [i['name'] for i in db.tags.find({'_id':{'$in': object_tags_id}})]
+    # и выводим в шаблон их имена
+    return render_template('object.html', show_tags=[i['name'] for i in db.tags.find({'_id':{'$in': object_tags_id}})], name=current_object['name'], description=current_object['description'], id=current_object['_id'])
 
 #_____Objects/
 #_____Auth

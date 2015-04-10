@@ -3,7 +3,10 @@
 <h2>{{ name }}</h2>
 <h3>{{ id }}</h3>
 <h4>{{ description }}</h4>
-<h5>linked objects</h5>
+linked objects
+<span class='linked'>
+</span>
+<br><br>
 {% if g.user %}
 	{% if myTag %}
 		<span class="already">tag in <a href="/collection">your collection</a></span>
