@@ -3,34 +3,20 @@
 <h2>{{ name }}</h2>
 <h3>{{ id }}</h3>
 <h4>{{ description }}</h4>
-linked tags 
+tags 
 <span class='linked'>
-  {% for tag in show_tags %}
-<a href="{{ url_for('tag_page', tag=tag) }}">{{ tag }}</a>  
-  {% endfor %}
+	{% for tag in show_tags %}
+		<a href="{{ url_for('tag_page', tag=tag) }}">{{ tag }}</a>  
+	{% endfor %}
 </span>
-  {% if g.user %}
-  <form style="display:inline">
-  	
-    <select>
-      {% for ut in user_tags %}
-        <option value="{{ut._id}}">{{ut.name}}</option>
-      {% endfor %}
-    </select>
-    <span id="add_linked_tag" class='add' type="submit">+</span>
-    
-  </form>
-  {% else %}
-  {% endif %}
-
-<!-- {% if g.user %}
-	{% if myTag %}
-		<span class="already">tag in <a href="/collection">your collection</a></span>
-		<span id="del_tag" class='error' type="submit">x</span>
-	{% else %}
-		<span id="add_tag" type="submit">add tag to collection</span>
-	{% endif %}
-{% else %}
-<span class='followstatus'>..<a href="/login">login</a> or <a href="/register">sign up</a> and put this tag in your own collection</span>
-{% endif %} -->
+{% if g.user %}
+	<form style="display:inline">
+		<select>
+			{% for ut in user_tags %}
+				<option value="{{ut._id}}">{{ut.name}}</option>
+			{% endfor %}
+		</select>
+	<span id="add_linked_tag" class='add' type="submit">+</span>
+	</form>
+{% endif %}
 {% endblock content %}

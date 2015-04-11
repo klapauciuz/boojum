@@ -3,8 +3,11 @@
 <h2>{{ name }}</h2>
 <h3>{{ id }}</h3>
 <h4>{{ description }}</h4>
-linked objects
+objects
 <span class='linked'>
+	{% for obj in show_objects %}
+		<a href="{{ url_for('obj_page', obj=obj) }}">{{ obj }}</a>  
+	{% endfor %}
 </span>
 <br><br>
 {% if g.user %}

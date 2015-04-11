@@ -263,6 +263,7 @@ span.del:hover {
 
 .linked a:hover, .already a:hover {
     color: white;
+    
 }
 select {
     border: 1px solid #105751;
