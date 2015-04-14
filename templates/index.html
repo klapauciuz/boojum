@@ -2,7 +2,9 @@
 {% block content %}
   <h2>meet Boojom, here you can bind your fav art with your cross-style personal associations</h2><h3>...and get realy suitable stuff from any art direction</h3>
   <ul class="tags">
-  <h1>tags</h1>
+  <h1>tags</h1><hr class='line'>
+  <span class='line2'>ipsum dolor sit amet consectetur </span>
+  <span class="text">Lorem</span>
   {% for tag in show_tags %}
     <li><a href="{{ url_for('tag_page', tag=tag) }}">{{ tag }}</a>
   {% endfor %}
@@ -13,4 +15,52 @@
     <li><a href="{{ url_for('obj_page', obj=obj) }}">{{ obj }}</a>
   {% endfor %}
   </ul>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('.tags h1').hover(function(){
+
+      $('.tags .line').animate({
+        /*left: '150px',*/
+        width: '20px',
+        opacity: 0.1,
+      }, 300, 'easeOutExpo', function() {
+        $('.tags .line2').css('border-color', 'rgba(0,0,0,0.8)');
+        $('.tags .line2').animate({
+          'height': '10px',
+        }, 300, function(){
+
+          $('.tags .line2').animate({
+          'width': '190px',
+          opacity: 0.8,
+        }, 500);
+        });
+        $('.tags .line').animate({
+          opacity: 0.6,
+        }, 200);
+        $('.tags .text').animate({
+          opacity: 0.6,
+        }, 200);
+      })
+    }, function(){
+      
+      $('.tags .line').animate({
+        opacity: 0,
+        width: '0px',
+      }, 1);
+      $('.tags .line2').css('border-color', 'rgba(0,0,0,0.6)');
+      $('.tags .line2').animate({
+        'height': '0px',
+      }, 1, function(){
+        $('.tags .line2').animate({
+        opacity: 0,
+        'width': '0px',
+      }, 1)
+      });
+      $('.tags .line2').css('border-color', 'rgba(0,0,0,0)');
+      $('.tags .text').animate({
+          opacity: 0,
+        }, 1);
+    });
+});
+</script>
 {% endblock  %}

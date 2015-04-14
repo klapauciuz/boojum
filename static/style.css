@@ -45,13 +45,27 @@ div.page {
 }
 
 h1 {
-    background: #6ECCC4;
+    color: rgba(0, 0, 0, 0.8);
+    background: white;
     margin: 0;
     padding: 10px 14px;
-    color: white;
     letter-spacing: 1px;
-    text-shadow: 0 0 3px #24776F;
     font-weight: normal;
+/*    -webkit-transition:  background 1.2s;
+    -moz-transition:  background 1.2s;
+    -ms-transition:  background 1.2s;
+    -o-transition:  background 1.2s;
+    transition:  background 1.2s;*/
+    cursor: default;
+    display: inline-block;
+}
+
+h1:hover {
+    background: black;
+    opacity: 0.8;
+    color: rgba(255, 255, 255, 1);
+    cursor: help;
+    text-shadow: 0 0 10px white;
 }
 
 div.page div.navigation {
@@ -99,6 +113,7 @@ div.page ul.tags {
     list-style: none;
     margin: 0;
     padding: 0;
+
 }
 
 div.page ul.tags li {
@@ -186,11 +201,14 @@ li{
 .tags {
     display: inline-block;
     float: left;
+    height: 30px;
 }
+
 
 .objects {
     display: inline-block;
-    float: : left;
+    margin-left: 30%;
+    height: 50%;
 }
 
 .already {
@@ -287,3 +305,34 @@ option {
     background-color: #CAECE9;
 }
 
+.line {
+    display: inline-block;
+    width: 0px;
+    margin-top: 40px;
+    position: absolute;
+    opacity: 0;
+    height: 0.1px;
+    background: black;
+    border-color: black;
+}
+
+.line2 {
+    border-left: 2px solid; 
+    border-bottom: 2px solid;
+    border-color: rgba(0,0,0,0.0);
+    opacity: 0;
+    position: absolute;
+    margin-top: 40px;
+    margin-left: 18px;
+    width: 0px;
+    height: 0px;
+    font-size: 12px;
+    padding: 3px;
+    padding-left: 6px;
+
+}
+
+.text {
+    opacity: 0;
+    font-size: 25px;
+}
