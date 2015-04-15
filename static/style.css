@@ -45,12 +45,13 @@ div.page {
 }
 
 h1 {
-    color: rgba(0, 0, 0, 0.8);
-    background: white;
+    color: white;
+    background: #6ECCC4;
     margin: 0;
     padding: 10px 14px;
     letter-spacing: 1px;
     font-weight: normal;
+    
 /*    -webkit-transition:  background 1.2s;
     -moz-transition:  background 1.2s;
     -ms-transition:  background 1.2s;
@@ -61,9 +62,8 @@ h1 {
 }
 
 h1:hover {
-    background: black;
-    opacity: 0.8;
-    color: rgba(255, 255, 255, 1);
+    opacity: 1;
+    color: rgba(255, 255, 255, 0);
     cursor: help;
     text-shadow: 0 0 10px white;
 }
@@ -207,7 +207,7 @@ li{
 
 .objects {
     display: inline-block;
-    margin-left: 30%;
+    margin-left: 20%;
     height: 50%;
 }
 
@@ -312,27 +312,29 @@ option {
     position: absolute;
     opacity: 0;
     height: 0.1px;
-    background: black;
-    border-color: black;
+    background: #6ECCC4;
+    border-color: #6ECCC4;
 }
 
 .line2 {
-    border-left: 2px solid; 
+    border-left: 2px solid;
     border-bottom: 2px solid;
-    border-color: rgba(0,0,0,0.0);
+    border-color: #6ECCC4;
     opacity: 0;
     position: absolute;
     margin-top: 40px;
     margin-left: 18px;
-    width: 0px;
-    height: 0px;
+    width: 100px;
+    height: 20px;
     font-size: 12px;
     padding: 3px;
     padding-left: 6px;
+    color: #6ECCC4;
 
 }
 
 .text {
     opacity: 0;
     font-size: 25px;
+    color: #6ECCC4;
 }
