@@ -11,7 +11,7 @@ linked tags
 </span>
   {% if g.user %}
   <form id="add_linked_tag" style="display:inline">
-    <select>
+    <select name="_id">
       {% for ut in user_tags %}
         <option value="{{ut._id}}">{{ut.name}}</option>
       {% endfor %}

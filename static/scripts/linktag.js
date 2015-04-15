@@ -3,11 +3,7 @@ $(document).ready(function(){
     event.preventDefault();
     var self = $(this);
     var objName = $('h2').text();
-    var data = {
-          data: JSON.stringify({
-                            "value": $('option').val()
-                        })
-       };
+    var data = self.serializeArray();
     $.ajax({
         url : '/objects/'+objName,
         type: 'POST',
