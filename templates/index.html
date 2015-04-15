@@ -3,8 +3,8 @@
   <h2>meet Boojom, here you can bind your fav art with your cross-style personal associations</h2><h3>...and get realy suitable stuff from any art direction</h3>
   <ul class="tags">
   <h1>tags</h1><hr class='line'>
-  <span class='line2'>ipsum dolor sit amet consectetur </span>
-  <span class="text">Lorem</span>
+  <span class='line2'>word or phrase-association</span>
+  <span class="text">abstract</span>
   {% for tag in show_tags %}
     <li><a href="{{ url_for('tag_page', tag=tag) }}">{{ tag }}</a>
   {% endfor %}
@@ -27,10 +27,10 @@ $(document).ready(function(){
         $('.tags .line2').css('border-color', 'rgba(0,0,0,0.8)');
         $('.tags .line2').animate({
           'height': '10px',
-        }, 300, function(){
+        }, 200, function(){
 
           $('.tags .line2').animate({
-          'width': '190px',
+          'width': '150px',
           opacity: 0.8,
         }, 500);
         });
