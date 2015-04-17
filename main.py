@@ -144,23 +144,15 @@ def obj_page(obj):
     current_object = objects.find_one({'name': obj})
 
     if request.method == 'POST':
-<<<<<<< HEAD
-        data = request.form['_id']
-        db.objects.update({"name":obj},
-=======
         data = json.loads(request.form.get('data'))
         print data['value']
         print data['name']
         db.objects.update({"name":obj}, 
->>>>>>> 3cf61edf5a0e9b48a4d9a31abe0390c490e1affa
                  {'$push': { 
                             "tags":{ "_id": ObjectId(data['value'])} 
                           }
                  }
                  )
-        response = jsonify(message=str('OK'))
-        response.status_code = 200
-        return response
 
         # добавляем объект в тег (для отображения объектов, у которых есть данный тег)
         db.tags.update({"_id":ObjectId(data['value'])}, 
