@@ -9,7 +9,8 @@ app = Flask(__name__)
 
 app.config["MONGODB_SETTINGS"] = {
     'DB': "boojom",
-    'host': 'localhost:27017'
+    'host': 'localhost',
+    'port': 27017
 }
 app.config["SECRET_KEY"] = "super secret key"
 

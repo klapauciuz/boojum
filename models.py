@@ -15,14 +15,14 @@ class Object(db.Document):
 
     meta = {
         'allow_inheritance': True,
-        'indexes': ['-created_at', 'slug'],
-        'ordering': ['-created_at']
+        'indexes': ['-name'],
+        'ordering': ['-name']
     }
 
 class Tag(db.EmbeddedDocument):
     name = db.StringField(max_length=255, required=True)
     description = db.StringField(max_length=255, required=True)
-    tags = db.ListField(db.ReferenceField('Object'))
+    objects = db.ListField(db.ReferenceField('Object'))
 
     def get_absolute_url(self):
         return url_for('tag', kwargs={"slug": self.name})
