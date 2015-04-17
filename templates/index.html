@@ -1,15 +1,111 @@
 {% extends "base.html" %}
 {% block content %}
+  <h2>meet Boojom, here you can bind your fav art with your cross-style personal associations</h2><h3>...and get realy suitable stuff from any art direction</h3>
   <ul class="tags">
-  <h1>tags</h1>
+  <h1>tags</h1><hr class='line'>
+  <span class='line2'>word or phrase-association</span>
+  <span class="text">abstract</span>
   {% for tag in show_tags %}
     <li><a href="{{ url_for('tag_page', tag=tag) }}">{{ tag }}</a>
   {% endfor %}
   </ul>
   <ul class="objects">
-  <h1>objects</h1>
+  <h1>objects</h1><hr class='line'>
+  <span class='line2'>music, game, book, movie, place, event etc</span>
+  <span class='text'>artwork</span>
   {% for obj in show_objects %}
     <li><a href="{{ url_for('obj_page', obj=obj) }}">{{ obj }}</a>
   {% endfor %}
   </ul>
+<script type="text/javascript">
+$(document).ready(function(){
+
+     $('.objects h1').hover(function(){
+
+      $('.objects .line').animate({
+        width: '20px',
+      }, 300, 'easeOutExpo', function() {
+        $('.objects .line2').css('border-color', 'rgba(110, 204, 196, 0.8)');
+        $('.objects .line2').animate({
+          'height': '10px',
+        }, 200, function(){
+
+          $('.objects .line2').animate({
+          'width': '250px',
+          opacity: 0.8,
+        }, 500);
+        });
+        $('.objects .line').animate({
+          opacity: 0.8,
+        }, 200);
+        $('.objects .text').animate({
+          opacity: 0.8,
+        }, 200);
+      })
+    }, function(){
+      
+      $('.objects .line').animate({
+        opacity: 0,
+        width: '0px',
+      }, 1);
+      $('.objects .line2').css('border-color', 'rgba(110, 204, 196, 0.8)');
+      $('.objects .line2').animate({
+        'height': '0px',
+      }, 1, function(){
+        $('.objects .line2').animate({
+        opacity: 0,
+        'width': '0px',
+      }, 1)
+      });
+      $('.objects .line2').css('border-color', 'rgba(110, 204, 196, 0.8)');
+      $('.objects .text').animate({
+          opacity: 0,
+        }, 1);
+    });
+
+    $('.tags h1').hover(function(){
+
+      $('.tags .line').animate({
+        width: '20px',
+        opacity: 0.1,
+      }, 300, 'easeOutExpo', function() {
+        $('.tags .line2').css('border-color', 'rgba(110, 204, 196, 0.8)');
+        $('.tags .line2').animate({
+          'height': '10px',
+        }, 200, function(){
+
+          $('.tags .line2').animate({
+          'width': '150px',
+          opacity: 0.8,
+        }, 500);
+        });
+        $('.tags .line').animate({
+          opacity: 0.8,
+        }, 200);
+        $('.tags .text').animate({
+          opacity: 0.8,
+        }, 200);
+      })
+    }, function(){
+      
+      $('.tags .line').animate({
+        opacity: 0,
+        width: '0px',
+      }, 1);
+      $('.tags .line2').css('border-color', 'rgba(110, 204, 196, 0.8)');
+      $('.tags .line2').animate({
+        'height': '0px',
+      }, 1, function(){
+        $('.tags .line2').animate({
+        opacity: 0,
+        'width': '0px',
+      }, 1)
+      });
+      $('.tags .line2').css('border-color', 'rgba(110, 204, 196, 0.8)');
+      $('.tags .text').animate({
+          opacity: 0,
+        }, 1);
+    });
+});
+</script>
 {% endblock  %}

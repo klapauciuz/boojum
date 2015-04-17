@@ -45,13 +45,27 @@ div.page {
 }
 
 h1 {
+    color: white;
     background: #6ECCC4;
     margin: 0;
     padding: 10px 14px;
-    color: white;
     letter-spacing: 1px;
-    text-shadow: 0 0 3px #24776F;
     font-weight: normal;
+    
+/*    -webkit-transition:  background 1.2s;
+    -moz-transition:  background 1.2s;
+    -ms-transition:  background 1.2s;
+    -o-transition:  background 1.2s;
+    transition:  background 1.2s;*/
+    cursor: default;
+    display: inline-block;
+}
+
+h1:hover {
+    opacity: 1;
+    color: rgba(255, 255, 255, 0);
+    cursor: help;
+    text-shadow: 0 0 10px white;
 }
 
 div.page div.navigation {
@@ -99,6 +113,7 @@ div.page ul.tags {
     list-style: none;
     margin: 0;
     padding: 0;
+
 }
 
 div.page ul.tags li {
@@ -186,11 +201,14 @@ li{
 .tags {
     display: inline-block;
     float: left;
+    height: 30px;
 }
+
 
 .objects {
     display: inline-block;
-    float: : left;
+    margin-left: 20%;
+    height: 50%;
 }
 
 .already {
@@ -223,19 +241,19 @@ span.del {
     cursor: pointer;
 }
 
-span.add {
+#add_linked_tag {
+    background: #CAECE9;
     border: 1px solid #105751;
-    border-left: 0px;
-    -moz-border-radius: 0px 2px 2px 0px;
-    -webkit-border-radius: 0px 2px 2px 0px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
     padding: 1px 3px;
     font-size: 14px;
     cursor: pointer;
+    color: #26776F;
 }
 
-span.add:hover {
+#add_linked_tag:hover {
     background: #F0FAF9;
-    border-left: 0px;
 
 }
 
@@ -263,4 +281,60 @@ span.del:hover {
 
 .linked a:hover, .already a:hover {
     color: white;
+    
+}
+select {
+    border: 1px solid #105751;
+    background-color: transparent;
+    color: #26776F;
+    padding: 0px 3px;
+    font-size: 14px;
+    border-radius: 0px 2px 2px 0px;
+    -moz-border-radius: 0px 2px 2px 0px;
+    -webkit-border-radius: 0px 2px 2px 0px;
+    margin-left: 0px;
+    border-left: 0px;
+}
+
+select:hover {
+    cursor: pointer;
+}
+
+option {
+    cursor: pointer;
+    background-color: #CAECE9;
+}
+
+.line {
+    display: inline-block;
+    width: 0px;
+    margin-top: 40px;
+    position: absolute;
+    opacity: 0;
+    height: 0.1px;
+    background: #6ECCC4;
+    border-color: #6ECCC4;
+}
+
+.line2 {
+    border-left: 2px solid;
+    border-bottom: 2px solid;
+    border-color: #6ECCC4;
+    opacity: 0;
+    position: absolute;
+    margin-top: 40px;
+    margin-left: 18px;
+    width: 100px;
+    height: 20px;
+    font-size: 12px;
+    padding: 3px;
+    padding-left: 6px;
+    color: #6ECCC4;
+
+}
+
+.text {
+    opacity: 0;
+    font-size: 25px;
+    color: #6ECCC4;
 }

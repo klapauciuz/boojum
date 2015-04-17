@@ -79,11 +79,14 @@ def tag_page(tag):
                  }
                  )
 
+    # берём айди объектов тега
+    tags_objects_id = [my_obj_id['_id'] for my_obj_id in current_tag['objects']]
+
     if current_tag:
         if g.user and current_tag['_id'] in user_tags:
             # проверяем есть ли тег в коллекции у юзера
-            return render_template('tag.html', description=current_tag['description'], name=current_tag['name'], id=current_tag['_id'], myTag=True)
-        return render_template('tag.html', description=current_tag['description'], name=current_tag['name'], id=current_tag['_id'])
+            return render_template('tag.html', show_objects=[i['name'] for i in db.objects.find({'_id':{'$in': tags_objects_id}})], description=current_tag['description'], name=current_tag['name'], id=current_tag['_id'], myTag=True)
+        return render_template('tag.html', show_objects=[i['name'] for i in db.objects.find({'_id':{'$in': tags_objects_id}})], description=current_tag['description'], name=current_tag['name'], id=current_tag['_id'])
     else:
         return render_template('404.html', show_name=tag)
 
@@ -112,6 +115,15 @@ def add_tag():
     if request.method == 'POST':
         name = request.form['name']
         description = request.form['description']
+
+        # берём строку с name="objects" и делим на объекты по разделителю запятая
+        # вот так 
+        # objects.split(', ')
+        # получаем массив объектов, сложность в том, что они уже должны быть в базе.. иначе придётся юзера заставлять вводить описание и проч.
+        # короче в форме добавления нового тега должен быть динамический выпадающий список объектов, вводим А - выпадают все объекты на А и т.д.
+        # сейчас связанные теги к объектам добавляются только через роут объекта(когда прикрепляем к нему тег)
+        objects = request.form['objects']
+
         _id = tags.insert({'name': name, 'description': description})
         db.users.update({"username":session["username"]}, 
                  {'$push': { 
@@ -132,8 +144,15 @@ def obj_page(obj):
     current_object = objects.find_one({'name': obj})
 
     if request.method == 'POST':
+<<<<<<< HEAD
         data = request.form['_id']
         db.objects.update({"name":obj},
+=======
+        data = json.loads(request.form.get('data'))
+        print data['value']
+        print data['name']
+        db.objects.update({"name":obj}, 
+>>>>>>> 3cf61edf5a0e9b48a4d9a31abe0390c490e1affa
                  {'$push': { 
                             "tags":{ "_id": ObjectId(data['value'])} 
                           }
@@ -142,6 +161,15 @@ def obj_page(obj):
         response = jsonify(message=str('OK'))
         response.status_code = 200
         return response
+
+        # добавляем объект в тег (для отображения объектов, у которых есть данный тег)
+        db.tags.update({"_id":ObjectId(data['value'])}, 
+                 {'$push': { 
+                            "objects":{ "_id": current_object['_id']} 
+                          }
+                 }
+                 )
+
 
     # берём айди тегов объекта
     object_tags_id = [my_tag_id['_id'] for my_tag_id in current_object['tags']]
@@ -154,6 +182,7 @@ def obj_page(obj):
         my_tags_name = [i for i in db.tags.find({'_id':{'$in': my_tags_id}})]
     else:
         my_tags_name = []
+
     # и выводим в шаблон их имена
     return render_template(
         'object.html',
