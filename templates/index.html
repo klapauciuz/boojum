@@ -1,10 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
-  <h2>meet Boojom, here you can bind your fav art with your cross-style personal associations</h2><h3>...and get realy suitable stuff from any art direction</h3>
+  {% if not g.user %}
+  <h2>meet Boojum, here you can bind any favorite thing with abstract and <i>cross-style</i> personal associations(<i>scopes</i>)</h2>
+  <h3>based on your interests and <i>personal behavior</i>, using his <i>powerful intelligence</i>, Boojum will suggest you realy suitable and needful stuff from any direction<br>
+  .. in other words, this is a databse of <i>all objects</i> in the world and your <i>associative links</i> between them. <a href="/register">try it now</a>, username
+  </h3>
+  {% else %}
+  <h2 class='tagANDobject'>all trends</h2><h3 class='tagANDobject'> ..show <u>popular</u>, <u>newest</u></h3><br>
+  {% endif %}
   <ul class="tags">
-  <h1>tags</h1><hr class='line'>
-  <span class='line2'>word or phrase-association</span>
-  <span class="text">abstract</span>
+  <h1>scopes</h1><hr class='line'>
+<!--   <span class='line2'>word or phrase-association</span>
+  <span class="text">abstract</span> -->
   {% for tag in show_tags %}
     <li><a href="{{ url_for('tag_page', tag=tag) }}">{{ tag }}</a>
   {% endfor %}
@@ -18,7 +25,7 @@
   {% endfor %}
   </ul>
 <script type="text/javascript">
-$(document).ready(function(){
+/*$(document).ready(function(){
 
      $('.objects h1').hover(function(){
 
@@ -106,6 +113,6 @@ $(document).ready(function(){
           opacity: 0,
         }, 1);
     });
-});
+});*/
 </script>
 {% endblock  %}

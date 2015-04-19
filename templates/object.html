@@ -3,7 +3,7 @@
 <h2>{{ name }}</h2>
 <h3>{{ id }}</h3>
 <h4>{{ description }}</h4>
-tags 
+this object in scopes 
 <span class='linked'>
 	{% for tag in show_tags %}
 		<a href="{{ url_for('tag_page', tag=tag) }}">{{ tag }}</a>  
@@ -19,4 +19,12 @@ tags
 	<span id="add_linked_tag" class='add' type="submit">+</span>
 	</form>
 {% endif %}
+<br><br>
+{% if myObj %}
+	<span class="already">object in <a href="/collection">your collection</a></span>
+	<span id="del_obj" class='del' type="submit">x</span>
+{% else %}
+	<span id="add_obj" type="submit">add object to collection</span>
+{% endif %}
+
 {% endblock content %}

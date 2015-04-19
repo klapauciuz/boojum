@@ -42,14 +42,20 @@ def collection():
     my_tags_id = [my_tag_id['_id'] for my_tag_id in g.user['tags']]
     print my_tags_id
     print [i['name'] for i in db.tags.find({'_id':{'$in': my_tags_id}})]
+    # берём айди объектов юзера
+    my_objs_id = [my_obj_id['_id'] for my_obj_id in g.user['objects']]
+    print my_objs_id
+    print [i['name'] for i in db.objects.find({'_id':{'$in': my_objs_id}})]
+
     # и выводим в шаблон их имена
-    return render_template('collection.html', show_tags=[i['name'] for i in db.tags.find({'_id':{'$in': my_tags_id}})])
+    return render_template('collection.html', show_tags=[i['name'] for i in db.tags.find({'_id':{'$in': my_tags_id}})], show_objects=[i['name'] for i in db.objects.find({'_id':{'$in': my_objs_id}})])
 
 #_____Collection/
 #_____Tags
 
 @app.route('/<tag>')
 def unknown_tag(tag):
+    """Unknown tag redirect"""
     return render_template('404.html', show_name=tag)
 
 @app.route('/tags/<tag>', methods=['GET', 'POST'])
@@ -81,6 +87,15 @@ def tag_page(tag):
 
     # берём айди объектов тега
     tags_objects_id = [my_obj_id['_id'] for my_obj_id in current_tag['objects']]
+    # print object_tags_id
+    # print [i['name'] for i in db.tags.find({'_id':{'$in': object_tags_id}})]
+
+    # проверяем залогиненность, что бы взять теги у юзера для вывода в список
+    # if g.user:
+    #     my_objects_id = [my_object_id['_id'] for my_object_id in g.user['objects']]
+    #     my_objects_name = [i for i in db.objects.find({'_id':{'$in': my_objects_id}})]
+    # else:
+    #     my_objects_name = []
 
     if current_tag:
         if g.user and current_tag['_id'] in user_tags:
@@ -92,39 +107,32 @@ def tag_page(tag):
 
 @app.route('/tags/add')
 def add_tag_page():
+    """New tag page"""
     name = request.args.get('name')
     if 'username' not in session:
         flash('Log in, please')
         return redirect('/login')
     if name == None:
         name = ''
-    return render_template('add_tag.html', tag_name=name)
-
-@app.route('/api/tags/<name>', methods=['GET', 'PUT', 'DELETE'])
-def get_tag(name):
-    if request.method == 'GET':
-        current_tag = tags.find_one({'name': name})
-        return dumps(current_tag)
-    if request.method == 'PUT':
-        tags.update({'name': name}, {'name': name})
-    if request.method == 'DELETE':
-        tags.remove({'name': name}, {justOne: true})
+    _objects = objects.find()
+    return render_template('add_tag.html', tag_name=name, show_objects=[obj['name'] for obj in _objects])
 
 @app.route('/api/add/tag', methods=['POST'])
 def add_tag():
+    """Add new tag"""
     if request.method == 'POST':
         name = request.form['name']
         description = request.form['description']
 
-        # берём строку с name="objects" и делим на объекты по разделителю запятая
-        # вот так 
-        # objects.split(', ')
-        # получаем массив объектов, сложность в том, что они уже должны быть в базе.. иначе придётся юзера заставлять вводить описание и проч.
-        # короче в форме добавления нового тега должен быть динамический выпадающий список объектов, вводим А - выпадают все объекты на А и т.д.
+        # если есть строка с объектами то берём её и обрезаем, попутно удаляя ненужные пробелы вначале
+        # if request.form['objects']:
+        #     objects = [obj.lstrip() for obj in request.form['objects'].split(',')]
+        # else:
+        #     objects = []
+        objects = []
+        # в форме добавления нового тега должен быть динамический выпадающий список объектов, вводим А - выпадают все объекты на А и т.д.
         # сейчас связанные теги к объектам добавляются только через роут объекта(когда прикрепляем к нему тег)
-        objects = request.form['objects']
-
-        _id = tags.insert({'name': name, 'description': description})
+        _id = tags.insert({'name': name, 'description': description, 'objects': objects})
         db.users.update({"username":session["username"]}, 
                  {'$push': { 
                             "tags":{ "_id": _id } 
@@ -135,13 +143,56 @@ def add_tag():
         response.status_code = 200
         return response
 
+# так и не понял что это и зачем
+# @app.route('/api/tags/<name>', methods=['GET', 'PUT', 'DELETE'])
+# def get_tag(name):
+#     if request.method == 'GET':
+#         current_tag = tags.find_one({'name': name})
+#         return dumps(current_tag)
+#     if request.method == 'PUT':
+#         tags.update({'name': name}, {'name': name})
+#     if request.method == 'DELETE':
+#         tags.remove({'name': name}, {justOne: true})
 #_____Tags/
 #_____Objects
+
+@app.route('/collection/add/<obj>', methods=['GET', 'POST'])
+def add_object(obj):
+    """Object add"""
+    current_object = objects.find_one({'name': obj})
+    if g.user:
+        user_objects = [user_obj['_id'] for user_obj in g.user['objects']]
+        
+    # проверяем залогиненность что бы взять объекты у юзера
+    if request.method == 'POST':
+        # print current_object["_id"]
+        # print user_tags
+        if current_object["_id"] not in user_objects:
+            db.users.update({"username":session["username"]}, 
+                 {'$push': { 
+                            "objects":{ "_id": current_object['_id'] } 
+                          }
+                 }
+                 )
+
+        else:
+            db.users.update({"username":session["username"]}, 
+                 {'$pull': { 
+                            "objects":{ "_id": current_object['_id'] } 
+                          }
+                 }
+                 )
+
+    response = jsonify(message=str('OK'))
+    response.status_code = 200
+    return response
 
 @app.route('/objects/<obj>', methods=['GET', 'POST'])
 def obj_page(obj):
     """Object page"""
     current_object = objects.find_one({'name': obj})
+    if g.user:
+        user_objects = [user_obj['_id'] for user_obj in g.user['objects']]
 
     if request.method == 'POST':
         data = json.loads(request.form.get('data'))
@@ -176,14 +227,25 @@ def obj_page(obj):
         my_tags_name = []
 
     # и выводим в шаблон их имена
-    return render_template(
-        'object.html',
-        show_tags=[i['name'] for i in db.tags.find({'_id':{'$in': object_tags_id}})],
-        name=current_object['name'],
-        description=current_object['description'],
-        id=current_object['_id'],
-        user_tags=my_tags_name
-    )
+    if g.user and current_object['_id'] in user_objects:
+        return render_template(
+            'object.html',
+            show_tags=[i['name'] for i in db.tags.find({'_id':{'$in': object_tags_id}})],
+            name=current_object['name'],
+            description=current_object['description'],
+            id=current_object['_id'],
+            user_tags=my_tags_name,
+            myObj = True
+        )
+    else:
+        return render_template(
+            'object.html',
+            show_tags=[i['name'] for i in db.tags.find({'_id':{'$in': object_tags_id}})],
+            name=current_object['name'],
+            description=current_object['description'],
+            id=current_object['_id'],
+            user_tags=my_tags_name
+        )
 
 #_____Objects/
 #_____Auth
@@ -206,7 +268,7 @@ def register():
             username = request.form['username']
             email = request.form['username']
             password = generate_password_hash(request.form['password'])
-            users.insert({'username': username, 'email': email, 'password': password, 'tags': []})
+            users.insert({'username': username, 'email': email, 'password': password, 'tags': [], 'objects': []})
             flash('Welcome to Boojom, ' + username)
             return redirect('/login')
     return render_template('register.html', error=error)

@@ -3,7 +3,7 @@
 <h2>{{ name }}</h2>
 <h3>{{ id }}</h3>
 <h4>{{ description }}</h4>
-objects
+objects in this scope 
 <span class='linked'>
 	{% for obj in show_objects %}
 		<a href="{{ url_for('obj_page', obj=obj) }}">{{ obj }}</a>  

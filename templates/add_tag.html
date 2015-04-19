@@ -1,12 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
 <h2>add new tag {{ tag_name }}</h2>
-<form id="add" action="" >
+<h3>keep in mind, scope - abstract concept. this is your association which is necessary for objects description</h3>
+<br>
+<form id="add" action="">
     <label>name </label>
     <input type="text" name="name" placeholder="e.g. creepy" value="{{ tag_name }}"/>
     <input type="submit" form="add" value="add"/><br><br>
-    <textarea rows="12" cols="30" name="description" placeholder="an overused slang term for sexually inappropriate or perverted or for attempting to derive sexual gratification through dishonorable means. Unfortunately, the word has become an abused favorite of melodramatic people who try hard to use the word wherever possible, to the point of rendering the word almost meaningless."></textarea><br><br>
+    <textarea style="display: inline-block;" rows="12" cols="30" name="description" placeholder="an overused slang term for sexually inappropriate or perverted or for attempting to derive sexual gratification through dishonorable means. Unfortunately, the word has become an abused favorite of melodramatic people who try hard to use the word wherever possible, to the point of rendering the word almost meaningless."></textarea>
     <label>associated<br>objects </label>
     <input type="text" name="objects" placeholder="slut, shit, fuck, frog" value="{{ tag_name }}"/>
 </form>
+<ul class="objects" style="margin-left: 50px;">
+  <h1>objects</h1>
+  {% for obj in show_objects %}
+    <li><a href="{{ url_for('obj_page', obj=obj) }}">{{ obj }}</a>
+  {% endfor %}
+</ul>
 {% endblock content %}
