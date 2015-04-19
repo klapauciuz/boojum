@@ -10,21 +10,23 @@ this object in scopes
 	{% endfor %}
 </span>
 {% if g.user %}
-	<form style="display:inline">
-		<select>
-			{% for ut in user_tags %}
-				<option value="{{ut._id}}">{{ut.name}}</option>
-			{% endfor %}
-		</select>
-	<span id="add_linked_tag" class='add' type="submit">+</span>
-	</form>
-{% endif %}
-<br><br>
-{% if myObj %}
-	<span class="already">object in <a href="/collection">your collection</a></span>
-	<span id="del_obj" class='del' type="submit">x</span>
-{% else %}
-	<span id="add_obj" type="submit">add object to collection</span>
+		<form style="display:inline">
+			<select>
+				{% for ut in user_tags %}
+					<option value="{{ut._id}}">{{ut.name}}</option>
+				{% endfor %}
+			</select>
+		<span id="add_linked_tag" class='add' type="submit">+</span>
+		</form>
+	<br><br>
+		{% if myObj %}
+			<span class="already">object in <a href="/collection">your collection</a></span>
+			<span id="del_obj" class='del' type="submit">x</span>
+		{% else %}
+			<span id="add_obj" type="submit">add object to collection</span>
+		{% endif %}
+	{% else %}<br><br>
+	<span class='followstatus'>..<a href="/login">login</a> or <a href="/register">sign up</a> and put this object in your own collection</span>
 {% endif %}
 
 {% endblock content %}
