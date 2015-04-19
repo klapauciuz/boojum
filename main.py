@@ -26,6 +26,10 @@ def hello():
     _objects = objects.find()
     return render_template('index.html', show_tags=[tag['name'] for tag in _tags], show_objects=[obj['name'] for obj in _objects])
 
+@app.route("/howtouse")
+def info():
+    return render_template('info.html')
+
 @app.route("/objects/")
 @app.route("/tags/")
 def gotohome():
@@ -248,6 +252,9 @@ def obj_page(obj):
         )
 
 #_____Objects/
+#_____Fill
+
+#_____Fill/
 #_____Auth
 @app.route('/register', methods=['GET', 'POST'])
 def register():

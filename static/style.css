@@ -372,3 +372,14 @@ option {
     text-align: center;
     margin-left: 30%;
 }
+
+
+.link {
+    margin: 10px 0;
+    background: #FAE4E4;
+    border: 1px solid #DD6F6F;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    padding: 4px;
+    font-size: 13px;
+}
