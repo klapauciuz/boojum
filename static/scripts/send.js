@@ -1,3 +1,4 @@
+/*Добавление и удаление тегов*/
 $(document).ready(function(){
   $('form#add').submit(function(event) {
     event.preventDefault();
@@ -5,7 +6,7 @@ $(document).ready(function(){
     postData = self.serializeArray();
 
     $.ajax({
-        url : '/api/add/tag',
+        url : '/tags/add',
         type: 'POST',
         data : postData,
         success:function(response) {
@@ -16,4 +17,20 @@ $(document).ready(function(){
         }
     });
   })
+  $('#delete').click(function(event) {
+    event.preventDefault();
+    var self = $(this),
+    tagName = $('h2').text();
+    $.ajax({
+        url : '/tags/'+tagName,
+        type: 'DELETE',
+        success:function(response) {
+            window.location.replace("/");
+        },
+        error: function(err) {
+          console.log(JSON.stringify(err));
+        }
+    });
+})
 });
+

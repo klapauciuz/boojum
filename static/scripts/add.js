@@ -1,3 +1,4 @@
+/*Добавление/удаление в личной коллекции*/
 $(document).ready(function(){
   $('#add_tag').click(function(event) {
     event.preventDefault();
@@ -57,12 +58,13 @@ $(document).ready(function(){
             }
         });
   });
+
 $('#add_obj').click(function(event) {
     event.preventDefault();
     var self = $(this),
     objName = $('h2').text();
     $.ajax({
-        url : '/collection/add/'+objName,
+        url : '/objects/'+objName,
         type: 'POST',
         data : objName,
         success:function(response) {
@@ -90,7 +92,7 @@ $('#add_obj').click(function(event) {
         var self = $(this),
         objName = $('h2').text();
         $.ajax({
-            url : '/collection/add/'+objName,
+            url : '/objects/'+objName,
             type: 'POST',
             data : objName,
             success:function(response) {

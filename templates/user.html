@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2 class='tagANDobject'>{{ user_name }}'s collection</h2> <span class='followstatus'>follow</span><br>
+  <ul class="tags">
+  <h1>scopes</h1>
+  {% for tag in show_tags %}
+    <li><a href="{{ url_for('tag_page', tag=tag) }}">{{ tag }}</a>
+  {% endfor %}
+  </ul>
+  <ul class="mu_tags">
+  <h1>mutual</h1>
+<!--   {% for tag in show_tags %}
+    <li><a href="{{ url_for('tag_page', tag=tag) }}">{{ tag }}</a>
+  {% endfor %} -->
+  </ul>
+
+  <ul class="objects">
+  <h1>objects</h1>
+  {% for obj in show_objects %}
+    <li><a href="{{ url_for('obj_page', obj=obj) }}">{{ obj }}</a>
+  {% endfor %}
+  </ul>
+  <ul class="mu_objects">
+  <h1>mutual</h1>
+<!--   {% for obj in show_objects %}
+    <li><a href="{{ url_for('obj_page', obj=obj) }}">{{ obj }}</a>
+  {% endfor %} -->
+  </ul>
+
+{% endblock  %}

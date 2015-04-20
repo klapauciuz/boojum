@@ -107,6 +107,7 @@ span.followstatus {
     -webkit-border-radius: 2px;
     padding: 4px;
     font-size: 13px;
+    cursor: pointer;
 }
 
 div.page ul.tags {
@@ -230,9 +231,23 @@ li{
 
 .objects {
     display: inline-block;
-    margin-left: 20%;
     height: 50%;
+    float: left;
 }
+
+.mu_objects {
+    opacity: 0.4;
+    padding: 0px;
+    float: left;
+    display: inline-block;
+
+}
+.mu_tags {
+    opacity: 0.4;
+    padding-left: 0px; 
+    float: left;
+}
+
 
 .already {
     background: #105751;

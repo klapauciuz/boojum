@@ -1,8 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
 <h2>{{ name }}</h2>
-<h3>{{ id }}</h3>
-<h4>{{ description }}</h4>
+<!-- <h3>{{ id }}</h3> -->
+<h3>{{ description }}</h3>
+{% if g.user['username'] == creator %}
+<h5 class='creator'>by <a href="{{ url_for('user', user=creator) }}">{{ creator }}</a> <span style="opacity: 0.6;">(this is you and you can <a href="">edit</a> or <a id="delete" href="/collection">delete</a> this page)</span></h5>
+
+{% else %}
+<h5>by <a href="{{ url_for('user', user=creator) }}">{{ creator }}</a></h5>
+{% endif %}
 objects in this scope 
 <span class='linked'>
 	{% for obj in show_objects %}
