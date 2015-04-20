@@ -283,12 +283,9 @@ def obj_page(obj):
 #_____User
 @app.route('/users/<user>')
 def user(user):
-    if 'username' not in session:
-        pass
-    else:
+    if 'username' in session:
         if user == g.user['username']:
             return redirect('/collection')
-        user_tags = [user_tag['_id'] for user_tag in g.user['tags']]
 
     current_user = users.find_one({'username': user})
 
@@ -296,8 +293,26 @@ def user(user):
     user_objects_id = [user_obj_id['_id'] for user_obj_id in current_user['objects']]
     # берём айди тегов юзера
     user_tags_id = [user_tag_id['_id'] for user_tag_id in current_user['tags']]
-    # и выводим в шаблон их имена
-    return render_template('user.html', user_name=user, show_tags=[i['name'] for i in db.tags.find({'_id':{'$in': user_tags_id}})], show_objects=[i['name'] for i in db.objects.find({'_id':{'$in': user_objects_id}})])
+
+    if 'username' in session:
+        # берём айди своих тегов
+        my_tags_id = [my_tag_id['_id'] for my_tag_id in g.user['tags']]
+        # берём айди своих объектов
+        my_objs_id = [my_obj_id['_id'] for my_obj_id in g.user['objects']]
+        # ищем общие теги
+        mu_tags_id = [i for i in my_tags_id if i in user_tags_id]
+        print mu_tags_id
+        # и объекты
+        mu_objects_id = [i for i in my_objs_id if i in user_objects_id]
+        print mu_objects_id
+        # создаём список из их имён
+        mu_tags_names = [i['name'] for i in db.tags.find({'_id':{'$in': mu_tags_id}})]
+        mu_objs_names = [i['name'] for i in db.objects.find({'_id':{'$in': mu_objects_id}})]
+    else:
+        mu_tags_names = []
+        mu_objs_names = []
+
+    return render_template('user.html', user_name=user, show_mu_tags=mu_tags_names, show_mu_objects=mu_objs_names, show_tags=[i['name'] for i in db.tags.find({'_id':{'$in': user_tags_id}})], show_objects=[i['name'] for i in db.objects.find({'_id':{'$in': user_objects_id}})])
 
 
 #_____User/

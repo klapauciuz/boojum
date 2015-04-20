@@ -7,24 +7,27 @@
     <li><a href="{{ url_for('tag_page', tag=tag) }}">{{ tag }}</a>
   {% endfor %}
   </ul>
+  {% if g.user %}
   <ul class="mu_tags">
   <h1>mutual</h1>
-<!--   {% for tag in show_tags %}
-    <li><a href="{{ url_for('tag_page', tag=tag) }}">{{ tag }}</a>
-  {% endfor %} -->
+  {% for mu_tag in show_mu_tags %}
+    <li><a href="{{ url_for('tag_page', tag=mu_tag) }}">{{ mu_tag }}</a>
+  {% endfor %}
   </ul>
-
+  {% endif %}
   <ul class="objects">
   <h1>objects</h1>
   {% for obj in show_objects %}
     <li><a href="{{ url_for('obj_page', obj=obj) }}">{{ obj }}</a>
   {% endfor %}
   </ul>
+  {% if g.user %}
   <ul class="mu_objects">
   <h1>mutual</h1>
-<!--   {% for obj in show_objects %}
-    <li><a href="{{ url_for('obj_page', obj=obj) }}">{{ obj }}</a>
-  {% endfor %} -->
+  {% for mu_obj in show_mu_objects %}
+    <li><a href="{{ url_for('obj_page', obj=mu_obj) }}">{{ mu_obj }}</a>
+  {% endfor %}
   </ul>
+  {% endif %}
 
 {% endblock  %}
