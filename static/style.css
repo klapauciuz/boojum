@@ -66,7 +66,7 @@ h1 {
     letter-spacing: 1px;
     font-weight: normal;
     
-/*    -webkit-transition:  background 1.2s;
+/*  -webkit-transition:  background 1.2s;
     -moz-transition:  background 1.2s;
     -ms-transition:  background 1.2s;
     -o-transition:  background 1.2s;
@@ -415,8 +415,22 @@ option {
 }
 
 #catName {
+    cursor: default;
     text-align: center;
     margin-left: 30%;
+    color: rgba(0, 0, 0, 0);
+    text-shadow: 0 0 10px black;
+    cursor: default;
+    -webkit-transition: all 0.8s;
+    -moz-transition: all 0.8s;
+    -ms-transition: all 0.8s;
+    -o-transition: all 0.8s;
+    transition: all 0.8s;
+}
+
+#catName:hover {
+    color: rgba(0, 0, 0, 0);
+    text-shadow: 0 0 1px black;
 }
 
 
