@@ -8,6 +8,7 @@
   <script type="text/javascript" src="{{ url_for('static', filename='scripts/send.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='scripts/add.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='scripts/linktag.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='scripts/fill.js') }}"></script>
 </head>
 <body>
 {% block header %}
@@ -18,12 +19,13 @@
   </big>
   {% if g.user %}
   <big style='float:right;'>
-
     <a href="/collection">my collection</a> <span id='profile'>[{{ g.user['username'] }}]</span> |
+    <a href="/howtouse">how to use</a> |
     <a href="/logout">logout</a>
   </big>
   {% else %}
   <big style='float:right;'>
+    <a href="/howtouse">how to use</a> |
     <a href="/login">login</a>/<a href="/register">sign up</a>
   </big>
   {% endif %}

@@ -1,16 +1,28 @@
 $(document).ready(function(){
-    
-  $('tags.fill').click(function(event) {
-    event.preventDefault();
-    var self = $(this),
-    postData = self.serializeArray();
-
+  $('.tags .fill').click(function(event) {
+    if( !confirm('It will fill your scopes by linked scopes from all objects. Ok?') ) 
+            return;
+    var self = $(this);
     $.ajax({
-        url : '',
+        url : '/collection/tags/fill',
         type: 'POST',
-        data : postData,
         success:function(response) {
-            window.location.replace("/");
+            location.href = '/collection'
+        },
+        error: function(err) {
+          console.log(JSON.stringify(err));
+        }
+    });
+  });
+  $('.objects .fill').click(function(event) {
+    if( !confirm('It will fill your objects by linked objects from all scopes. Ok?') ) 
+            return;
+    var self = $(this);
+    $.ajax({
+        url : '/collection/objects/fill',
+        type: 'POST',
+        success:function(response) {
+            location.href = '/collection'
         },
         error: function(err) {
           console.log(JSON.stringify(err));

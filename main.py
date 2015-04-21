@@ -55,6 +55,46 @@ def collection():
     return render_template('collection.html', show_tags=[i['name'] for i in db.tags.find({'_id':{'$in': my_tags_id}})], show_objects=[i['name'] for i in db.objects.find({'_id':{'$in': my_objs_id}})])
 
 #_____Collection/
+#_____Fill
+@app.route('/collection/<TO>/fill', methods=['GET', 'POST'])
+def fill(TO):
+    if g.user:
+        user_tags = [user_tag['_id'] for user_tag in g.user['tags']]
+        user_objs = [user_tag['_id'] for user_obj in g.user['objects']]
+    # берём айди тегов юзера
+    my_tags_id = [my_tag_id['_id'] for my_tag_id in g.user['tags']]
+    # берём айди объектов юзера
+    my_objs_id = [my_obj_id['_id'] for my_obj_id in g.user['objects']]
+    if TO == 'tags':
+        # ищем все теги у объектов юзера
+        for my_obj_tag in objects.find({'_id':{'$in': my_objs_id}}):
+            for tag in my_obj_tag['tags']:
+                if tag['_id'] not in user_tags:
+                    db.users.update({"username":session["username"]}, 
+                         {'$push': { 
+                                    "tags":{ "_id": tag['_id'] } 
+                                  }
+                         }
+                         )
+        response = jsonify(message=str('OK'))
+        response.status_code = 200
+        return response
+    else:
+        # ищем все теги у объектов юзера
+        for my_tag_obj in tags.find({'_id':{'$in': my_tags_id}}):
+            for obj in my_tag_obj['objects']:
+                if obj['_id'] not in user_objs:
+                    db.users.update({"username":session["username"]}, 
+                         {'$push': { 
+                                    "objects":{ "_id": obj['_id'] } 
+                                  }
+                         }
+                         )
+        response = jsonify(message=str('OK'))
+        response.status_code = 200
+        return response
+
+#_____Fill/
 #_____Tags
 
 @app.route('/<tag>')
@@ -277,9 +317,6 @@ def obj_page(obj):
         )
 
 #_____Objects/
-#_____Fill
-
-#_____Fill/
 #_____User
 @app.route('/users/<user>')
 def user(user):

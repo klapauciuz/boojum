@@ -37,6 +37,20 @@ input[type="submit"], span#add_tag, span#add_obj {
     cursor: pointer;
 }
 
+#example_add_tag, #example_add_obj  {
+    background: #105751;
+    border: 1px solid #073B36;
+    padding: 1px 3px;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    color: white;
+    cursor: pointer;
+}
+
+
 div.page {
     background: white;
     border: 1px solid #6ECCC4;
@@ -203,6 +217,23 @@ div.fill {
 }
 
 div.fill:hover {
+    opacity: 0.8;
+}
+
+.fill_example {
+    background: #6ECCC4;
+    border: 1px solid #6ECCC4;
+    -moz-border-radius: 0px 0px 4px 4px;
+    -webkit-border-radius: 0px 0px 4px 4px;
+    padding: 4px;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    opacity: 0.4;
+    text-align: center;
+}
+
+.fill_example:hover {
     opacity: 0.8;
 }
 
