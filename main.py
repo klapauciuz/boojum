@@ -6,6 +6,7 @@ from werkzeug import check_password_hash, generate_password_hash
 from bson.objectid import ObjectId
 import requests
 from bs4 import BeautifulSoup
+import re
 
 app = Flask(__name__)
 
@@ -152,11 +153,12 @@ def add_object_from_wiki():
     r = requests.get(request.form['urlwiki'])
     soup = BeautifulSoup(r.text)
     name = soup.find("h1", class_="firstHeading").text
-    description = soup.find("div", id='bodyContent')
-    description = description.find_all("p")
+    description = soup.find("div", id='mw-content-text')
+    description = description.find_all("p", recursive=False)
     description = description[0].text
     source = request.form['urlwiki']
-    _id = objects.insert({'name': name, 'description': description, 'tags': [], 'source': source})
+    _id = objects.insert({'name': re.sub(r'(\n|\t)', '', name), 'description': description, 'tags': [], 'source': source})
+
     db.users.update({"username":session["username"]}, 
              {'$push': { 
                         "objects":{ "_id": _id } 
@@ -267,7 +269,6 @@ def obj_page(obj):
     current_object = objects.find_one({'name': obj})
     if g.user:
         user_objects = [user_obj['_id'] for user_obj in g.user['objects']]
-
     if request.method == 'POST':
         # если прикрепляем тег к объекту
         if request.form.get('data'):
