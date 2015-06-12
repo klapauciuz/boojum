@@ -174,7 +174,7 @@ def add_object_from_wiki():
          }
          )
     response = re.sub(r'(\n|\t)', '', name)
-    thanks_string = 'Done. Thank you for another new object, qwerty, ' + session["username"] + '!'
+    thanks_string = 'Done. Thank you for another new object, ' + session["username"]
     flash(thanks_string)
     return response
     # with open('wiki.html', 'w') as wiki:
