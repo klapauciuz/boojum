@@ -36,7 +36,12 @@ $(document).ready(function(){
         event.preventDefault();
         var self = $(this),
         postData = self.serializeArray();
-
+        $('#wide_submit').val('loading');
+        $('#wide_submit').prop('disabled', true);
+        $('#wide_submit').css('cursor', 'progress');
+        $('#wide_submit').animate({
+                opacity: 0.2,
+        });
         $.ajax({
             url : '/objects/add',
             type: 'POST',
