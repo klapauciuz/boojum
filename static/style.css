@@ -37,6 +37,12 @@ input[type="submit"], span#add_tag, span#add_obj {
     cursor: pointer;
 }
 
+input#wide_submit {
+    height: 42px;
+    position: absolute;
+    display: inline;
+}
+
 #example_add_tag, #example_add_obj  {
     background: #105751;
     border: 1px solid #073B36;

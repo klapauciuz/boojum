@@ -149,16 +149,23 @@ def tag_page(tag):
 @app.route('/objects/add', methods=['POST'])
 def add_object_from_wiki():
     """New object add"""
-    print 'fromwiki, url:', request.form['urlwiki']
-    r = requests.get(request.form['urlwiki'])
-    soup = BeautifulSoup(r.text)
-    name = soup.find("h1", class_="firstHeading").text
-    description = soup.find("div", id='mw-content-text')
-    description = description.find_all("p", recursive=False)
-    description = description[0].text
-    source = request.form['urlwiki']
+    if request.form['urlwiki'] == '':
+        print 'fromlastfm, url:', request.form['urllast']
+        r = requests.get(request.form['urllast'])
+        soup = BeautifulSoup(r.text)
+        name = re.sub(r'[\ \n]{2,}', '', soup.find("article", class_='artist-overview').find('h1').text)
+        description = soup.find('div', class_='wiki-text').text
+        source = request.form['urllast']
+        print name
+    else:
+        print 'fromwiki, url:', request.form['urlwiki']
+        r = requests.get(request.form['urlwiki'])
+        soup = BeautifulSoup(r.text)
+        name = soup.find("h1", class_="firstHeading").text
+        descriptions = soup.find("div", id='mw-content-text').find_all("p", recursive=False)
+        description = descriptions[0].text
+        source = request.form['urlwiki']
     _id = objects.insert({'name': re.sub(r'(\n|\t)', '', name), 'description': description, 'tags': [], 'source': source})
-
     db.users.update({"username":session["username"]}, 
              {'$push': { 
                         "objects":{ "_id": _id } 
