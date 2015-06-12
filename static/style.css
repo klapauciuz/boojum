@@ -161,11 +161,16 @@ h3 {
     margin: 0;
     font-size: 1em;
     color: #2C7E76;
-    opacity: 0.8;
+    opacity: 1;
+    font-weight: normal;
 }
 
 .tagANDobject {
     display: inline;
+}
+
+h3.tagANDobject {
+    opacity: 0.6;
 }
 
 div.page div.twitbox p {
