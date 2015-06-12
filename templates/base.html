@@ -13,24 +13,26 @@
 </head>
 <body>
 {% block header %}
+<div id='menu'>
   <big>
-    <a href="/tags/add">add new</a> |
+    <a href="/tags/add">add new</a> 
     <a href="/">trends</a>
     <span id='catName' href="">Boojum</span>
   </big>
   {% if g.user %}
   <big style='float:right;'>
-    <a href="/collection">my collection</a> <span id='profile'>[{{ g.user['username'] }}]</span> |
-    <a href="/howtouse">how to use</a> |
+    <a href="/collection" style='padding-right: 0px;'>my collection</a> <span id='profile'><sup>[{{ g.user['username'] }}]</sup></span> 
+    <a href="/howtouse">how to use</a> 
     <a href="/logout">logout</a>
   </big>
   {% else %}
   <big style='float:right;'>
-    <a href="/howtouse">how to use</a> |
+    <a href="/howtouse">how to use</a> 
     <a href="/login">login</a>/<a href="/register">sign up</a>
   </big>
   {% endif %}
-  <hr style="border-color: gray">
+  <!-- <hr style="border-color: gray"> -->
+</div>
 {% endblock header %}
 {% with flashes = get_flashed_messages() %}
   {% if flashes %}
