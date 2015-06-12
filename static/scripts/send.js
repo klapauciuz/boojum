@@ -42,7 +42,8 @@ $(document).ready(function(){
             type: 'POST',
             data : postData,
             success:function(response) {
-                window.location.replace("/");
+                console.log(response);
+                window.location.replace("/objects/" + response);
             },
             error: function(err) {
               console.log(JSON.stringify(err));

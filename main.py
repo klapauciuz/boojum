@@ -165,19 +165,24 @@ def add_object_from_wiki():
         descriptions = soup.find("div", id='mw-content-text').find_all("p", recursive=False)
         description = descriptions[0].text
         source = request.form['urlwiki']
+   
     _id = objects.insert({'name': re.sub(r'(\n|\t)', '', name), 'description': description, 'tags': [], 'source': source})
     db.users.update({"username":session["username"]}, 
-             {'$push': { 
-                        "objects":{ "_id": _id } 
-                      }
-             }
-             )
+         {'$push': { 
+                    "objects":{ "_id": _id } 
+                  }
+         }
+         )
+    response = re.sub(r'(\n|\t)', '', name)
+    thanks_string = 'Done. Thank you for another new object, qwerty, ' + session["username"] + '!'
+    flash(thanks_string)
+    return response
     # with open('wiki.html', 'w') as wiki:
     #     wiki.write(r.text.encode('utf-8'))
 
-    response = jsonify(message=str('OK'))
-    response.status_code = 200
-    return response
+    # response = jsonify(message=str('OK'))
+    # response.status_code = 200
+    # return response
 
 @app.route('/tags/add', methods=['GET', 'POST'])
 def add_tag_page():
