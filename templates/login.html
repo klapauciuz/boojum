@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
+<center>
 <h1>try Boojom</h1>
-<h3>Boojom associations service - get the full list of recommendations specially cooked from the best art for YOU, username!</h3><br>
+<h3>associations service</h3><br>
 <h2>Sign In</h2>
   {% if error %}<div class="error"><strong>Error:</strong> {{ error }}</div>{% endif %}
   <form action="" method="post">
@@ -11,6 +12,7 @@
       <dt>Password
       <dd><input type="password" name="password" size="30">
     </dl>
-    <div class="actions"><input type="submit" value="Sign In"></div>..not yet with Boojom? <a href="/register">sign up</a>, slowpoke
+    <div class="actions"><input type="submit" value="Sign In"></div><br>..not yet with Boojom? <a href="/register">sign up</a>, slowpoke
   </form>
+</center>
 {% endblock content %}

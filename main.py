@@ -444,7 +444,7 @@ def register():
             username = request.form['username']
             email = request.form['username']
             password = generate_password_hash(request.form['password'])
-            users.insert({'username': username, 'email': email, 'password': password, 'tags': [], 'objects': []})
+            users.insert({'username': username, 'email': email, 'password': password, 'tags': [], 'objects': [], 'friends': []})
             flash('Welcome to Boojum, ' + username)
             return redirect('/login')
     return render_template('register.html', error=error)

@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-<h2  class='tagANDobject'>new scope {{ tag_name }}</h2><h3 class='tagANDobject'> ..keep in mind, scope - abstract concept. this is your association which is necessary for objects description</h3>
+<center>
+<h2  class='tagANDobject'>new scope {{ tag_name }}</h2><br><h3 class='tagANDobject'>keep in mind, scope - abstract concept and your personal association with objects</h3>
 <br>
 <br>
+<div class='MainContainer'>
 <form id="add" action="">
     <label>name </label>
     <input type="text" name="name" placeholder="e.g. creepy" value="{{ tag_name }}"/>
@@ -15,12 +17,13 @@
 <h2>or add object</h2><br>
 <form id="add_fromwiki" action="">
     <label>from wikipedia</label>
-    <input type="text" name="urlwiki" placeholder="url" value=""/>
+    <input type="text" name="urlwiki" placeholder="url" style='width: 110px;' value=""/>
     <input type="submit" form="add_fromwiki" id='wide_submit' value="submit"/><br>
     <label>from last.fm</label>
-    <input type="text" name="urllast" placeholder="url" style='width: 164px;' value=""/>
+    <input type="text" name="urllast" placeholder="url" style='width: 120px;' value=""/>
 </form>
-
+</div>
+</center>
 <!-- потом над будет прикрутить драгндроп что бы удобно было назначать объекты тегу -->
 <!-- <ul class="objects" style="margin-left: 50px;">
   <h1>objects</h1>

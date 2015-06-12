@@ -66,28 +66,18 @@ div.page {
 }
 
 h1 {
-    color: white;
-    background: #6ECCC4;
-    margin: 0;
-    padding: 10px 14px;
-    letter-spacing: 1px;
-    font-weight: normal;
-    
-/*  -webkit-transition:  background 1.2s;
-    -moz-transition:  background 1.2s;
-    -ms-transition:  background 1.2s;
-    -o-transition:  background 1.2s;
-    transition:  background 1.2s;*/
+    color: black;
+    font-size: 30px;
+    opacity: 0.2;
     cursor: default;
-    display: inline-block;
 }
 
-h1:hover {
+.tags h1:hover, .objects h1:hover {
     opacity: 1;
-    /*color: rgba(255, 255, 255, 1);*/
-    /*cursor: help;*/
-    /*text-shadow: 0 0 10px white;*/
+    color: rgb(44, 126, 118);
 }
+
+
 
 div.page div.navigation {
     background: #DEE9E8;
@@ -107,7 +97,6 @@ div.page div.navigation a {
 h2 {
     margin: 0 0 15px 0;
     color: #105751;
-
 }
 
 div.page div.body {
@@ -122,29 +111,19 @@ div.page div.footer {
 }
 
 span.followstatus {
-    border: 1px solid #ccc;
-    background: #E3EBEA;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    padding: 4px;
-    font-size: 13px;
+    font-size: 12px;
     cursor: pointer;
 }
 
 span.unfollow {
-    border: 1px solid #E3EBEA;
-    background: #ccc;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    padding: 4px;
-    font-size: 13px;
+    font-size: 12px;
     cursor: pointer;
 }
 
 div.page ul.tags {
     list-style: none;
-    margin: 0;
-    padding: 0;
+    margin: 0px;
+    padding: 0px;
 
 }
 
@@ -158,9 +137,6 @@ div.page ul.tags li {
     min-height: 48px;
 }
 
-div.page ul.tags p {
-    margin: 0;
-}
 
 div.page ul.tags li img {
     float: left;
@@ -185,6 +161,7 @@ h3 {
     margin: 0;
     font-size: 1em;
     color: #2C7E76;
+    opacity: 0.8;
 }
 
 .tagANDobject {
@@ -211,11 +188,11 @@ ul.flashes {
 }
 
 ul.flashes li {
-    background: #B9F3ED;
-    border: 1px solid #81CEC6;
+    text-align: center;
+    background: #CAECE9;
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
-    padding: 4px;
+    padding: 6px;
     font-size: 13px;
 }
 
@@ -271,29 +248,34 @@ li{
 
 .tags {
     display: inline-block;
+    width: 117px;
     float: left;
-    height: 30px;
-    width: 116px;
 }
-
 
 .objects {
     display: inline-block;
-    height: 50%;
-    float: left;
+    width: 120px;
+    border-radius: 10px;
+    position: fixed;
+
+}
+
+.tags h1, .objects h1{
+    border-radius: 3px 3px 0px 0px;
 }
 
 .mu_objects {
     opacity: 0.4;
-    padding: 0px;
-    float: left;
+    margin-left: 120px;
     display: inline-block;
-
+    width: 120px;
 }
+
 .mu_tags {
     opacity: 0.4;
     padding-left: 0px; 
     float: left;
+    width: 117px;
 }
 
 
@@ -350,7 +332,7 @@ span.del:hover {
 
 
 #profile, #profile a {
-    opacity: 0.5;
+    opacity: 0.3;
     color: #26776F;
     font-weight: bold;
 }
@@ -427,14 +409,15 @@ option {
 
 #add {
     float: left;
-    display: inline-block;
+    display: inline;
     width: 250px;
+    margin-left: -4%;
 }
 
 #catName {
     cursor: default;
     text-align: center;
-    margin-left: 30%;
+    margin-left: 31.5%;
     color: rgba(0, 0, 0, 0);
     text-shadow: 0 0 10px black;
     cursor: default;
@@ -490,4 +473,26 @@ option {
 
 input[type="submit"]:hover {
     background: rgba(16, 87, 81, 0.8);
+}
+
+
+li a { 
+    padding: 4px;
+    padding-left: 0px;
+    text-decoration: none;
+}
+
+.tags li, .objects li {
+    width: 117px;
+    padding: 2px;
+    margin-top: 2px;
+}
+
+.MainContainer {
+    width: 45%;
+}
+
+#exchange {
+    display: inline-block;
+    float: left;
 }

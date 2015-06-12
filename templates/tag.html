@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+<center>
 <h2>{{ name }}</h2>
 <!-- <h3>{{ id }}</h3> -->
 <h3>{{ description }}</h3>
@@ -24,5 +25,6 @@ objects in this scope
 	{% endif %}
 {% else %}
 <span class='followstatus'>..<a href="/login">login</a> or <a href="/register">sign up</a> and put this tag in your own collection</span>
+</center>
 {% endif %}
 {% endblock content %}

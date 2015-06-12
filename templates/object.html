@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+<center>
 <h2>{{ name }}</h2>
 <h3>{{ description }}</h3>
 <h5>source <a href="{{ source }}">{{ source }}</a></h5>
@@ -27,6 +28,7 @@ this object in scopes
 		{% endif %}
 	{% else %}<br><br>
 	<span class='followstatus'>..<a href="/login">login</a> or <a href="/register">sign up</a> and put this object in your own collection</span>
+</center>
 {% endif %}
 
 {% endblock content %}
