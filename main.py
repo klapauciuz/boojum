@@ -347,14 +347,39 @@ def obj_page(obj):
 
 #_____Objects/
 #_____User
-@app.route('/users/<user>')
+@app.route('/users/<user>', methods=['GET', 'POST', 'DELETE'])
 def user(user):
     if 'username' in session:
         if user == g.user['username']:
             return redirect('/collection')
 
     current_user = users.find_one({'username': user})
+    user_friends = [user_fri_id['_id'] for user_fri_id in current_user['friends']]
+    print 'user friends:', [ObjectId(str(x)) for x in user_friends]
+    user_friends_names = [friend['username'] for friend in db.users.find({'_id':{'$in': user_friends}})]
+    # if request.method == 'DELETE':
+    #     users.remove({'_id': current_user['_id']})
 
+    if request.method == 'POST':
+        db.users.update({"username":session["username"]}, 
+             {'$push': { 
+                        "friends":{ "_id": current_user['_id'] } 
+                      }
+             }
+             )
+        db.users.update({"username":user}, 
+             {'$push': { 
+                        "friends":{ "_id": g.user['_id'] } 
+                      }
+             }
+             )
+    if request.method == 'DELETE':
+        db.users.update({"username":user}, 
+             {'$pull': { 
+                        "friends":{ "_id": g.user['_id'] } 
+                      }
+             }
+             )
     # берём айди объектов юзера
     user_objects_id = [user_obj_id['_id'] for user_obj_id in current_user['objects']]
     # берём айди тегов юзера
@@ -367,10 +392,10 @@ def user(user):
         my_objs_id = [my_obj_id['_id'] for my_obj_id in g.user['objects']]
         # ищем общие теги
         mu_tags_id = [i for i in my_tags_id if i in user_tags_id]
-        print mu_tags_id
+        print 'mutual tags id:', mu_tags_id
         # и объекты
         mu_objects_id = [i for i in my_objs_id if i in user_objects_id]
-        print mu_objects_id
+        print 'mutual objects id:', mu_objects_id
         # создаём список из их имён
         mu_tags_names = [i['name'] for i in db.tags.find({'_id':{'$in': mu_tags_id}})]
         mu_objs_names = [i['name'] for i in db.objects.find({'_id':{'$in': mu_objects_id}})]
@@ -378,9 +403,13 @@ def user(user):
         mu_tags_names = []
         mu_objs_names = []
 
-    return render_template('user.html', user_name=user, show_mu_tags=mu_tags_names, show_mu_objects=mu_objs_names, show_tags=[i['name'] for i in db.tags.find({'_id':{'$in': user_tags_id}})], show_objects=[i['name'] for i in db.objects.find({'_id':{'$in': user_objects_id}})])
-
-
+    if 'username' in session:
+        if g.user['_id'] not in user_friends:
+            return render_template('user.html', user_name=user, show_mu_tags=mu_tags_names, show_mu_objects=mu_objs_names, show_tags=[i['name'] for i in db.tags.find({'_id':{'$in': user_tags_id}})], show_objects=[i['name'] for i in db.objects.find({'_id':{'$in': user_objects_id}})])
+        else:
+            return render_template('user.html', Friend=True, user_name=user, show_mu_tags=mu_tags_names, show_mu_objects=mu_objs_names, show_tags=[i['name'] for i in db.tags.find({'_id':{'$in': user_tags_id}})], show_objects=[i['name'] for i in db.objects.find({'_id':{'$in': user_objects_id}})])
+    else:
+        return render_template('user.html', user_name=user, show_mu_tags=mu_tags_names, show_mu_objects=mu_objs_names, show_tags=[i['name'] for i in db.tags.find({'_id':{'$in': user_tags_id}})], show_objects=[i['name'] for i in db.objects.find({'_id':{'$in': user_objects_id}})])
 #_____User/
 #_____Auth
 @app.route('/register', methods=['GET', 'POST'])

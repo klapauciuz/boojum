@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
-  <h2 class='tagANDobject'>{{ user_name }}'s collection</h2> <span class='followstatus'>follow</span><br>
+  <h2 class='tagANDobject'>{{ user_name }}'s collection</h2>
+  {% if g.user %}
+    {% if Friend %}
+    <span class='unfollow' type="submit">unfollow</span>
+    {% else %}
+    <span class='followstatus' type="submit">follow</span>
+    {% endif %}
+  {% else %}
+  {% endif %}
+  <br>
   <ul class="tags">
   <h1>scopes</h1>
   {% for tag in show_tags %}
@@ -29,5 +38,10 @@
   {% endfor %}
   </ul>
   {% endif %}
+  <script type="text/javascript">
+    var userName = '{{ user_name }}';
+    console.log(userName);
+  </script>
+
 
 {% endblock  %}

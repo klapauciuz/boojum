@@ -124,6 +124,16 @@ span.followstatus {
     cursor: pointer;
 }
 
+span.unfollow {
+    border: 1px solid #E3EBEA;
+    background: #ccc;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    padding: 4px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
 div.page ul.tags {
     list-style: none;
     margin: 0;
