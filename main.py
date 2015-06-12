@@ -4,6 +4,8 @@ from flask import Flask, render_template, abort, request, url_for, redirect, req
 from bson.json_util import dumps
 from werkzeug import check_password_hash, generate_password_hash
 from bson.objectid import ObjectId
+import requests
+from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 
@@ -142,6 +144,31 @@ def tag_page(tag):
         return render_template('tag.html', show_objects=[i['name'] for i in db.objects.find({'_id':{'$in': tags_objects_id}})], description=current_tag['description'], name=current_tag['name'], id=current_tag['_id'], creator=creator['username'])
     else:
         return render_template('404.html', show_name=tag)
+
+@app.route('/objects/add', methods=['POST'])
+def add_object_from_wiki():
+    """New object add"""
+    print 'fromwiki, url:', request.form['urlwiki']
+    r = requests.get(request.form['urlwiki'])
+    soup = BeautifulSoup(r.text)
+    name = soup.find("h1", class_="firstHeading").text
+    description = soup.find("div", id='bodyContent')
+    description = description.find_all("p")
+    description = description[0].text
+    source = request.form['urlwiki']
+    _id = objects.insert({'name': name, 'description': description, 'tags': [], 'source': source})
+    db.users.update({"username":session["username"]}, 
+             {'$push': { 
+                        "objects":{ "_id": _id } 
+                      }
+             }
+             )
+    # with open('wiki.html', 'w') as wiki:
+    #     wiki.write(r.text.encode('utf-8'))
+
+    response = jsonify(message=str('OK'))
+    response.status_code = 200
+    return response
 
 @app.route('/tags/add', methods=['GET', 'POST'])
 def add_tag_page():
@@ -303,6 +330,7 @@ def obj_page(obj):
             name=current_object['name'],
             description=current_object['description'],
             id=current_object['_id'],
+            source=current_object['source'],
             user_tags=my_tags_name,
             myObj = True
         )
@@ -313,7 +341,8 @@ def obj_page(obj):
             name=current_object['name'],
             description=current_object['description'],
             id=current_object['_id'],
-            user_tags=my_tags_name
+            source=current_object['source'],
+            user_tags=my_tags_name,
         )
 
 #_____Objects/
@@ -357,7 +386,7 @@ def user(user):
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if 'username' in session:
-        flash('You are already registered in Boojom, ' + session['username'])
+        flash('You are already registered in Boojum, ' + session['username'])
         return redirect('/')
     error = None
     if request.method == 'POST':
@@ -374,14 +403,14 @@ def register():
             email = request.form['username']
             password = generate_password_hash(request.form['password'])
             users.insert({'username': username, 'email': email, 'password': password, 'tags': [], 'objects': []})
-            flash('Welcome to Boojom, ' + username)
+            flash('Welcome to Boojum, ' + username)
             return redirect('/login')
     return render_template('register.html', error=error)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if 'username' in session:
-        flash('You are already in Boojom, ' + session['username'])
+        flash('You are already in Boojum, ' + session['username'])
         return redirect('/')
     error = None
     if request.method == 'POST':

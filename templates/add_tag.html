@@ -6,15 +6,24 @@
 <form id="add" action="">
     <label>name </label>
     <input type="text" name="name" placeholder="e.g. creepy" value="{{ tag_name }}"/>
-    <input type="submit" form="add" value="add"/><br><br>
+    <input type="submit" form="add" value="add"/><br>
     <textarea style="display: inline-block;" rows="12" cols="30" name="description" placeholder="an overused slang term for sexually inappropriate or perverted or for attempting to derive sexual gratification through dishonorable means. Unfortunately, the word has become an abused favorite of melodramatic people who try hard to use the word wherever possible, to the point of rendering the word almost meaningless."></textarea>
-    <label>associated<br>objects </label>
-    <input type="text" name="objects" placeholder="slut, shit, fuck, frog" value="{{ tag_name }}"/>
+    <label>objects</label>
+    <input type="text" name="objects" placeholder="" value=""/>
 </form>
-<ul class="objects" style="margin-left: 50px;">
+<br><br>
+<h2>or add object</h2><br>
+<form id="add_fromwiki" action="">
+    <label>from wikipedia</label>
+    <input type="text" name="urlwiki" placeholder="url" value=""/>
+    <input type="submit" form="add_fromwiki" value="submit"/><br>
+</form>
+
+<!-- потом над будет прикрутить драгндроп что бы удобно было назначать объекты тегу -->
+<!-- <ul class="objects" style="margin-left: 50px;">
   <h1>objects</h1>
   {% for obj in show_objects %}
     <li><a href="{{ url_for('obj_page', obj=obj) }}">{{ obj }}</a>
   {% endfor %}
-</ul>
+</ul> -->
 {% endblock content %}
