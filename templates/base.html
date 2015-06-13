@@ -14,11 +14,12 @@
 <body>
 {% block header %}
 <div id='menu'>
-  <big>
+  <big style='float:left;'>
     <a href="/tags/add">add new</a> 
     <a href="/">trends</a>
-    <span id='catName' href="">Boojum</span>
+    
   </big>
+  <span id='catName' href="">Boojum</span>
   {% if g.user %}
   <big style='float:right;'>
     <a href="/collection" style='padding-right: 0px;'>collection</a> <span id='profile'><sup>[{{ g.user['username'] }}]</sup></span> 

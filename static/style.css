@@ -73,7 +73,7 @@ h1 {
     cursor: default;
 }
 
-.tags h1:hover, .objects h1:hover {
+.tags h1:hover, .objects h1:hover, .people h1:hover {
     opacity: 1;
     color: rgb(44, 126, 118);
 }
@@ -114,11 +114,17 @@ div.page div.footer {
 span.followstatus {
     font-size: 12px;
     cursor: pointer;
+    color: YellowGreen;
 }
 
 span.unfollow {
     font-size: 12px;
     cursor: pointer;
+    color: Tomato;
+}
+
+.unfollow, .followstatus{
+    position: fixed;
 }
 
 div.page ul.tags {
@@ -252,38 +258,6 @@ li{
     list-style: none;
 }
 
-.tags {
-    display: inline-block;
-    width: 117px;
-    float: left;
-}
-
-.objects {
-    display: inline-block;
-    width: 120px;
-    border-radius: 10px;
-    position: fixed;
-
-}
-
-.tags h1, .objects h1{
-    border-radius: 3px 3px 0px 0px;
-}
-
-.mu_objects {
-    opacity: 0.4;
-    margin-left: 120px;
-    display: inline-block;
-    width: 120px;
-}
-
-.mu_tags {
-    opacity: 0.4;
-    padding-left: 0px; 
-    float: left;
-    width: 117px;
-}
-
 
 .already {
     background: #105751;
@@ -379,34 +353,6 @@ option {
     background-color: #CAECE9;
 }
 
-.line {
-    display: inline-block;
-    width: 0px;
-    margin-top: 40px;
-    position: absolute;
-    opacity: 0;
-    height: 0.1px;
-    background: #6ECCC4;
-    border-color: #6ECCC4;
-}
-
-.line2 {
-    border-left: 2px solid;
-    border-bottom: 2px solid;
-    border-color: #6ECCC4;
-    opacity: 0;
-    position: absolute;
-    margin-top: 40px;
-    margin-left: 18px;
-    width: 100px;
-    height: 20px;
-    font-size: 12px;
-    padding: 3px;
-    padding-left: 6px;
-    color: #6ECCC4;
-
-}
-
 .text {
     opacity: 0;
     font-size: 25px;
@@ -415,15 +361,19 @@ option {
 
 #add {
     float: left;
-    display: inline;
+    display: inline-block;
     width: 250px;
-    margin-left: -4%;
+    margin-left: 20%;
+}
+
+#add_fromwiki {
+    width: 300px;
+    float: left;
 }
 
 #catName {
     cursor: default;
-    text-align: center;
-    margin-left: 31.5%;
+    margin-left: 34%;
     color: rgba(0, 0, 0, 0);
     text-shadow: 0 0 10px black;
     cursor: default;
@@ -488,17 +438,59 @@ li a {
     text-decoration: none;
 }
 
-.tags li, .objects li {
+.tags li, .objects li, .people li {
     width: 117px;
     padding: 2px;
     margin-top: 2px;
 }
 
 .MainContainer {
-    width: 45%;
+    width: 80%;
 }
 
 #exchange {
     display: inline-block;
     float: left;
+}
+
+.people {
+    display: inline-block;
+    width: 117px;
+    float: right;
+    margin-right: 9%;
+}
+
+.tags {
+    display: inline-block;
+    width: 117px;
+    float: left;
+    margin-left: 9%;
+}
+
+.objects {
+    display: inline-block;
+    width: 117px;
+    padding-left: 0px;
+}
+
+
+.mu_objects {
+    display: inline-block;
+    opacity: 0.4;
+    padding-left: 0px; 
+    width: 117px;
+}
+
+.mu_tags {
+    opacity: 0.4;
+    padding-left: 0px; 
+    float: left;
+    width: 117px;
+}
+
+.mu_people {
+    opacity: 0.4;
+    padding-left: 0px; 
+    width: 117px;
+    float: right;
 }

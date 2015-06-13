@@ -3,6 +3,7 @@
 <center>
 <h2>{{ name }}</h2>
 <!-- <h3>{{ id }}</h3> -->
+</center>
 <h3>{{ description }}</h3>
 {% if g.user['username'] == creator %}
 <h5 class='creator'>by <a href="{{ url_for('user', user=creator) }}">{{ creator }}</a> <span style="opacity: 0.4;">(you can <a href="">edit</a> or <a id="delete" href="/collection">delete</a> this page)</span></h5>

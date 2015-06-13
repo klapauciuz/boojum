@@ -24,13 +24,20 @@
   {% endfor %}
   </ul>
   <ul class="objects">
-  <h1>objects</h1><hr class='line'>
+  <h1>objects</h1>
 <!--   <span class='line2'>music, game, book, movie, place, event etc</span>
   <span class='text'>artwork</span> -->
   {% for obj in show_objects %}
     <li><a href="{{ url_for('obj_page', obj=obj) }}">{{ obj }}</a></li>
   {% endfor %}
   </ul>
+  <ul class="people">
+  <h1>people</h1><!-- <div class='fill' style='width: 100%;'>fill from scopes</div> -->
+  {% for people in show_people %}
+    <li><a href="{{ url_for('user', user=people) }}">{{ people }}</a></li>
+  {% endfor %}
+  </ul>
+  </div>
   </div>
 </center>
 <script type="text/javascript">

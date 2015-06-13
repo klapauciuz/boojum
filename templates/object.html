@@ -2,6 +2,7 @@
 {% block content %}
 <center>
 <h2>{{ name }}</h2>
+</center>
 <h3>{{ description }}</h3>
 <h5>source <a href="{{ source }}">{{ source }}</a></h5>
 this object in scopes 
@@ -10,6 +11,7 @@ this object in scopes
 		<a href="{{ url_for('tag_page', tag=tag) }}">{{ tag }}</a>  
 	{% endfor %}
 </span>
+
 {% if g.user %}
 		<form style="display:inline">
 			<select>
@@ -28,7 +30,6 @@ this object in scopes
 		{% endif %}
 	{% else %}<br><br>
 	<span class='followstatus'>..<a href="/login">login</a> or <a href="/register">sign up</a> and put this object in your own collection</span>
-</center>
 {% endif %}
 
 {% endblock content %}

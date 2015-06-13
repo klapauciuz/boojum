@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <center>
-  <h2 class='tagANDobject'>collection</h2> <h3 class='tagANDobject'><br>how to <a href="howtouse">get new stuff</a> ?</h3><br>
+  <h2 class='tagANDobject'>collection</h2> <h3 class='tagANDobject'><br><br>
   <div class='MainContainer'>
   <ul class="tags">
   <h1>scopes</h1><!-- <div class='fill'>fill from objects</div> -->
@@ -13,6 +13,12 @@
   <h1>objects</h1><!-- <div class='fill' style='width: 100%;'>fill from scopes</div> -->
   {% for obj in show_objects %}
     <li><a href="{{ url_for('obj_page', obj=obj) }}">{{ obj }}</a></li>
+  {% endfor %}
+  </ul>
+  <ul class="people">
+  <h1>people</h1><!-- <div class='fill' style='width: 100%;'>fill from scopes</div> -->
+  {% for friend in show_friends %}
+    <li><a href="{{ url_for('user', user=friend) }}">{{ friend }}</a></li>
   {% endfor %}
   </ul>
   </div>

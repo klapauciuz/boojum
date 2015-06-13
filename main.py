@@ -27,7 +27,8 @@ def before_request():
 def hello():
     _tags = tags.find()
     _objects = objects.find()
-    return render_template('index.html', show_tags=[tag['name'] for tag in _tags], show_objects=[obj['name'] for obj in _objects])
+    _users = users.find()
+    return render_template('index.html', show_people=[user['username'] for user in _users], show_tags=[tag['name'] for tag in _tags], show_objects=[obj['name'] for obj in _objects])
 
 @app.route("/howtouse")
 def info():
@@ -45,17 +46,20 @@ def collection():
         flash('Log in, please')
         return redirect('/login')
 
-    # берём айди тегов юзера
+    # берём айди своих тегов
     my_tags_id = [my_tag_id['_id'] for my_tag_id in g.user['tags']]
     print my_tags_id
     print [i['name'] for i in db.tags.find({'_id':{'$in': my_tags_id}})]
-    # берём айди объектов юзера
+    # берём айди своих объектов
     my_objs_id = [my_obj_id['_id'] for my_obj_id in g.user['objects']]
     print my_objs_id
     print [i['name'] for i in db.objects.find({'_id':{'$in': my_objs_id}})]
-
+    # берём айди своих друзей
+    my_flws_id = [my_flw_id['_id'] for my_flw_id in g.user['friends']]
+    print my_flws_id
+    print 'my friends:', [i['username'] for i in db.users.find({'_id':{'$in': my_flws_id}})]
     # и выводим в шаблон их имена
-    return render_template('collection.html', show_tags=[i['name'] for i in db.tags.find({'_id':{'$in': my_tags_id}})], show_objects=[i['name'] for i in db.objects.find({'_id':{'$in': my_objs_id}})])
+    return render_template('collection.html', show_tags=[i['name'] for i in db.tags.find({'_id':{'$in': my_tags_id}})], show_objects=[i['name'] for i in db.objects.find({'_id':{'$in': my_objs_id}})], show_friends=[i['username'] for i in db.users.find({'_id':{'$in': my_flws_id}})])
 
 #_____Collection/
 #_____Fill
@@ -206,8 +210,7 @@ def add_tag_page():
                           }
                  }
                  )
-        response = jsonify(message=str('OK'))
-        response.status_code = 200
+        response = name
         return response
 
     name = request.args.get('name')
@@ -387,6 +390,12 @@ def user(user):
              }
              )
     if request.method == 'DELETE':
+        db.users.update({"username":session["username"]}, 
+             {'$pull': { 
+                        "friends":{ "_id": current_user['_id'] } 
+                      }
+             }
+             )
         db.users.update({"username":user}, 
              {'$pull': { 
                         "friends":{ "_id": g.user['_id'] } 
@@ -397,6 +406,10 @@ def user(user):
     user_objects_id = [user_obj_id['_id'] for user_obj_id in current_user['objects']]
     # берём айди тегов юзера
     user_tags_id = [user_tag_id['_id'] for user_tag_id in current_user['tags']]
+    # берём айди друзей юзера
+    user_flws_id = [user_flw_id['_id'] for user_flw_id in current_user['friends']]
+    print user_flws_id
+    print 'user friends:', [i['username'] for i in db.users.find({'_id':{'$in': user_flws_id}})]
 
     if 'username' in session:
         # берём айди своих тегов
@@ -418,11 +431,11 @@ def user(user):
 
     if 'username' in session:
         if g.user['_id'] not in user_friends:
-            return render_template('user.html', user_name=user, show_mu_tags=mu_tags_names, show_mu_objects=mu_objs_names, show_tags=[i['name'] for i in db.tags.find({'_id':{'$in': user_tags_id}})], show_objects=[i['name'] for i in db.objects.find({'_id':{'$in': user_objects_id}})])
+            return render_template('user.html', show_friends=[i['username'] for i in db.users.find({'_id':{'$in': user_flws_id}})], user_name=user, show_mu_tags=mu_tags_names, show_mu_objects=mu_objs_names, show_tags=[i['name'] for i in db.tags.find({'_id':{'$in': user_tags_id}})], show_objects=[i['name'] for i in db.objects.find({'_id':{'$in': user_objects_id}})])
         else:
-            return render_template('user.html', Friend=True, user_name=user, show_mu_tags=mu_tags_names, show_mu_objects=mu_objs_names, show_tags=[i['name'] for i in db.tags.find({'_id':{'$in': user_tags_id}})], show_objects=[i['name'] for i in db.objects.find({'_id':{'$in': user_objects_id}})])
+            return render_template('user.html', Friend=True, show_friends=[i['username'] for i in db.users.find({'_id':{'$in': user_flws_id}})], user_name=user, show_mu_tags=mu_tags_names, show_mu_objects=mu_objs_names, show_tags=[i['name'] for i in db.tags.find({'_id':{'$in': user_tags_id}})], show_objects=[i['name'] for i in db.objects.find({'_id':{'$in': user_objects_id}})])
     else:
-        return render_template('user.html', user_name=user, show_mu_tags=mu_tags_names, show_mu_objects=mu_objs_names, show_tags=[i['name'] for i in db.tags.find({'_id':{'$in': user_tags_id}})], show_objects=[i['name'] for i in db.objects.find({'_id':{'$in': user_objects_id}})])
+        return render_template('user.html', show_friends=[i['username'] for i in db.users.find({'_id':{'$in': user_flws_id}})], user_name=user, show_mu_tags=mu_tags_names, show_mu_objects=mu_objs_names, show_tags=[i['name'] for i in db.tags.find({'_id':{'$in': user_tags_id}})], show_objects=[i['name'] for i in db.objects.find({'_id':{'$in': user_objects_id}})])
 #_____User/
 #_____Auth
 @app.route('/register', methods=['GET', 'POST'])
