@@ -288,22 +288,24 @@ def obj_page(obj):
         # если прикрепляем тег к объекту
         if request.form.get('data'):
             data = json.loads(request.form.get('data'))
-            print data['value']
-            print data['name']
-            db.objects.update({"name":obj}, 
-                     {'$push': { 
-                                "tags":{ "_id": ObjectId(data['value'])} 
-                              }
-                     }
-                     )
+            values = data['values']
+            names = data['names'].split(', ')
+            for x in xrange(0, len(values)):
+                print names[x], ':', values[x]
+                db.objects.update({"name": obj}, 
+                         {'$push': { 
+                                    "tags":{ "_id": ObjectId(values[x])} 
+                                  }
+                         }
+                         )
 
-            # добавляем объект в тег (для отображения объектов, у которых есть данный тег)
-            db.tags.update({"_id":ObjectId(data['value'])}, 
-                     {'$push': { 
-                                "objects":{ "_id": current_object['_id']} 
-                              }
-                     }
-                     )
+                # добавляем объект в тег (для отображения объектов, у которых есть данный тег)
+                db.tags.update({"_id":ObjectId(values[x])}, 
+                         {'$push': { 
+                                    "objects":{ "_id": current_object['_id']} 
+                                  }
+                         }
+                         )
             response = jsonify(message=str('OK'))
             response.status_code = 200
             return response

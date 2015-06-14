@@ -1,10 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
+<script type="text/javascript">
+$(document).ready(function(){
+    $('.yeah').SumoSelect({placeholder: 'Select tags'});
+});
+</script>
 <center>
 <h2>{{ name }}</h2>
 </center>
 <h3>{{ description }}</h3>
-<h5>source <a href="{{ source }}">{{ source }}</a></h5>
+<h5>source <a id='source' href="{{ source }}">{{ source }}</a></h5>
+<script type="text/javascript">
+	var source = '{{ source }}';
+	var source = decodeURIComponent(source);
+	document.getElementById("source").innerText = source;
+</script>
+
 this object in scopes 
 <span class='linked'>
 	{% for tag in show_tags %}
@@ -14,12 +25,12 @@ this object in scopes
 
 {% if g.user %}
 		<form style="display:inline">
-			<select>
+			<select multiple="multiple" class='yeah'>
 				{% for ut in user_tags %}
 					<option value="{{ut._id}}">{{ut.name}}</option>
 				{% endfor %}
 			</select>
-		<span id="add_linked_tag" class='add' type="submit">+</span>
+		<span id="add_linked_tag" class='add' type="submit">&#10003;</span>
 		</form>
 	<br><br>
 		{% if myObj %}
@@ -31,5 +42,4 @@ this object in scopes
 	{% else %}<br><br>
 	<span class='followstatus'>..<a href="/login">login</a> or <a href="/register">sign up</a> and put this object in your own collection</span>
 {% endif %}
-
 {% endblock content %}
