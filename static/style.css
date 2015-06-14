@@ -41,9 +41,9 @@ input[type="submit"], span#add_tag, span#add_obj {
 
 input#wide_submit {
     height: 42px;
-    position: absolute;
-    display: inline;
+    width: 100px;
 }
+
 
 #example_add_tag, #example_add_obj  {
     background: #105751;
@@ -123,9 +123,10 @@ span.unfollow {
     color: Tomato;
 }
 
-.unfollow, .followstatus{
+.unfollow, .followstatus, .show{
     position: fixed;
 }
+
 
 div.page ul.tags {
     list-style: none;
@@ -386,12 +387,25 @@ option {
     float: left;
     display: inline-block;
     width: 250px;
-    margin-left: 20%;
+    margin-left: 25%;
 }
 
 #add_fromwiki {
-    width: 300px;
+    width: 250px;
     float: left;
+}
+
+#add input, #add_fromwiki input {
+    border-radius: 3px;
+}
+
+#add input:focus, #add_fromwiki input:focus {
+    outline: 0;
+    opacity: 0.8;
+}
+
+textarea:focus{
+    outline: 0;
 }
 
 #catName {

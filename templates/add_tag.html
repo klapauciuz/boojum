@@ -6,21 +6,21 @@
 <br>
 <div class='MainContainer'>
 <form id="add" action="">
-    <label>name </label>
+    <label>name</label>
     <input type="text" name="name" placeholder="e.g. creepy" value="{{ tag_name }}"/>
-    <input type="submit" form="add" value="add"/><br>
+    <input type="submit" form="add" value="add"/><br><br>
     <textarea style="display: inline-block;" rows="12" cols="30" name="description" placeholder="an overused slang term for sexually inappropriate or perverted or for attempting to derive sexual gratification through dishonorable means. Unfortunately, the word has become an abused favorite of melodramatic people who try hard to use the word wherever possible, to the point of rendering the word almost meaningless."></textarea>
     <label>objects</label>
     <input type="text" name="objects" placeholder="" value=""/>
 </form>
 <br><br>
 <form id="add_fromwiki" action="">
-    <h2>or add object</h2><br>
-    <label>from wikipedia</label>
-    <input type="text" name="urlwiki" placeholder="url" style='width: 110px;' value=""/>
-    <input type="submit" form="add_fromwiki" id='wide_submit' value="submit"/><br>
-    <label>from last.fm</label>
-    <input type="text" name="urllast" placeholder="url" style='width: 120px;' value=""/>
+    <h2>or add object</h2> from<br><br>
+    <label>wikipedia</label>
+    <input type="text" name="urlwiki" placeholder="url" style='width: 110px; margin-left: 15px;' value=""/><br>
+    <label>last.fm</label>
+    <input type="text" name="urllast" placeholder="url" style='width: 110px; margin-left: 30px;' value=""/><br><br><br>
+    <input type="submit" form="add_fromwiki" id='wide_submit' value="submit"/>
 </form>
 </div>
 </center>
@@ -31,4 +31,27 @@
     <li><a href="{{ url_for('obj_page', obj=obj) }}">{{ obj }}</a>
   {% endfor %}
 </ul> -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#add_fromwiki input').keyup(function() {
+            if($(this).val() != ''){
+                $('#add_fromwiki input[type="text"]').not(this).css('opacity', '0.2').prop( "disabled", true );
+                $('#add input, #add textarea').not(this).css('opacity', '0.2').prop( "disabled", true );
+            }
+            else{
+                $('form input[type="text"]').not(this).css('opacity', '1').prop( "disabled", false );
+                $('#add input, #add textarea').not(this).css('opacity', '1').prop( "disabled", false );
+            }
+        });
+
+        $('#add input').keyup(function() {
+            if($('#add input').val() != ''){
+                $('#add_fromwiki input').css('opacity', '0.2').prop( "disabled", true );
+            }
+            else{
+                $('#add_fromwiki input').not(this).css('opacity', '1').prop( "disabled", false );
+            }
+        });
+    });
+</script>
 {% endblock content %}
