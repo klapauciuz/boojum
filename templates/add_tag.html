@@ -7,7 +7,7 @@
 <div class='MainContainer'>
 <form id="add" action="">
     <label>name</label>
-    <input type="text" name="name" placeholder="e.g. creepy" value="{{ tag_name }}"/>
+    <input type="text" name="name" style="width: 120px; margin: 0px 2px;" placeholder="e.g. creepy" value="{{ tag_name }}"/>
     <input type="submit" form="add" value="add"/><br><br>
     <textarea style="display: inline-block;" rows="12" cols="30" name="description" placeholder="an overused slang term for sexually inappropriate or perverted or for attempting to derive sexual gratification through dishonorable means. Unfortunately, the word has become an abused favorite of melodramatic people who try hard to use the word wherever possible, to the point of rendering the word almost meaningless."></textarea>
     <label>objects</label>
@@ -36,11 +36,11 @@
         $('#add_fromwiki input').keyup(function() {
             if($(this).val() != ''){
                 $('#add_fromwiki input[type="text"]').not(this).css('opacity', '0.2').prop( "disabled", true );
-                $('#add input, #add textarea').not(this).css('opacity', '0.2').prop( "disabled", true );
+                $('#add input, #add textarea, #add').not(this).css('opacity', '0.2').prop( "disabled", true );
             }
             else{
                 $('form input[type="text"]').not(this).css('opacity', '1').prop( "disabled", false );
-                $('#add input, #add textarea').not(this).css('opacity', '1').prop( "disabled", false );
+                $('#add input, #add textarea, #add').not(this).css('opacity', '1').prop( "disabled", false );
             }
         });
 
