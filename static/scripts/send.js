@@ -43,6 +43,8 @@ $(document).ready(function(){
         $('#wide_submit').animate({
                 opacity: 0.2,
         });
+        console.log(postData);
+        
         $.ajax({
             url : '/objects/add',
             type: 'POST',

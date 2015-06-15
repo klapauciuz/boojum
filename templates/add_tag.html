@@ -35,11 +35,11 @@
     $(document).ready(function() {
         $('#add_fromwiki input').keyup(function() {
             if($(this).val() != ''){
-                $('#add_fromwiki input[type="text"]').not(this).css('opacity', '0.2').prop( "disabled", true );
+                $('#add_fromwiki input[type="text"]').not(this).css('opacity', '0.2').prop( "disabled", false );
                 $('#add input, #add textarea, #add').not(this).css('opacity', '0.2').prop( "disabled", true );
             }
             else{
-                $('form input[type="text"]').not(this).css('opacity', '1').prop( "disabled", false );
+                $('#add_fromwiki input[type="text"]').not(this).css('opacity', '1').prop( "disabled", false );
                 $('#add input, #add textarea, #add').not(this).css('opacity', '1').prop( "disabled", false );
             }
         });
