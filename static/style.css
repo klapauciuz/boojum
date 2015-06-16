@@ -410,7 +410,7 @@ textarea:focus{
 
 #catName {
     cursor: default;
-    margin-left: 34%;
+    margin-left: 35%;
     color: rgba(0, 0, 0, 0);
     text-shadow: 0 0 10px black;
     cursor: default;
@@ -532,3 +532,9 @@ li a {
     float: right;
 }
 
+.simple {
+    font-family: 'Calibri';
+    font-size: 12px;
+    color: rgb(1, 122, 88);
+    letter-spacing: 1px;
+}

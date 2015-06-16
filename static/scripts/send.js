@@ -51,10 +51,10 @@ $(document).ready(function(){
             data : postData,
             success:function(response) {
                 console.log(response);
-                window.location.replace("/objects/" + response);
+                window.location.replace(response);
             },
             error: function(err) {
-              console.log(JSON.stringify(err));
+                console.log(JSON.stringify(err));
             }
         });
     });
