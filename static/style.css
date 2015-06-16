@@ -475,7 +475,7 @@ li a {
     text-decoration: none;
 }
 
-.tags li, .objects li, .people li {
+.tags li, .objects li, .people li, .mu_tags li, .mu_objects li, .mu_people li {
     width: 117px;
     padding: 2px;
     margin-top: 2px;
@@ -513,15 +513,17 @@ li a {
 
 .mu_objects {
     display: inline-block;
-    opacity: 0.4;
+    opacity: 0;
     padding-left: 0px; 
     width: 117px;
+    position: absolute;
 }
 
 .mu_tags {
-    opacity: 0.4;
-    padding-left: 0px; 
+    opacity: 0;
+    margin-left: 15%; 
     float: left;
+    position: absolute;
     width: 117px;
 }
 

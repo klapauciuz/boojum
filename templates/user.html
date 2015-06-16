@@ -18,14 +18,25 @@
       <li><a href="{{ url_for('tag_page', tag=tag) }}">{{ tag }}</a></li>
     {% endfor %}
     </ul>
-    
+    <ul class="mu_tags">
+    <h1>scopes</h1>
+    {% for tag in show_mu_tags %}
+      <li><a href="{{ url_for('tag_page', tag=tag) }}">{{ tag }}</a></li>
+    {% endfor %}
+    </ul>
     <ul class="objects">
     <h1>objects</h1>
     {% for obj in show_objects %}
       <li><a href="{{ url_for('obj_page', obj=obj) }}">{{ obj }}</a></li>
     {% endfor %}
     </ul>
-    
+    <ul class="mu_objects">
+    <h1>objects</h1>
+    {% for obj in show_mu_objects %}
+      <li><a href="{{ url_for('obj_page', obj=obj) }}">{{ obj }}</a></li>
+    {% endfor %}
+    </ul>
+     
    
     <ul class="people">
     <h1>people</h1><!-- <div class='fill' style='width: 100%;'>fill from scopes</div> -->
@@ -38,6 +49,22 @@
   <script type="text/javascript">
     var userName = '{{ user_name }}';
     console.log(userName);
+    $(document).ready(function(){
+      $('.objects h1').hover(function() {
+        $('.mu_objects').animate({'opacity': 0.4}, 300);
+      }, function(){
+        setTimeout(function(){
+            $('.mu_objects').animate({'opacity': 0}, 300);
+        }, 1000);
+      });
+      $('.tags h1').hover(function() {
+        $('.mu_tags').animate({'opacity': 0.4}, 300);
+      }, function(){
+        setTimeout(function(){
+            $('.mu_tags').animate({'opacity': 0}, 300);
+        }, 1000);
+      });
+    });
   </script>
 
 
