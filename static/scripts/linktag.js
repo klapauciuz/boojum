@@ -1,6 +1,11 @@
 /*Прикрепление тегов к объекту*/
 $(document).ready(function(){
   $('#add_linked_tag').click(function(event) {
+    if ($('.yeah').val() == null) 
+    {
+      $('.placeholder').append('!');
+      return false;
+    }
     event.preventDefault();
     var self = $(this);
     var objName = $('h2').text();
