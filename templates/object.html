@@ -2,44 +2,41 @@
 {% block content %}
 <script type="text/javascript">
 $(document).ready(function(){
-    $('.yeah').SumoSelect({placeholder: 'Select tags'});
+    $('.yeah').SumoSelect({placeholder: '...select tags'});
 });
 </script>
 <center>
 <h2>{{ name }}</h2>
 </center>
 <h3>{{ description }}</h3>
-<h5>source <a id='source' href="{{ source }}">{{ source }}</a></h5>
+<h5 style="margin-bottom: 12px;">&para; <a id='source' href="{{ source }}" target='_blank'>{{ source }}</a></h5>
 <script type="text/javascript">
 	var source = '{{ source }}';
 	var source = decodeURIComponent(source);
 	document.getElementById("source").innerText = source;
 </script>
-
-this object in scopes 
 <span class='linked'>
 	{% for tag in show_tags %}
 		<a href="{{ url_for('tag_page', tag=tag) }}">{{ tag }}</a>  
 	{% endfor %}
 </span>
-
 {% if g.user %}
-		<form style="display:inline">
-			<select multiple="multiple" class='yeah'>
-				{% for ut in user_tags %}
-					<option value="{{ut._id}}">{{ut.name}}</option>
-				{% endfor %}
-			</select>
-		<span id="add_linked_tag" class='add' type="submit">&#10003;</span>
-		</form>
-	<br><br>
-		{% if myObj %}
-			<span class="already">object in <a href="/collection">your collection</a></span>
-			<span id="del_obj" class='del' type="submit">x</span>
-		{% else %}
-			<span id="add_obj" type="submit">add object to collection</span>
-		{% endif %}
-	{% else %}<br><br>
-	<span class='simple'>..<a href="/login">login</a> or <a href="/register">sign up</a> and put this object in your own collection</span>
+<form style="display:inline;">
+	<select multiple="multiple" class='yeah'>
+		{% for ut in user_tags %}
+			<option value="{{ut._id}}">{{ut.name}}</option>
+		{% endfor %}
+	</select>
+	<span id="add_linked_tag" class='add' type="submit">&#10004;</span>
+</form>
+<br><br>
+	{% if myObj %}
+		<span class="already">object in <a href="/collection">your collection</a></span>
+		<span id="del_obj" class='del' type="submit">&cross;</span>
+	{% else %}
+		<span id="add_obj" type="submit">add object to collection</span>
+	{% endif %}
+{% else %}<br><br>
+<span class='simple'>..<a href="/login">login</a> or <a href="/register">sign up</a> and put this object in your own collection</span>
 {% endif %}
 {% endblock content %}

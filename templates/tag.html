@@ -10,7 +10,6 @@
 {% else %}
 <h5>by <a href="{{ url_for('user', user=creator) }}">{{ creator }}</a></h5>
 {% endif %}
-objects in this scope 
 <span class='linked'>
 	{% for obj in show_objects %}
 		<a href="{{ url_for('obj_page', obj=obj) }}">{{ obj }}</a>  
@@ -20,7 +19,7 @@ objects in this scope
 {% if g.user %}
 	{% if myTag %}
 		<span class="already">tag in <a href="/collection">your collection</a></span>
-		<span id="del_tag" class='del' type="submit">x</span>
+		<span id="del_tag" class='del' type="submit">&cross;</span>
 	{% else %}
 		<span id="add_tag" type="submit">add tag to collection</span>
 	{% endif %}

@@ -285,7 +285,6 @@ span.del {
     -webkit-border-radius: 0px 2px 2px 0px;
     padding: 0px 3px;
     margin-left: -4px;
-
     font-size: 13px;
     cursor: pointer;
 }
@@ -296,14 +295,15 @@ span.del {
     border: 1px solid rgba(0,0,0,0);
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;*/
-    padding: 0px 5px;
-    font-size: 23px;
-    font-weight: bold;
-    font-family: 'Calibri';
+    padding: 0px 4px;
+    margin: -8px;
+    color: #CAECE9;
+    background-color: #F0FFFF ;
+    border: 4px solid #F0FFFF ;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
     cursor: pointer;
-    opacity: 0.6;
-    color: white;
-    margin-left: 5px;
 }
 
 
@@ -311,7 +311,7 @@ span.del {
     /*background: Tomato;
     border-color: Tomato;
     border: 1px solid Tomato;*/
-    opacity: 1;
+    color: #AEEA00;
 }
 
 #add_linked_tag sup {
@@ -333,43 +333,49 @@ span.del:hover {
     font-weight: bold;
 }
 
+
 .linked {
-    box-shadow: 0px 0px 20px #2C7E76;
+    box-shadow: 0px 0px 160px #2C7E76;
+}
+
+
+div.SumoSelect {
+    top: 0px !important;
+    margin: 0px !important;
+    padding: 0px !important;
 }
 
 .linked, .linked a {
     text-decoration: none;
-    color: #CAECE9;
-    background-color: #2C7E76 ;
-    border: 4px solid #2C7E76 ;
+    color: #2C7E76;
+    background-color: #F0FFFF ;
+    border: 4px solid #F0FFFF ;
     border-radius: 2px;
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
     z-index: 10;
-
 }
+
+.linked a {
+    opacity: 0.5;
+}
+
+h5 {
+    margin: 20px 0px;
+}
+
 
 .linked a:hover, .already a:hover {
-    color: white;
-    
-}
-select {
-    border: 1px solid #105751;
-    background-color: transparent;
-    color: #26776F;
-    padding: 0px 3px;
-    font-size: 14px;
-    border-radius: 0px 2px 2px 0px;
-    -moz-border-radius: 0px 2px 2px 0px;
-    -webkit-border-radius: 0px 2px 2px 0px;
-    margin-left: 0px;
-    border-left: 0px;
-    margin-top: 4px;
-    z-index: 1;
+    opacity: 1;
 }
 
-select:hover {
-    cursor: pointer;
+.SumoSelect p {
+    color: #2C7E76;
+}
+
+form, select {
+    padding: 0px;
+    margin: 0px;
 }
 
 option {
@@ -537,6 +543,6 @@ li a {
 .simple {
     font-family: 'Calibri';
     font-size: 12px;
-    color: rgb(1, 122, 88);
+    color: rgb(22,139,74);
     letter-spacing: 1px;
 }
