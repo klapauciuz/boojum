@@ -209,39 +209,31 @@ ul.flashes li {
     font-size: 13px;
 }
 
-div.fill {
-    background: #6ECCC4;
-    border: 1px solid #6ECCC4;
-    -moz-border-radius: 0px 0px 4px 4px;
-    -webkit-border-radius: 0px 0px 4px 4px;
-    padding: 4px;
-    color: white;
-    font-size: 14px;
-    cursor: pointer;
-    display: none;
-    opacity: 0.4;
-    text-align: center;
+.fill {
+    cursor: default;
+    font-weight: bold;
+    font-size: 18px;
+    position: absolute;
+    color: Orange;
+    opacity: 0.3;
 }
 
-div.fill:hover {
-    opacity: 0.8;
+.fill:hover {
+    opacity: 1;
+    cursor: pointer;
 }
 
 .fill_example {
-    background: #6ECCC4;
-    border: 1px solid #6ECCC4;
-    -moz-border-radius: 0px 0px 4px 4px;
-    -webkit-border-radius: 0px 0px 4px 4px;
-    padding: 4px;
-    color: white;
-    font-size: 14px;
-    cursor: pointer;
-    opacity: 0.4;
-    text-align: center;
+    cursor: default;
+    font-weight: bold;
+    font-size: 23px;
+    color: Orange;
+    opacity: 0.3;
 }
 
 .fill_example:hover {
-    opacity: 0.8;
+    opacity: 1;
+    cursor: pointer;
 }
 
 div.error {
