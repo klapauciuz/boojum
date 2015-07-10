@@ -21,13 +21,13 @@ $(document).ready(function(){
 	{% endfor %}
 </span>
 {% if g.user %}
-<form style="display:inline;">
+<form style="display:inline; cursor: pointer;">
 	<select multiple="multiple" class='yeah'>
 		{% for ut in user_tags %}
 			<option value="{{ut._id}}">{{ut.name}}</option>
 		{% endfor %}
 	</select>
-	<span id="add_linked_tag" class='add' type="submit">&#10004;</span>
+	<div id="add_linked_tag" class='add' type="submit">&#10004;</div>
 </form>
 <br><br>
 	{% if myObj %}

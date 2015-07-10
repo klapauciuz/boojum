@@ -287,8 +287,8 @@ span.del {
     border: 1px solid rgba(0,0,0,0);
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;*/
-    padding: 0px 4px;
-    margin: -8px;
+    padding: 0px 0px 0px 5px;
+    margin: -10px;
     color: #CAECE9;
     background-color: #F0FFFF ;
     border: 4px solid #F0FFFF ;
@@ -296,21 +296,27 @@ span.del {
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
     cursor: pointer;
+    display: inline;
+    -webkit-transition: all 0.1s ease-out 0s;
+    -moz-transition: all 0.1s ease-out 0s;
+    -o-transition: all 0.1s ease-out 0s;
+    transition: all 0.1s ease-out 0s;
+    box-shadow: 0px 0px 0px #2C7E76;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
 }
 
 
 #add_linked_tag:hover {
-    /*background: Tomato;
-    border-color: Tomato;
-    border: 1px solid Tomato;*/
     color: #AEEA00;
+    margin: -7px;
 }
 
 #add_linked_tag sup {
     display: none;
     font-size: 10px;
     color: white;
-    opacity: 0.8;
+    opacity: 1;
 }
 
 span.del:hover {
@@ -327,15 +333,10 @@ span.del:hover {
 
 
 .linked {
-    box-shadow: 0px 0px 160px #2C7E76;
+    box-shadow: 0px 0px 0px rgba(44,126,118, 0.4);;
 }
 
 
-div.SumoSelect {
-    top: 0px !important;
-    margin: 0px !important;
-    padding: 0px !important;
-}
 
 .linked, .linked a {
     text-decoration: none;
@@ -348,20 +349,23 @@ div.SumoSelect {
     z-index: 10;
 }
 
+.linked a:hover{
+    color: rgba(44,126,118,1);
+    border-radius: 0px;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+}
 
+div.SumoSelect {
+    top: 0px !important;
+    margin: 0px !important;
+    padding: 0px !important;
+}
 h5 {
     margin: 20px 0px;
 }
 
 
-.linked a:hover{
-    background-color: #2C7E76;
-    border-color: #2C7E76;
-    color: #F0FFFF;
-    border-radius: 0px;
-    -moz-border-radius: 0px;
-    -webkit-border-radius: 0px;
-}
 
 .SumoSelect p {
     color: #2C7E76;
