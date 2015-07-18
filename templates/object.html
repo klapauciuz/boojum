@@ -1,3 +1,7 @@
+<script type="text/javascript">
+	var object_id = '{{ id }}';
+	console.log(object_id);
+</script>
 {% extends "base.html" %}
 {% block content %}
 <script type="text/javascript">
@@ -9,6 +13,22 @@ $(document).ready(function(){
 <h2>{{ name }}</h2>
 </center>
 <h3 class='description'>{{ description }}</h3>
+<div class='images'>
+{% for img in images %}
+<img class='image' src="/static/images/{{ img }}">
+{% endfor %}
+<form id="upload-file" style='width: 50%;' method="post" enctype="multipart/form-data">
+<div style="text-align: center; overflow: hidden; width: 200%; background-color: #eff1f3; cursor: pointer;">
+<div style="color: #738392; font-size: 20px; font-weight: bold; width: 100%; height: 20px; float: left; cursor: pointer;"><br>add image</div>
+<input type="file" name="file" id="file" size="1" style="margin-top: -50px; margin-left:-410px; -moz-opacity: 0; filter: alpha(opacity=0); opacity: 0; font-size: 150px; height: 100px">
+</div>
+</form>
+</div>
+<!-- <form id="upload-file" method="post" enctype="multipart/form-data">
+        <input name="file" id='file' value='asd' data-id='{{ id }}' type="file">
+        <button id="upload-file-btn" type="button">Upload</button>
+</form> -->
+<div class='stuff'>
 <h5 style="margin-bottom: 12px;">&para; <a id='source' href="{{ source }}" target='_blank'>{{ source }}</a></h5>
 <script type="text/javascript">
 	var source = '{{ source }}';
@@ -32,7 +52,7 @@ $(document).ready(function(){
 <br><br>
 	{% if myObj %}
 		<span class="already">object in <a href="/collection">your collection</a></span>
-		<span id="del_obj" class='del' type="submit">&cross;</span>
+		<div id="del_obj" class='del' type="submit"></div>
 	{% else %}
 		<span id="add_obj" type="submit">add object to collection</span>
 	{% endif %}

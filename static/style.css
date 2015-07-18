@@ -269,17 +269,11 @@ li{
     text-decoration: none;
 }
 
-span.del {
-    background: #FAE4E4;
-    border: 1px solid #DD6F6F;
-    border-left: 0px;
-    -moz-border-radius: 0px 2px 2px 0px;
-    -webkit-border-radius: 0px 2px 2px 0px;
-    padding: 0px 3px;
-    margin-left: -4px;
-    font-size: 13px;
-    cursor: pointer;
+.already a:hover {
+    color: #CAECE9;
+    text-decoration: underline;
 }
+
 
 #add_linked_tag {
     /*background: rgba(0,0,0,0);
@@ -304,6 +298,7 @@ span.del {
     box-shadow: 0px 0px 0px #2C7E76;
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
+    z-index: 1000;
 }
 
 
@@ -333,7 +328,8 @@ span.del:hover {
 
 
 .linked {
-    box-shadow: 0px 0px 0px rgba(44,126,118, 0.4);;
+    box-shadow: 0px 0px 0px rgba(44,126,118, 0.4);
+    width: 60%;
 }
 
 
@@ -529,6 +525,7 @@ li a {
     float: left;
     position: absolute;
     width: 117px;
+    z-index: -10;
 }
 
 .mu_people {
@@ -546,5 +543,72 @@ li a {
 }
 
 .description {
-    width: 60%;
+    width: 50%;
+    float: left;
 }
+
+img.image {
+    width:50%;
+    float: left;
+}
+
+img.image:hover {
+    opacity: 0.6;
+    width:50%;
+    float: left;
+}
+
+
+.images {
+    background: black;
+    width: 600px;
+    float: right;
+}
+
+.stuff {
+    float: left;
+}
+
+#upload-file {
+    cursor: pointer;
+    width: 500px;
+}
+
+#del_obj {
+    width: 11px;
+    height: 11px;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    opacity: 0.2;
+    transform:rotate(45deg);
+    -ms-transform:rotate(45deg); /* IE 9 */
+    -webkit-transform:rotate(45deg); /* Safari and Chrome */
+}
+
+#del_obj:hover {
+    opacity: 1;
+}
+
+
+#del_obj:before, #del_obj:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    background: #d00;
+}
+
+#del_obj:before {
+    left: 50%;
+    width: 30%;
+    margin-left: -15%;
+    height: 100%;
+}
+
+#del_obj:after {
+    top: 50%;
+    height: 30%;
+    margin-top: -15%;
+    width: 100%;
+}
+

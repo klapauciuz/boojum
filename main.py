@@ -2,11 +2,12 @@
 from pymongo import MongoClient
 from flask import Flask, render_template, abort, request, url_for, redirect, request, jsonify, flash, session, g, json
 from bson.json_util import dumps
-from werkzeug import check_password_hash, generate_password_hash
+from werkzeug import check_password_hash, generate_password_hash, secure_filename
 from bson.objectid import ObjectId
 import requests
 from bs4 import BeautifulSoup
 import re
+import os
 
 app = Flask(__name__)
 
@@ -16,6 +17,9 @@ db = client['boojom']
 tags = db.tags
 objects = db.objects
 users = db.users
+
+UPLOAD_FOLDER = 'static\\images'
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 @app.before_request
 def before_request():
@@ -102,6 +106,30 @@ def fill(TO):
         return response
 
 #_____Fill/
+
+#_____Files
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        file = request.files['file']
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            print request.form['id']
+            db.objects.update({"_id":ObjectId(request.form['id'])}, 
+                         {'$push': { 
+                                    "images": filename
+                                  }
+                         }
+                         )
+            return 'Success[server]'
+    return redirect('/')
+#_____Files/
+
 #_____Tags
 
 @app.route('/<tag>')
@@ -150,6 +178,95 @@ def tag_page(tag):
     else:
         return render_template('404.html', show_name=tag)
 
+@app.route('/objects/<obj>', methods=['GET', 'POST'])
+def obj_page(obj):
+    """Object page and add object to collection"""
+    current_object = objects.find_one({'name': obj})
+    if g.user:
+        user_objects = [user_obj['_id'] for user_obj in g.user['objects']]
+    if request.method == 'POST':
+        # если прикрепляем тег к объекту
+        if request.form.get('data'):
+            data = json.loads(request.form.get('data'))
+            values = data['values']
+            names = data['names'].split(', ')
+            for x in xrange(0, len(values)):
+                print names[x], ':', values[x]
+                db.objects.update({"name": obj}, 
+                         {'$push': { 
+                                    "tags":{ "_id": ObjectId(values[x])} 
+                                  }
+                         }
+                         )
+
+                # добавляем объект в тег (для отображения объектов, у которых есть данный тег)
+                db.tags.update({"_id":ObjectId(values[x])}, 
+                         {'$push': { 
+                                    "objects":{ "_id": current_object['_id']} 
+                                  }
+                         }
+                         )
+            response = jsonify(message=str('OK'))
+            response.status_code = 200
+            return response
+
+        # если добавляем объект в коллекцию
+        else:
+            if current_object["_id"] not in user_objects:
+                db.users.update({"username":session["username"]}, 
+                     {'$push': { 
+                                "objects":{ "_id": current_object['_id'] } 
+                              }
+                     }
+                     )
+
+            else:
+                db.users.update({"username":session["username"]}, 
+                     {'$pull': { 
+                                "objects":{ "_id": current_object['_id'] } 
+                              }
+                     }
+                     )
+
+    # берём айди тегов объекта
+    object_tags_id = [my_tag_id['_id'] for my_tag_id in current_object['tags']]
+    # print object_tags_id
+    # print [i['name'] for i in db.tags.find({'_id':{'$in': object_tags_id}})]
+
+    # проверяем залогиненность, что бы взять теги у юзера для вывода в список
+    if g.user:
+        my_tags_id = [my_tag_id['_id'] for my_tag_id in g.user['tags']]
+        my_tags_name = [i for i in db.tags.find({'_id':{'$in': my_tags_id}})]
+    else:
+        my_tags_name = []
+
+    # и выводим в шаблон их имена
+    if g.user and current_object['_id'] in user_objects:
+        return render_template(
+            'object.html',
+            show_tags=[i['name'] for i in db.tags.find({'_id':{'$in': object_tags_id}})],
+            name=current_object['name'],
+            description=current_object['description'],
+            id=current_object['_id'],
+            source=current_object['source'],
+            user_tags=my_tags_name,
+            myObj = True,
+            images=current_object['images']
+        )
+    else:
+        return render_template(
+            'object.html',
+            show_tags=[i['name'] for i in db.tags.find({'_id':{'$in': object_tags_id}})],
+            name=current_object['name'],
+            description=current_object['description'],
+            id=current_object['_id'],
+            source=current_object['source'],
+            user_tags=my_tags_name,
+            images=current_object['images']
+        )
+
+#_____Objects/
+
 @app.route('/objects/add', methods=['POST'])
 def add_object_from_wiki():
     """New object add"""
@@ -176,7 +293,7 @@ def add_object_from_wiki():
     if db.objects.find({'name': re.sub(r'(\n|\t)', '', name)}).limit(1).count() > 0:
         response = '/objects/' + re.sub(r'(\n|\t)', '', name)
         return response
-    _id = objects.insert({'name': re.sub(r'(\n|\t)', '', name), 'description': description, 'tags': [], 'source': source})
+    _id = objects.insert({'name': re.sub(r'(\n|\t)', '', name), 'description': description, 'images': [], 'tags': [], 'source': source})
     db.users.update({"username":session["username"]}, 
          {'$push': { 
                     "objects":{ "_id": _id } 
@@ -285,92 +402,6 @@ def add_tag_page():
 #     response.status_code = 200
 #     return response
 
-@app.route('/objects/<obj>', methods=['GET', 'POST'])
-def obj_page(obj):
-    """Object page and add object to collection"""
-    current_object = objects.find_one({'name': obj})
-    if g.user:
-        user_objects = [user_obj['_id'] for user_obj in g.user['objects']]
-    if request.method == 'POST':
-        # если прикрепляем тег к объекту
-        if request.form.get('data'):
-            data = json.loads(request.form.get('data'))
-            values = data['values']
-            names = data['names'].split(', ')
-            for x in xrange(0, len(values)):
-                print names[x], ':', values[x]
-                db.objects.update({"name": obj}, 
-                         {'$push': { 
-                                    "tags":{ "_id": ObjectId(values[x])} 
-                                  }
-                         }
-                         )
-
-                # добавляем объект в тег (для отображения объектов, у которых есть данный тег)
-                db.tags.update({"_id":ObjectId(values[x])}, 
-                         {'$push': { 
-                                    "objects":{ "_id": current_object['_id']} 
-                                  }
-                         }
-                         )
-            response = jsonify(message=str('OK'))
-            response.status_code = 200
-            return response
-
-        # если добавляем объект в коллекцию
-        else:
-            if current_object["_id"] not in user_objects:
-                db.users.update({"username":session["username"]}, 
-                     {'$push': { 
-                                "objects":{ "_id": current_object['_id'] } 
-                              }
-                     }
-                     )
-
-            else:
-                db.users.update({"username":session["username"]}, 
-                     {'$pull': { 
-                                "objects":{ "_id": current_object['_id'] } 
-                              }
-                     }
-                     )
-
-    # берём айди тегов объекта
-    object_tags_id = [my_tag_id['_id'] for my_tag_id in current_object['tags']]
-    # print object_tags_id
-    # print [i['name'] for i in db.tags.find({'_id':{'$in': object_tags_id}})]
-
-    # проверяем залогиненность, что бы взять теги у юзера для вывода в список
-    if g.user:
-        my_tags_id = [my_tag_id['_id'] for my_tag_id in g.user['tags']]
-        my_tags_name = [i for i in db.tags.find({'_id':{'$in': my_tags_id}})]
-    else:
-        my_tags_name = []
-
-    # и выводим в шаблон их имена
-    if g.user and current_object['_id'] in user_objects:
-        return render_template(
-            'object.html',
-            show_tags=[i['name'] for i in db.tags.find({'_id':{'$in': object_tags_id}})],
-            name=current_object['name'],
-            description=current_object['description'],
-            id=current_object['_id'],
-            source=current_object['source'],
-            user_tags=my_tags_name,
-            myObj = True
-        )
-    else:
-        return render_template(
-            'object.html',
-            show_tags=[i['name'] for i in db.tags.find({'_id':{'$in': object_tags_id}})],
-            name=current_object['name'],
-            description=current_object['description'],
-            id=current_object['_id'],
-            source=current_object['source'],
-            user_tags=my_tags_name,
-        )
-
-#_____Objects/
 #_____User
 @app.route('/users/<user>', methods=['GET', 'POST', 'DELETE'])
 def user(user):
@@ -499,6 +530,7 @@ def logout():
 if __name__ == "__main__":
     app.secret_key = 'super secret key'
     app.config['SESSION_TYPE'] = 'filesystem'
+    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     app.run(debug=True)
 #_____Auth/
 
