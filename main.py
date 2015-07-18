@@ -170,11 +170,13 @@ def tag_page(tag):
     creator = db.users.find_one({'_id': current_tag['creator']})
     # берём айди объектов тега
     tags_objects_id = [my_obj_id['_id'] for my_obj_id in current_tag['objects']]
+
+    show_objects = [i for i in db.objects.find({'_id':{'$in': tags_objects_id}})]
     if current_tag:
         if g.user and current_tag['_id'] in user_tags:
             # проверяем есть ли тег в коллекции у юзера
-            return render_template('tag.html', show_objects=[i['name'] for i in db.objects.find({'_id':{'$in': tags_objects_id}})], description=current_tag['description'], name=current_tag['name'], id=current_tag['_id'], creator=creator['username'], myTag=True)
-        return render_template('tag.html', show_objects=[i['name'] for i in db.objects.find({'_id':{'$in': tags_objects_id}})], description=current_tag['description'], name=current_tag['name'], id=current_tag['_id'], creator=creator['username'])
+            return render_template('tag.html', show_objects=show_objects, description=current_tag['description'], name=current_tag['name'], id=current_tag['_id'], creator=creator['username'], myTag=True)
+        return render_template('tag.html', show_objects=show_objects, description=current_tag['description'], name=current_tag['name'], id=current_tag['_id'], creator=creator['username'])
     else:
         return render_template('404.html', show_name=tag)
 

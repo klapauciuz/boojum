@@ -21,7 +21,7 @@ $(document).ready(function(){
     $('#delete').click(function(event) {
         event.preventDefault();
         var self = $(this),
-        tagName = $('h2').text();
+        tagName = $('h2.tagANDobject').text();
         $.ajax({
             url : '/tags/'+tagName,
             type: 'DELETE',
