@@ -29,7 +29,7 @@ input[type="password"] {
 input[type="submit"], span#add_tag, span#add_obj {
     background: #105751;
     border: 1px solid #073B36;
-    padding: 1px 3px;
+    padding: 2px 4px;
     font-family: 'Trebuchet MS', sans-serif;
     font-size: 14px;
     font-weight: bold;
@@ -123,8 +123,12 @@ span.unfollow {
     color: Tomato;
 }
 
-.unfollow, .followstatus, .show{
+.unfollow, .followstatus, .show, .edit, #delete{
     position: fixed;
+}
+
+#delete {
+    margin-left: 20px;
 }
 
 
@@ -255,7 +259,7 @@ li{
 .already {
     background: #105751;
     border: 1px solid #073B36;
-    padding: 1px 3px;
+    padding: 2px 4px;
     font-family: 'Trebuchet MS', sans-serif;
     font-size: 14px;
     font-weight: bold;
@@ -265,13 +269,8 @@ li{
 }
 
 .already a {
-    color: #CAECE9;
+    color: #F0FFFF;
     text-decoration: none;
-}
-
-.already a:hover {
-    color: #CAECE9;
-    text-decoration: underline;
 }
 
 
@@ -577,6 +576,7 @@ img.image:hover {
 #del_obj {
     width: 11px;
     height: 11px;
+    top: 1px;
     position: relative;
     display: inline-block;
     cursor: pointer;

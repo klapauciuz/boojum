@@ -51,10 +51,10 @@ $(document).ready(function(){
 </form>
 <br><br>
 	{% if myObj %}
-		<span class="already">object in <a href="/collection">your collection</a></span>
+		<span class="already">in <a href="/collection">collection</a></span>
 		<div id="del_obj" class='del' type="submit"></div>
 	{% else %}
-		<span id="add_obj" type="submit">add object to collection</span>
+		<span id="add_obj" type="submit">add to collection</span>
 	{% endif %}
 {% else %}<br><br>
 <span class='simple'>..<a href="/login">login</a> or <a href="/register">sign up</a> and put this object in your own collection</span>
