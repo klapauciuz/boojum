@@ -11,7 +11,7 @@
             /*placeholder style*/
             .SumoSelect > .CaptionCont > span.placeholder { color: #ccc; font-style: italic; }
 
-        .SumoSelect > .CaptionCont > label { position: absolute; top: 0px; right: 0px; bottom: 0px; width: 30px;}
+        .SumoSelect > .CaptionCont > label { position: absolute; top: 0px; right: 0px; bottom: 0px; width: 30px; }
             .SumoSelect > .CaptionCont > label > i { background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAYAAABy6+R8AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wMdBhAJ/fwnjwAAAGFJREFUKM9jYBh+gBFKuzEwMKQwMDB8xaOWlYGB4T4DA0MrsuapDAwM//HgNwwMDDbYTJuGQ8MHBgYGJ1xOYGNgYJiBpuEpAwODHSF/siDZ+ISBgcGClEDqZ2Bg8B6CkQsAPRga0cpRtDEAAAAASUVORK5CYII=');
                 background-position: center center; width: 16px; height: 16px; display: block; position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto;background-repeat: no-repeat;opacity: 0.8;}
 
@@ -29,7 +29,7 @@
             .SumoSelect > .optWrapper > .options > li:hover { background-color: white; }
             .SumoSelect > .optWrapper > .options > li.sel{background-color: rgb(202, 236, 233);}
 
-            .SumoSelect > .optWrapper > .options > li label { text-overflow: ellipsis; white-space: nowrap; overflow: hidden; display: block;cursor: pointer;}
+            .SumoSelect > .optWrapper > .options > li label { text-overflow: ellipsis; white-space: nowrap; overflow: hidden; display: block; cursor: pointer;}
             .SumoSelect > .optWrapper > .options > li span { display: none; }
 
         /*Floating styles*/

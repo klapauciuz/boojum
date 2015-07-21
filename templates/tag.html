@@ -1,40 +1,52 @@
 {% extends "base.html" %}
+
 {% block content %}
 <center>
 {% if g.user['username'] == creator %}
-<h2 class='tagANDobject'>{{ name }}</h2>
-<sup><a class="edit" href="/collection"><img style='width:11px;height:11px;' src="/static/edit.png"></a></sup>
-<sup><a id="delete" href="/collection"><img style='width:11px;height:11px;' src="/static/trash.png"></a></sup>
+<h2>{{ name }}</h2>
+<!-- <sup><a class="edit" href="/collection"><img style='width:11px;height:11px;' src="/static/edit.png"></a></sup>
+<sup><a id="delete" href="/collection"><img style='width:11px;height:11px;' src="/static/trash.png"></a></sup> -->
 {% else %}
-<h2 class='tagANDobject'>{{ name }}</h2>
-<sup class='author'>by <a href="{{ url_for('user', user=creator) }}">{{ creator }}</a></sup>
+<h2>{{ name }}</h2>
 {% endif %}
 <!-- <h3>{{ id }}</h3> -->
 </center>
 <h3>{{ description }}</h3>
+<h5 class='source' style="display: inline-block; margin-bottom: 12px;">by <a href="{{ url_for('user', user=creator) }}">{{ creator }}</a></h5>
 <br>
+<br>
+<div class="already_box">
 {% if g.user %}
 	{% if myTag %}
 		<span class="already">already in <a href="/collection">collection</a></span>
-		<div id="del_tag" class='del'></div>
+		<div id="del_tag" type="submit"></div>
 	{% else %}
 		<span id="add_tag" type="submit">add tag to collection</span>
 	{% endif %}
 {% else %}
 <span class='simple'>..<a href="/login">login</a> or <a href="/register">sign up</a> and put this tag in your own collection</span>
-</center>
 {% endif %}
-</h5>
-<br><br>
+</div>
+</center>
 <div class='linked_box'>
+<div class="grid">
     {% for obj in show_objects %}
-		    <div class="inner_image">
+    	<div class="grid-item">
 		    <a href="{{ url_for('obj_page', obj=obj['name']) }}">
 		    <img style="width:100%; height: 100%;" src="/static/images/{{ obj['images'][0] }}" alt="" onerror="this.src='/static/white.png';" />
 		    </a>
 		    <p>{{ obj['name'] }}</p>
-			</div>
+		</div>
 	{% endfor %}
 </div>
-<br><br>
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('.grid').masonry({
+	  // options
+	  itemSelector: '.grid-item',
+	  columnWidth: 202
+	});
+});
+</script>
 {% endblock content %}

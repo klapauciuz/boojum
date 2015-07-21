@@ -24,43 +24,42 @@ $(document).ready(function(){
 </div>
 </form>
 </div>
-<div class='stuff'>
-<h5 style="margin-bottom: 12px;">&para; <a id='source' href="{{ source }}" target='_blank'>{{ source }}</a></h5>
+<h5 class='source' style="display: inline-block; margin-bottom: 12px;">&para; <a id='source' href="{{ source }}" target='_blank'>{{ source }}</a></h5>
 <script type="text/javascript">
 	var source = '{{ source }}';
 	var source = decodeURIComponent(source);
 	document.getElementById("source").innerText = source;
 </script>
 <br>
+<div class="already_box">
 {% if g.user %}
 	{% if myObj %}
 			<span class="already">already in <a href="/collection">collection</a></span>
-			<div id="del_obj" class='del'></div>
+			<div id="del_obj" type="submit"></div>
 		{% else %}
 			<span id="add_obj" type="submit">add to collection</span>
 	{% endif %}
 {% else %}
 <span class='simple'>..<a href="/login">login</a> or <a href="/register">sign up</a> and put this tag in your own collection</span>
 {% endif %}
+</div>
 </center>
-<br>
-<br>
-<span class='linked'>
-	{% for tag in show_tags %}
-		<a href="{{ url_for('tag_page', tag=tag) }}">{{ tag }}</a>  
-	{% endfor %}
-</span>
-{% if g.user %}
-<form class='linkedform' style="display:inline; cursor: pointer;">
-	<select multiple="multiple" class='yeah'>
-		{% for ut in user_tags %}
-			<option value="{{ut._id}}">{{ut.name}}</option>
+<div class='linked_box_in_object'>
+	<span class='linked'>
+		{% for tag in show_tags %}
+			<a href="{{ url_for('tag_page', tag=tag) }}">{{ tag }}</a>  
 		{% endfor %}
-	</select>
-</form>
-<div id="add_linked_tag" class='add' type="submit">&#10004;</div>
-{% else %}
-
-{% endif %}
+	</span>
+	{% if g.user %}
+	<form class='linkedform' style="display:inline; cursor: pointer;">
+		<select multiple="multiple" class='yeah'>
+			{% for ut in user_tags %}
+				<option value="{{ut._id}}">{{ut.name}}</option>
+			{% endfor %}
+		</select>
+	</form>
+	<div id="add_linked_tag" type="submit">&#10004;</div>
+	{% else %}
+	{% endif %}
 </div>
 {% endblock content %}
