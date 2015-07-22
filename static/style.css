@@ -39,26 +39,40 @@ input[type="submit"] {
     cursor: pointer;
 }
 
-span#add_tag, span#add_obj {
-    background: #105751;
-    border: 2px solid #105751;
-    padding: 2px 4px;
-    top: 1px;
-    font-family: 'Trebuchet MS', sans-serif;
-    font-size: 14px;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    color: #F0FFFF;
-    cursor: pointer;
-    display: inline-block;
-    box-shadow: 0px 0px 8px #105751;
-}
 
 input#wide_submit {
     height: 42px;
     width: 100px;
 }
 
+.btn {
+  background: #a1cae3;
+  background-image: -webkit-linear-gradient(top, #a1cae3, #5b99bf);
+  background-image: -moz-linear-gradient(top, #a1cae3, #5b99bf);
+  background-image: -ms-linear-gradient(top, #a1cae3, #5b99bf);
+  background-image: -o-linear-gradient(top, #a1cae3, #5b99bf);
+  background-image: linear-gradient(to bottom, #a1cae3, #5b99bf);
+  -webkit-border-radius: 2;
+  -moz-border-radius: 2;
+  border-radius: 2px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 14px;
+  margin-top: 2px;
+  padding: 4px 8px 4px 8px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #a1cae3;
+  background-image: -webkit-linear-gradient(top, #a1cae3, #6aa6cf);
+  background-image: -moz-linear-gradient(top, #a1cae3, #6aa6cf);
+  background-image: -ms-linear-gradient(top, #a1cae3, #6aa6cf);
+  background-image: -o-linear-gradient(top, #a1cae3, #6aa6cf);
+  background-image: linear-gradient(to bottom, #a1cae3, #6aa6cf);
+  text-decoration: none;
+  cursor: pointer;
+}
 
 #example_add_tag, #example_add_obj  {
     background: #105751;
@@ -338,6 +352,7 @@ li{
 }
 
 .linkedform {
+    display:inline;
     margin: 6px 6px;
 }
 
@@ -371,23 +386,16 @@ li{
 .linked a:hover{
 /*    color: rgba(44,126,118,0);
 */  color: #F0FFFF;
-    background-color: rgb(44,126,118);
-    border-color: rgb(44,126,118);
+    background-color: rgba(44,126,118, 1);
+    border-color: rgba(44,126,118, 1);
 /*    text-shadow: 0px 0px 2px rgb(44,126,118);
 */}
 
-div.SumoSelect {
-    top: 0px !important;
-    margin: 0px !important;
-    padding: 0px !important;
-}
 
 h5 {
     margin: 20px 0px;
     display: block;
 }
-
-
 
 .SumoSelect p {
     color: #2C7E76;
@@ -582,23 +590,15 @@ img.image {
 
 img.image:hover {
     opacity: 0.6;
-    width:50%;
-    float: left;
 }
 
 
 .images {
     background: black;
-    width: 600px;
+    width: 650px;
     float: right;
 }
 
-
-
-#upload-file {
-    cursor: pointer;
-    width: 500px;
-}
 
 #del_obj, #del_tag {
     left: 3px;
@@ -671,7 +671,7 @@ img.image:hover {
 }
 
 .linked_box_in_object {
-    width: 700px;
+    width: 650px;
     display: block;
     background-color: #F0FFFF;
     border: 6px solid #F0FFFF;
@@ -707,12 +707,30 @@ img.image:hover {
     text-decoration: underline;
 }
 
-.grid-item{
+.grid-item {
     width: 200px;
     opacity: 0.8;
     float: left;
+    margin-top: -3px !important;
 }
 
 .grid-item:hover {
     opacity: 1;
+}
+
+#grid[data-columns]::before {
+    content: '3 .column.size-1of3';
+}
+
+/* These are the classes that are going to be applied: */
+.column { float: left; }
+.size-1of3 { width: 33.333%; }
+
+#grid img {
+    width: 100%;
+}
+
+#grid a:hover {
+    cursor: default;
+    opacity: 0.8;
 }

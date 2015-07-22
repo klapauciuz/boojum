@@ -7,6 +7,11 @@
 <script type="text/javascript">
 $(document).ready(function(){
     $('.yeah').SumoSelect({placeholder: '...select tags'});
+	    $('.SumoSelect').hover(function() {
+	    	$('.optWrapper').addClass('open');
+	    }, function() {
+			$('.optWrapper').removeClass('open');
+	    });
 });
 </script>
 <center>
@@ -14,9 +19,11 @@ $(document).ready(function(){
 </center>
 <h3 class='description'>{{ description }}</h3>
 <div class='images'>
+<div id="grid" data-columns>
 {% for img in images %}
-<img class='image' src="/static/images/{{ img }}">
+<a href="/static/images/{{ img }}" target='_blank'><img src="/static/images/{{ img }}"></a>
 {% endfor %}
+</div>
 <form id="upload-file" style='width: 50%;' method="post" enctype="multipart/form-data">
 <div style="text-align: center; overflow: hidden; width: 200%; background-color: #eff1f3; cursor: pointer;">
 <div style="color: #738392; font-size: 20px; font-weight: bold; width: 100%; height: 20px; float: left; cursor: pointer;"><br>add image</div>
@@ -24,7 +31,7 @@ $(document).ready(function(){
 </div>
 </form>
 </div>
-<h5 class='source' style="display: inline-block; margin-bottom: 12px;">&para; <a id='source' href="{{ source }}" target='_blank'>{{ source }}</a></h5>
+<h5 class='source' style="display: inline-block; margin-bottom: 12px;"><img src="/static/external_link.gif"> <a id='source' href="{{ source }}" target='_blank'>{{ source }}</a></h5>
 <script type="text/javascript">
 	var source = '{{ source }}';
 	var source = decodeURIComponent(source);
@@ -34,10 +41,10 @@ $(document).ready(function(){
 <div class="already_box">
 {% if g.user %}
 	{% if myObj %}
-			<span class="already">already in <a href="/collection">collection</a></span>
+			<span class="already">in your <a href="/collection">collection</a></span>
 			<div id="del_obj" type="submit"></div>
 		{% else %}
-			<span id="add_obj" type="submit">add to collection</span>
+			<span id="add_obj" class='btn' type="submit">add to collection</span>
 	{% endif %}
 {% else %}
 <span class='simple'>..<a href="/login">login</a> or <a href="/register">sign up</a> and put this tag in your own collection</span>
@@ -51,7 +58,7 @@ $(document).ready(function(){
 		{% endfor %}
 	</span>
 	{% if g.user %}
-	<form class='linkedform' style="display:inline; cursor: pointer;">
+	<form class='linkedform'>
 		<select multiple="multiple" class='yeah'>
 			{% for ut in user_tags %}
 				<option value="{{ut._id}}">{{ut.name}}</option>
@@ -62,4 +69,5 @@ $(document).ready(function(){
 	{% else %}
 	{% endif %}
 </div>
+<script type="text/javascript" src="{{ url_for('static', filename='scripts/salvattore.min.js') }}"></script>
 {% endblock content %}
