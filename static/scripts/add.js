@@ -42,8 +42,8 @@ $(document).ready(function(){
 */               /* self.text(' ! ');*/
                 /*self.delay( 300 );*/
                 self.css('display','none');
-                $('.already').delay(340);
-                $('.already').animate({
+                $('.universal_button').delay(340);
+                $('.universal_button').animate({
                     opacity: 0,
                 }, 120, function(){
                     
@@ -101,8 +101,8 @@ $('#add_obj').click(function(event) {
 */               /* self.text(' ! ');*/
                 /*self.delay( 300 );*/
                 self.css('display','none');
-                $('.already').delay(340);
-                $('.already').animate({
+                $('.universal_button').delay(340);
+                $('.universal_button').animate({
                     opacity: 0,
                 }, 120, function(){
                     

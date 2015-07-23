@@ -41,10 +41,12 @@ $(document).ready(function(){
 <div class="already_box">
 {% if g.user %}
 	{% if myObj %}
-			<span class="already">in your <a href="/collection">collection</a></span>
-			<div id="del_obj" type="submit"></div>
+		<div id="already">
+			<div class="universal_button l">already in <a href="/collection">collection</a></div>
+			<div id="del_obj" type="submit"><img src="/static/trash.png"></div>
+		</div>
 		{% else %}
-			<span id="add_obj" class='btn' type="submit">add to collection</span>
+			<div id="add_obj" class="universal_button" type="submit">add to collection</div>
 	{% endif %}
 {% else %}
 <span class='simple'>..<a href="/login">login</a> or <a href="/register">sign up</a> and put this tag in your own collection</span>

@@ -18,10 +18,10 @@
 <div class="already_box">
 {% if g.user %}
 	{% if myTag %}
-		<span class="already">already in <a href="/collection">collection</a></span>
-		<div id="del_tag" type="submit"></div>
+		<div class="universal_button">already in <a href="/collection">collection</a></div>
+		<div id="del_tag" type="submit"><img src="/static/delete.png"></div>
 	{% else %}
-		<span id="add_tag" type="submit">add tag to collection</span>
+		<div id="add_tag" class="universal_button" type="submit">add to collection</div>
 	{% endif %}
 {% else %}
 <span class='simple'>..<a href="/login">login</a> or <a href="/register">sign up</a> and put this tag in your own collection</span>
