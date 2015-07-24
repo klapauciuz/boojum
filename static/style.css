@@ -26,7 +26,7 @@ input[type="password"] {
     color: #105751;
 }
 
-input[type="submit"], span#add_tag, span#add_obj {
+input[type="submit"] {
     background: #105751;
     border: 1px solid #073B36;
     padding: 2px 4px;
@@ -39,11 +39,40 @@ input[type="submit"], span#add_tag, span#add_obj {
     cursor: pointer;
 }
 
+
 input#wide_submit {
     height: 42px;
     width: 100px;
 }
 
+.btn {
+  background: #a1cae3;
+  background-image: -webkit-linear-gradient(top, #a1cae3, #5b99bf);
+  background-image: -moz-linear-gradient(top, #a1cae3, #5b99bf);
+  background-image: -ms-linear-gradient(top, #a1cae3, #5b99bf);
+  background-image: -o-linear-gradient(top, #a1cae3, #5b99bf);
+  background-image: linear-gradient(to bottom, #a1cae3, #5b99bf);
+  -webkit-border-radius: 2;
+  -moz-border-radius: 2;
+  border-radius: 2px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 14px;
+  margin-top: 2px;
+  padding: 4px 8px 4px 8px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #a1cae3;
+  background-image: -webkit-linear-gradient(top, #a1cae3, #6aa6cf);
+  background-image: -moz-linear-gradient(top, #a1cae3, #6aa6cf);
+  background-image: -ms-linear-gradient(top, #a1cae3, #6aa6cf);
+  background-image: -o-linear-gradient(top, #a1cae3, #6aa6cf);
+  background-image: linear-gradient(to bottom, #a1cae3, #6aa6cf);
+  text-decoration: none;
+  cursor: pointer;
+}
 
 #example_add_tag, #example_add_obj  {
     background: #105751;
@@ -58,6 +87,47 @@ input#wide_submit {
     cursor: pointer;
 }
 
+.universal_button  {
+    background-color: rgba(45,168,103,0.6);
+    background-image: -webkit-linear-gradient(top, rgba(146,224,182,0.8), rgba(45,168,103,0.6));
+    background-image: -moz-linear-gradient(top, rgba(146,224,182,0.8), rgba(45,168,103,0.6));
+    background-image: -ms-linear-gradient(top, rgba(146,224,182,0.8), rgba(45,168,103,0.6));
+    background-image: -o-linear-gradient(top, rgba(146,224,182,0.8), rgba(45,168,103,0.6));
+    background-image: linear-gradient(to bottom, rgba(146,224,182,0.8), rgba(45,168,103,0.6));
+    padding: 4px 8px;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 14px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    color: #F0FFFF;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.universal_button:hover  {
+    background-color: rgba(45,168,103,1);
+    background-image: -webkit-linear-gradient(top, rgba(146,224,182,0.8), rgba(45,168,103,1));
+    background-image: -moz-linear-gradient(top, rgba(146,224,182,0.8), rgba(45,168,103,1));
+    background-image: -ms-linear-gradient(top, rgba(146,224,182,0.8), rgba(45,168,103,1));
+    background-image: -o-linear-gradient(top, rgba(146,224,182,0.8), rgba(45,168,103,1));
+    background-image: linear-gradient(to bottom, rgba(146,224,182,0.8), rgba(45,168,103,1));
+}
+
+.universal_button a {
+    color: #F0FFFF;
+    opacity: 0.6;
+    text-decoration: none;
+}
+
+
+.l {
+    cursor: default;
+}
+
+.universal_button a:hover {
+    opacity: 1;
+    text-decoration: none;
+}
 
 div.page {
     background: white;
@@ -262,29 +332,11 @@ li{
     list-style: none;
 }
 
-
-.already {
-    background: #105751;
-    border: 1px solid #073B36;
-    padding: 2px 4px;
-    font-family: 'Trebuchet MS', sans-serif;
-    font-size: 14px;
-    font-weight: bold;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    color: #F0FFFF;
-    float: left;
-}
-
-.already a {
-    color: #F0FFFF;
-    text-decoration: none;
-}
-
 #add_linked_tag {
     padding: 0px 0px 0px 5px;
     margin: -10px;
-    color: #CAECE9;
+    color: rgba(44,126,118, 1);
+    opacity: 0.5;
     background-color: #F0FFFF ;
     border: 4px solid #F0FFFF ;
     border-radius: 2px;
@@ -299,18 +351,14 @@ li{
     box-shadow: 0px 0px 0px #2C7E76;
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
+    font-weight: bold;
+    font-size: 20px;
 }
 
 #add_linked_tag:hover {
     color: #AEEA00;
-    margin: -7px;
+    opacity: 1;
 }
-
-span.del:hover {
-    background: #DD6F6F;
-}
-
-
 
 #profile, #profile a {
     opacity: 0.3;
@@ -323,7 +371,10 @@ span.del:hover {
     box-shadow: 0px 0px 0px rgba(44,126,118, 0.4);
 }
 
-
+.linkedform {
+    display:inline;
+    margin: 6px 6px;
+}
 
 .linked, .linked a {
     text-decoration: none;
@@ -336,26 +387,35 @@ span.del:hover {
     z-index: 10;
 }
 
-.linked a:hover{
-    color: rgba(44,126,118,1);
-    border-radius: 0px;
-    -moz-border-radius: 0px;
-    -webkit-border-radius: 0px;
+.linked {
+    border: 0px;
 }
 
-div.SumoSelect {
-    top: 0px !important;
-    margin: 0px !important;
-    padding: 0px !important;
+.linked a {
+    margin: 2px 6px;
+    display: inline-block;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    transition: all 0.2s;
+/*    box-shadow: 0px 0px 100px rgb(44,126,118);
+*/
+
 }
+
+.linked a:hover{
+/*    color: rgba(44,126,118,0);
+*/  color: #F0FFFF;
+    background-color: rgba(44,126,118, 1);
+    border-color: rgba(44,126,118, 1);
+/*    text-shadow: 0px 0px 2px rgb(44,126,118);
+*/}
+
 
 h5 {
     margin: 20px 0px;
-    display: inline-block;
-    float: left;
+    display: block;
 }
-
-
 
 .SumoSelect p {
     color: #2C7E76;
@@ -442,7 +502,7 @@ textarea:focus{
     padding-right: 20px;
     text-decoration: none;
     font-size: 20px;
-    color:  rgb(43, 88, 122);
+    color: rgb(43, 88, 122);
 
 }
 
@@ -534,6 +594,8 @@ li a {
     font-size: 12px;
     color: rgb(22,139,74);
     letter-spacing: 1px;
+    display: block;
+    width: 400px !important;
 }
 
 .description {
@@ -548,40 +610,30 @@ img.image {
 
 img.image:hover {
     opacity: 0.6;
-    width:50%;
-    float: left;
 }
 
 
 .images {
     background: black;
-    width: 600px;
+    width: 650px;
     float: right;
 }
 
-.stuff {
-    float: left;
-}
-
-#upload-file {
-    cursor: pointer;
-    width: 500px;
-}
 
 #del_obj, #del_tag {
-    left: 3px;
-    width: 11px;
-    height: 11px;
-    top: 3px;
-    position: relative;
-    display: inline-block;
+    display: inline;
+    position: absolute;
+    margin: 4px;
     cursor: pointer;
-    opacity: 0.2;
-    transform:rotate(45deg);
-    -ms-transform:rotate(45deg); /* IE 9 */
-    -webkit-transform:rotate(45deg); /* Safari and Chrome */
+    opacity: 0.6;
 }
 
+#del_obj:hover, #del_tag:hover {
+    opacity: 1;
+}
+
+
+/*
 #del_obj:hover, #del_tag:hover {
     opacity: 1;
 }
@@ -606,9 +658,7 @@ img.image:hover {
     height: 30%;
     margin-top: -15%;
     width: 100%;
-}
-
-
+}*/
 
 .inner_image { 
    display: inline-block;
@@ -623,7 +673,13 @@ img.image:hover {
     cursor: pointer;
 }
 
-.linked_box p { 
+.linked_box {
+    margin: 15px 0px;
+    display: block;
+    width: 80%;
+}
+
+.grid-item p { 
    position: absolute; 
    top: 10px; 
    left: 0; 
@@ -634,6 +690,18 @@ img.image:hover {
    padding: 6px; 
 }
 
+.linked_box_in_object {
+    width: 650px;
+    display: block;
+    background-color: #F0FFFF;
+    border: 6px solid #F0FFFF;
+    border-radius: 2px;
+    margin: 15px 0px;
+}
+
+.already_box {
+    width: 1000px;
+}
 
 .author {
     margin-left: 5px;
@@ -642,7 +710,48 @@ img.image:hover {
     font-size: 10px;
 }
 
-#source {
+.source {
+    margin: 0px;
+    padding: 5px;
+    opacity: 0.5;
+}
+
+.source a {
     margin-right: 10px;
     opacity: 0;
+    text-decoration: none;
+    color: rgb(44, 126, 118);
+}
+
+.source a:hover {
+    text-decoration: underline;
+}
+
+.grid-item {
+    width: 200px;
+    opacity: 0.8;
+    float: left;
+    margin-top: -3px !important;
+}
+
+.grid-item:hover {
+    opacity: 1;
+}
+
+#grid[data-columns]::before {
+    content: '3 .column.size-1of3';
+}
+
+/* These are the classes that are going to be applied: */
+.column { float: left; }
+.size-1of3 { width: 33.333%; }
+
+#grid img {
+    width: 100%;
+}
+
+#grid a:hover {
+    cursor: default;
+    opacity: 0.8;
+>>>>>>> 64889eddb7ef1c3bff05e553b4744561b84917b4
 }
