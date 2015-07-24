@@ -3,9 +3,10 @@
 {% block content %}
 <center>
 {% if g.user['username'] == creator %}
-<h2>{{ name }}</h2>
-<!-- <sup><a class="edit" href="/collection"><img style='width:11px;height:11px;' src="/static/edit.png"></a></sup>
-<sup><a id="delete" href="/collection"><img style='width:11px;height:11px;' src="/static/trash.png"></a></sup> -->
+<h2>{{ name }}
+<sup><a class="edit" href="/collection"><img style='width:11px;height:11px;' src="/static/edit.png"></a></sup>
+<sup><a id="delete" href="/collection"><img style='width:11px;height:11px;' src="/static/trash.png"></a></sup>
+</h2>
 {% else %}
 <h2>{{ name }}</h2>
 {% endif %}
