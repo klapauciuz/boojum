@@ -30,6 +30,7 @@ $(document).ready(function(){
 	var source = '{{ source }}';
 	var source = decodeURIComponent(source);
 	document.getElementById("source").innerText = source;
+	$('#source').css('opacity', '1');
 </script>
 <br>
 {% if g.user %}
