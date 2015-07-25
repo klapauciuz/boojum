@@ -119,11 +119,6 @@ input#wide_submit {
     text-decoration: none;
 }
 
-
-.l {
-    cursor: default;
-}
-
 .universal_button a:hover {
     opacity: 1;
     text-decoration: none;
@@ -333,31 +328,20 @@ li{
 }
 
 #add_linked_tag {
-    padding: 0px 0px 0px 5px;
-    margin: -10px;
-    color: rgba(44,126,118, 1);
-    opacity: 0.5;
-    background-color: #F0FFFF ;
-    border: 4px solid #F0FFFF ;
-    border-radius: 2px;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
+    opacity: 0;
+    background: #F0FFFF;
+    color: #CAECE9;
     cursor: pointer;
-    display: inline;
-    -webkit-transition: all 0.1s;
-    -moz-transition: all 0.1s;
-    -o-transition: all 0.1s;
-    transition: all 0.1s;
-    box-shadow: 0px 0px 0px #2C7E76;
-    border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
-    font-weight: bold;
-    font-size: 20px;
+    display: inline-block;
+    font-size: 30px;
+    width: 30px;
+    height: 27px;
+    text-align: center;
+
 }
 
 #add_linked_tag:hover {
     color: #AEEA00;
-    opacity: 1;
 }
 
 #profile, #profile a {
@@ -614,48 +598,50 @@ img.image:hover {
     background: black;
     width: 49%;
     float: right;
+    overflow: auto;
+    height: auto;
+    max-height: 90%;
 }
 
 
 #del_obj, #del_tag {
-    display: inline;
-    position: absolute;
-    margin: 4px;
     cursor: pointer;
-    opacity: 0.6;
+    padding: 4px 6px;
+    letter-spacing: 0.15px;
+    display: inline;
+    background: #fcc4b0;
+    background-image: -webkit-linear-gradient(top, #fcc4b0, #f5834f);
+    background-image: -moz-linear-gradient(top, #fcc4b0, #f5834f);
+    background-image: -ms-linear-gradient(top, #fcc4b0, #f5834f);
+    background-image: -o-linear-gradient(top, #fcc4b0, #f5834f);
+    background-image: linear-gradient(to bottom, #fcc4b0, #f5834f);
+    
+}
+
+#del_obj img, #del_tag img, #add_obj img, #add_tag img, .suggest img, .share img {
+    margin-bottom: 3px;
+    vertical-align:middle;
+    text-align: center;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#add_obj, #add_tag {
+    padding: 4px 6px;
+    letter-spacing: 0.5px;
+    display: inline;
 }
 
 #del_obj:hover, #del_tag:hover {
     opacity: 1;
+    background: #fcc4b0;
+    background-image: -webkit-linear-gradient(top, #fcc4b0, #ff906b);
+    background-image: -moz-linear-gradient(top, #fcc4b0, #ff906b);
+    background-image: -ms-linear-gradient(top, #fcc4b0, #ff906b);
+    background-image: -o-linear-gradient(top, #fcc4b0, #ff906b);
+    background-image: linear-gradient(to bottom, #fcc4b0, #ff906b);
 }
-
-
-/*
-#del_obj:hover, #del_tag:hover {
-    opacity: 1;
-}
-
-
-#del_obj:before, #del_obj:after, #del_tag:before, #del_tag:after {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    background: #d00;
-}
-
-#del_obj:before, #del_tag:before {
-    left: 50%;
-    width: 30%;
-    margin-left: -15%;
-    height: 100%;
-}
-
-#del_obj:after, #del_tag:after {
-    top: 50%;
-    height: 30%;
-    margin-top: -15%;
-    width: 100%;
-}*/
 
 .inner_image { 
    display: inline-block;
@@ -675,6 +661,7 @@ img.image:hover {
     display: block;
     width: 80%;
 }
+
 
 .grid-item p { 
    position: absolute; 
@@ -697,13 +684,13 @@ img.image:hover {
 }
 
 .already_box {
-    width: 200px;
+    width: 800px;
 }
 
 
 .source {
     margin: 0px;
-    padding: 5px;
+    padding: 6px;
     opacity: 0.5;
 }
 
@@ -744,4 +731,25 @@ img.image:hover {
 #grid a:hover {
     cursor: default;
     opacity: 0.8;
+}
+
+.share {
+    padding: 4px 6px;
+    display: inline;
+    margin-left: 5px;
+    background: #3498db;
+    background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+    background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+    background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+    background-image: -o-linear-gradient(top, #3498db, #2980b9);
+    background-image: linear-gradient(to bottom, #3498db, #2980b9);
+}
+
+.share:hover {
+    background: #3cb0fd;
+    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
 }

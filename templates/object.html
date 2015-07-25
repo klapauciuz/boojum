@@ -12,6 +12,15 @@ $(document).ready(function(){
 	    }, function() {
 			$('.optWrapper').removeClass('open');
 	    });
+
+	    $('ul.options li').click(function() {
+	    	if ($('ul.options li').hasClass('selected')) {
+			    	$('#add_linked_tag').fadeTo(200, 1);
+		    }
+		    else {
+		    		$('#add_linked_tag').fadeTo(200, 0);
+		    }
+	    })
 });
 </script>
 <center>
@@ -42,16 +51,15 @@ $(document).ready(function(){
 <div class="already_box">
 {% if g.user %}
 	{% if myObj %}
-		<div id="already">
-			<div class="universal_button l">already in <a href="/collection">collection</a></div>
-			<div id="del_obj" type="submit"><img src="/static/trash.png"></div>
-		</div>
+			<div id="del_obj" class="universal_button" type="submit"><img src="/static/post_old.gif"> remove from collection</div>
 		{% else %}
-			<div id="add_obj" class="universal_button" type="submit">add to collection</div>
+			<div id="add_obj" class="universal_button" type="submit"><img src="/static/post_new.gif"> add to your collection</div>
 	{% endif %}
 {% else %}
 <span class='simple'>..<a href="/login">login</a> or <a href="/register">sign up</a> and put this tag in your own collection</span>
 {% endif %}
+<div class="universal_button share" type="submit"><img src="/static/textedit.png"> suggest edit</div>
+<div class="universal_button share" type="submit"><img src="/static/share.png"> share</div>
 </div>
 </center>
 <div class='linked_box_in_object'>
@@ -68,7 +76,7 @@ $(document).ready(function(){
 			{% endfor %}
 		</select>
 	</form>
-	<div id="add_linked_tag" type="submit">&#10004;</div>
+	<div id="add_linked_tag" type="submit">ok</div>
 	{% else %}
 	{% endif %}
 </div>

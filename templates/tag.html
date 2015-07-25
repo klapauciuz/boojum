@@ -15,18 +15,18 @@
 <h3>{{ description }}</h3>
 <h5 class='source' style="display: inline-block; margin-bottom: 12px;">by <a href="{{ url_for('user', user=creator) }}">{{ creator }}</a></h5>
 <br>
-<br>
 <div class="already_box">
 {% if g.user %}
 	{% if myTag %}
-		<div class="universal_button l">already in <a href="/collection">collection</a></div>
-		<div id="del_tag" type="submit"><img src="/static/trash.png"></div>
-	{% else %}
-		<div id="add_tag" class="universal_button" type="submit">add to collection</div>
+			<div id="del_tag" class="universal_button l" type="submit"><img src="/static/post_old.gif"> remove from collection</div>
+		{% else %}
+			<div id="add_tag" class="universal_button" type="submit"><img src="/static/post_new.gif"> add to your collection</div>
 	{% endif %}
 {% else %}
 <span class='simple'>..<a href="/login">login</a> or <a href="/register">sign up</a> and put this tag in your own collection</span>
 {% endif %}
+<div class="universal_button share" type="submit"><img src="/static/textedit.png"> suggest edit</div>
+<div class="universal_button share" type="submit"><img src="/static/share.png"> share</div>
 </div>
 </center>
 <div class='linked_box'>
@@ -70,7 +70,8 @@ $(document).ready(function() {
 	            columnWidth: 200
 	        });
 	    });
-	 }    
+	 };
+
 });
 </script>
 {% endblock content %}
