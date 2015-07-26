@@ -332,12 +332,12 @@ li{
     background: #F0FFFF;
     color: #CAECE9;
     cursor: pointer;
-    display: inline-block;
-    font-size: 30px;
+    display: inline;
+    font-size: 28px;
+    margin-top: -4px;
+    margin-right: 12px;
+    vertical-align: middle;
     width: 30px;
-    height: 27px;
-    text-align: center;
-
 }
 
 #add_linked_tag:hover {
@@ -352,9 +352,8 @@ li{
 
 
 .linkedform {
-    display:inline-block;
-    margin: 6px 6px;
-    width: 220px;
+    display:inline;
+    margin-left: 11px;
 }
 
 .linked, .linked a {
@@ -581,7 +580,8 @@ li a {
 
 .description {
     width: 50%;
-    float: left;
+    margin-bottom: 12px;
+    display: inline-block;
 }
 
 img.image {
@@ -595,12 +595,13 @@ img.image:hover {
 
 
 .images {
-    background: black;
+    background-color: black;
     width: 49%;
     float: right;
     overflow: auto;
+    display: inline-block;
     height: auto;
-    max-height: 90%;
+    max-height: 85%;
 }
 
 
@@ -675,8 +676,9 @@ img.image:hover {
 }
 
 .linked_box_in_object {
-    width: 48%;
-    display: block;
+    width: auto;
+    max-width: 48%;
+    display: inline-block;
     background-color: #F0FFFF;
     border: 6px solid #F0FFFF;
     border-radius: 2px;
@@ -684,15 +686,15 @@ img.image:hover {
 }
 
 .already_box {
-    width: 800px;
+    width: 600px;
 }
 
 
 .source {
-    margin: 0px;
-    padding: 6px;
-    opacity: 0.5;
+    opacity: 0.3;
+    display: inline-block;
 }
+
 
 .source a {
     margin-right: 10px;
@@ -752,4 +754,10 @@ img.image:hover {
     background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
     background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
     background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+}
+
+.new {
+    opacity: 0;
+    background:#D6FFC2 !important;
+    border-color:#D6FFC2 !important;
 }

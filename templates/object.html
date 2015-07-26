@@ -20,13 +20,33 @@ $(document).ready(function(){
 		    else {
 		    		$('#add_linked_tag').fadeTo(200, 0);
 		    }
+	    });
+
+	    $('.new').hover(function() {
+	    	$('.linked a').removeClass('new');
 	    })
+	    var tagsArray =JSON.parse('{{show_tags|tojson|safe}}'); 
+	    console.log(tagsArray);
+		
+	    $('option').each(function () {
+	    	if(jQuery.inArray($(this).text(), tagsArray) !== -1) {
+	    		$('.yeah')[0].sumo.disableItem($(this).index());
+	    	} 
+	    });
 });
 </script>
 <center>
 <h2>{{ name }}</h2>
 </center>
-<h3 class='description'>{{ description }}</h3>
+<h3 class='description'>{{ description }}
+<div class='source'><img src="/static/external_link.gif"> <a id='source' href="{{ source }}" target='_blank'>{{ source }}</a></div>
+<script type="text/javascript">
+	var source = '{{ source }}';
+	var source = decodeURIComponent(source);
+	document.getElementById("source").innerText = source;
+	$('#source').css('opacity', '1');
+</script>
+</h3>
 <div class='images'>
 <div id="grid" data-columns>
 {% for img in images %}
@@ -40,20 +60,12 @@ $(document).ready(function(){
 </div>
 </form>
 </div>
-<h5 class='source' style="display: inline-block; margin-bottom: 12px;"><img src="/static/external_link.gif"> <a id='source' href="{{ source }}" target='_blank'>{{ source }}</a></h5>
-<script type="text/javascript">
-	var source = '{{ source }}';
-	var source = decodeURIComponent(source);
-	document.getElementById("source").innerText = source;
-	$('#source').css('opacity', '1');
-</script>
-<br>
 <div class="already_box">
 {% if g.user %}
 	{% if myObj %}
-			<div id="del_obj" class="universal_button" type="submit"><img src="/static/post_old.gif"> remove from collection</div>
+			<div id="del_obj" class="del universal_button" type="submit"><img src="/static/post_old.gif"> remove from collection</div>
 		{% else %}
-			<div id="add_obj" class="universal_button" type="submit"><img src="/static/post_new.gif"> add to your collection</div>
+			<div id="add_obj" class="add universal_button" type="submit"><img src="/static/post_new.gif"> add to your collection</div>
 	{% endif %}
 {% else %}
 <span class='simple'>..<a href="/login">login</a> or <a href="/register">sign up</a> and put this tag in your own collection</span>
@@ -61,7 +73,6 @@ $(document).ready(function(){
 <div class="universal_button share" type="submit"><img src="/static/textedit.png"> suggest edit</div>
 <div class="universal_button share" type="submit"><img src="/static/share.png"> share</div>
 </div>
-</center>
 <div class='linked_box_in_object'>
 	<span class='linked'>
 		{% for tag in show_tags %}

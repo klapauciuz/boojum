@@ -13,9 +13,7 @@ $(document).ready(function(){
       return $(el).data('val');
     }).get();
 
-    console.log(tagsValues);
-    console.log($('p.CaptionCont span').text());
-    
+    var tagsNames = $('p.CaptionCont span').text().split(',');
     var data = {
           data: JSON.stringify({
                             "values": tagsValues,
@@ -28,7 +26,26 @@ $(document).ready(function(){
         data: data,
         success:function(response) {
             console.log(data);
-            window.location.replace('/objects/'+objName);
+            $('#add_linked_tag').css('opacity', 0);
+            for (x=0;x<tagsNames.length;x++) {  
+              tagsNames[x] = $.trim(tagsNames[x]);
+              $('.linked_box_in_object .linked').append('<a class="new" href="/tags/'+tagsNames[x]+'">'+tagsNames[x]+'</a>');
+            }
+
+            $('.new').fadeTo('slow', 1);
+            
+            var obj = [];
+            $('option:selected').each(function () {
+                obj.push($(this).index());
+            });
+            for (var i = 0; i < obj.length; i++) {
+                $('.yeah')[0].sumo.unSelectItem(obj[i]);
+                $('.yeah')[0].sumo.disableItem(obj[i]);
+            }
+            $('.CaptionCont span').addClass('placeholder').text('...another one?');
+            $('.new').hover(function() {
+              $(this).removeClass('new');
+            });
         },
         error: function(err) {
           console.log(JSON.stringify(err));

@@ -1,87 +1,63 @@
 /*Добавление/удаление в личной коллекции*/
 $(document).ready(function(){
-  $('#add_tag').click(function(event) {
+$('#add_tag, #del_tag').on('click', function(event) {
     event.preventDefault();
     var self = $(this),
-    tagName = $('h2').text();
+    tagName = $('h2').text(),
+    speed = 120;
     $.ajax({
         url : '/tags/'+tagName,
         type: 'POST',
         data : tagName,
         success:function(response) {
-            self.animate({
-                    opacity: 0,
-              }, 120, function() {
-                self.animate({
-                    opacity: 1,
+             if (self.hasClass('add')) {
+                console.log('add');
+                self.fadeTo(speed, 0, function() {
+                    self.toggleClass('add del').attr("id","del_tag").html('<img src="/static/post_old.gif"> remove from collection');
                 });
+                self.fadeTo(speed, 1);
 
-                self.prop('disabled', 'disabled');
-                self.delay( 600 )
-                window.location.replace('/tags/'+tagName);
-              });
+            } else {
+                console.log('del');
+                self.fadeTo(speed, 0, function() {
+                    self.toggleClass('del add').attr("id","add_tag").html('<img src="/static/post_new.gif"> add to your collection');                
+                });
+                self.fadeTo(speed, 1);
+            }
             },
         error: function(err) {
           console.log(JSON.stringify(err));
         }
     });
-  });
-    $('#del_tag').click(function(event) {
-        event.preventDefault();
-        var self = $(this),
-        tagName = $('h2').text();
-        $.ajax({
-            url : '/tags/'+tagName,
-            type: 'POST',
-            data : tagName,
-            success:function(response) {
-            self.animate({
-                    opacity: 0,
-              }, 120, function() {
-                self.animate({
-                    opacity: 1,
-                });
-
-                self.prop('disabled', 'disabled');
-                self.delay( 600 )
-                window.location.replace('/tags/'+tagName);
-              });
-            },
-            error: function(err) {
-                console.log(JSON.stringify(err));
-            }
-        });
-  });
-
-$('#add_obj').on('click', function(event) {
+});
+$('#add_obj, #del_obj').on('click', function(event) {
     event.preventDefault();
     var self = $(this),
-    objName = $('h2').text();
+    objName = $('h2').text(),
+    speed = 120;
     $.ajax({
         url : '/objects/'+objName,
         type: 'POST',
         data : objName,
         success:function(response) {
-                repl = $('<div id="del_obj" class="universal_button" type="submit"><img src="/static/post_old.gif"> remove from collection</div>')
-                self.replaceWith( repl );
+             if (self.hasClass('add')) {
+                console.log('add');
+                self.fadeTo(speed, 0, function() {
+                    self.toggleClass('add del').attr("id","del_obj").html('<img src="/static/post_old.gif"> remove from collection');
+                });
+                self.fadeTo(speed, 1);
+
+            } else {
+                console.log('del');
+                self.fadeTo(speed, 0, function() {
+                    self.toggleClass('del add').attr("id","add_obj").html('<img src="/static/post_new.gif"> add to your collection');                
+                });
+                self.fadeTo(speed, 1);
+            }
             },
         error: function(err) {
           console.log(JSON.stringify(err));
         }
     });
-  });
-    $('#del_obj').on('click', function(event) {
-        event.preventDefault();
-        var self = $(this),
-        objName = $('h2').text();
-        $.ajax({
-            url : '/objects/'+objName,
-            type: 'POST',
-            data : objName,
-            success:function(response) {
-                repl = $('<div id="add_obj" class="universal_button" type="submit"><img src="/static/post_new.gif"> add to your collection</div>')
-                self.replaceWith( repl );
-            },
-        });
-  });
+});
 });
