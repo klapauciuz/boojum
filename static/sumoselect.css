@@ -15,14 +15,19 @@
             .SumoSelect > .CaptionCont > label > i { opacity: 0;
                 background-position: center center; width: 16px; height: 16px; display: block; position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto;background-repeat: no-repeat;opacity: 0.8;}
 
-    .SumoSelect > .optWrapper {  top: 30px; width: 100%; position: absolute; left: 0; opacity: 0; visibility: hidden; transition: opacity 200ms ease-out, top 200ms ease-out, visibility 200ms ease-out; -webkit-transition: opacity 200ms ease-out, top 200ms ease-out, visibility 200ms ease-out; -moz-transition: opacity 200ms ease-out, top 200ms ease-out, visibility 200ms ease-out; -ms-transition: opacity 200ms ease-out, top 200ms ease-out, visibility 200ms ease-out; -o-transition: opacity 200ms ease-out, top 200ms ease-out, visibility 200ms ease-out; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; z-index: -100; background: #fff; border: 1px solid rgb(202, 236, 233); box-shadow: 2px 3px 3px rgb(202, 236, 233); border-radius: 3px;overflow: hidden;}
+    .SumoSelect > .optWrapper {top: 30px;  height: 220px;
+    width: 180px;
+    position: absolute; left: 0; opacity: 0; transition: opacity 200ms ease-out, top 200ms ease-out, visibility 200ms ease-out; -webkit-transition: opacity 200ms ease-out, top 200ms ease-out, visibility 200ms ease-out; -moz-transition: opacity 200ms ease-out, top 200ms ease-out, visibility 200ms ease-out; -ms-transition: opacity 200ms ease-out, top 200ms ease-out, visibility 200ms ease-out; -o-transition: opacity 200ms ease-out, top 200ms ease-out, visibility 200ms ease-out; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; z-index: -100; background: #fff; border: 1px solid rgb(202, 236, 233); box-shadow: 0px 0px 0px rgb(202, 236, 233); border-radius: 3px;overflow: hidden;}
         .SumoSelect > .optWrapper.open { top: 28px; visibility: visible; opacity: 1; z-index: 1000; }
 
-        .SumoSelect > .optWrapper > .options {  list-style: none; display: block; padding: 0px; margin: 0px; overflow: auto; border-radius: 2px;
+        .SumoSelect > .optWrapper > .options { 
+    width: 110%;
+    height: 100%;
+    overflow: auto;
+    list-style: none; display: block; padding: 0px; padding-right: 15px;  margin: 0px; border-radius: 2px;
          /*Set the height of pop up here (only for desktop mode)*/
-            max-height: 250px;
              /*height*/ }
-        .SumoSelect > .optWrapper.isFloating > .options {max-height: 100%;box-shadow: 0px 0px 100px rgb(202, 236, 233);}
+        .SumoSelect > .optWrapper.isFloating > .options {max-height: 100%;box-shadow: 0px 0px 100px rgb(202, 236, 233);overflow: scroll;}
         .SumoSelect > .optWrapper > .options > li { padding: 6px 6px; border-bottom: 1px solid #F3F3F3; position: relative; }
             .SumoSelect > .optWrapper > .options > li:first-child { border-radius: 2px 2px 0px 0px; }
             .SumoSelect > .optWrapper > .options > li:last-child { border-bottom: none; border-radius: 0px 0px 2px 2px; }
@@ -55,7 +60,7 @@
     .SumoSelect > .optWrapper.multiple.okCancelInMulti > .MultiControls { display: block; }
         .SumoSelect > .optWrapper.multiple.okCancelInMulti > .MultiControls > p { padding: 6px; }
 
-    .SumoSelect > .optWrapper.multiple > .MultiControls > p { display: inline-block; cursor: pointer; padding: 12px; width: 50%; box-sizing: border-box; text-align: center; opacity:  }
+    .SumoSelect > .optWrapper.multiple > .MultiControls > p { display: inline-block; cursor: pointer; padding: 12px; width: 50%; box-sizing: border-box; text-align: center; }
         .SumoSelect > .optWrapper.multiple > .MultiControls > p:hover { background-color: #f1f1f1; }
         .SumoSelect > .optWrapper.multiple > .MultiControls > p.btnOk { border-right: 1px solid #DBDBDB; border-radius: 0px 0px 0px 3px; }
         .SumoSelect > .optWrapper.multiple > .MultiControls > p.btnCancel { border-radius: 0px 0px 3px 0px; }

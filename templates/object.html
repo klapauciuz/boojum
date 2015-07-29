@@ -33,11 +33,26 @@ $(document).ready(function(){
 	    		$('.yeah')[0].sumo.disableItem($(this).index());
 	    	} 
 	    });
+
+	    $('#add_linked_tag').click(function() {
+	    	$('#window').show();
+	    });
+
+	    $(document).bind('click', function(e) {
+		  if(!$(e.target).is('#window')) {
+		    $('#window').hide()
+		  }
+		});
 });
 </script>
-<center>
 <h2>{{ name }}</h2>
-</center>
+<div id='window'>
+	<span class='linked_new'>
+		{% for ut in user_tags %}
+			<a value="{{ut._id}}">{{ut.name}}</a>
+		{% endfor %}
+	</span>
+</div>
 <h3 class='description'>{{ description }}
 <div class='source'><img src="/static/external_link.gif"> <a id='source' href="{{ source }}" target='_blank'>{{ source }}</a></div>
 <script type="text/javascript">
@@ -67,11 +82,11 @@ $(document).ready(function(){
 		{% else %}
 			<div id="add_obj" class="add universal_button" type="submit"><img src="/static/post_new.gif"> add to your collection</div>
 	{% endif %}
+<div class="universal_button share" type="submit"><img src="/static/share.png"> share</div>
+<div class="universal_button share" type="submit"><img src="/static/textedit.png"> suggest edit</div>
 {% else %}
 <span class='simple'>..<a href="/login">login</a> or <a href="/register">sign up</a> and put this tag in your own collection</span>
 {% endif %}
-<div class="universal_button share" type="submit"><img src="/static/textedit.png"> suggest edit</div>
-<div class="universal_button share" type="submit"><img src="/static/share.png"> share</div>
 </div>
 <div class='linked_box_in_object'>
 	<span class='linked'>
@@ -80,14 +95,14 @@ $(document).ready(function(){
 		{% endfor %}
 	</span>
 	{% if g.user %}
-	<form class='linkedform'>
+	<!-- <form class='linkedform'>
 		<select multiple="multiple" class='yeah'>
 			{% for ut in user_tags %}
 				<option value="{{ut._id}}">{{ut.name}}</option>
 			{% endfor %}
 		</select>
-	</form>
-	<div id="add_linked_tag" type="submit">ok</div>
+	</form> -->
+	<div id="add_linked_tag" type="submit">add</div>
 	{% else %}
 	{% endif %}
 </div>

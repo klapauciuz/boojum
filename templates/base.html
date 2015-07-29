@@ -2,6 +2,7 @@
 <html>
 <head>
   <title></title>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='sumoselect.css') }}">
   <script type="text/javascript" src="{{ url_for('static', filename='scripts/bower_components/jquery/dist/jquery.js') }}"></script>
@@ -24,6 +25,7 @@
 </script>
 </head>
 <body>
+<div id="k">
 {% block header %}
 <div id='menu'>
   <big style='float:left;'>
@@ -56,5 +58,6 @@
   {% endif %}
 {% endwith %}
 {% block content %}{% endblock  %}
+</div>
 </body>
 </html>

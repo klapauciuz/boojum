@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-<center>
 {% if g.user['username'] == creator %}
 <h2>{{ name }}
 <sup><a class="edit" href="/collection"><img style='width:11px;height:11px;' src="/static/edit.png"></a></sup>
@@ -11,10 +10,9 @@
 <h2>{{ name }}</h2>
 {% endif %}
 <!-- <h3>{{ id }}</h3> -->
-</center>
-<h3>{{ description }}</h3>
-<h5 class='source' style="display: inline-block; margin-bottom: 12px;">by <a href="{{ url_for('user', user=creator) }}">{{ creator }}</a></h5>
-<br>
+<h3 style='margin-bottom: 12px;'>{{ description }}
+<div class='source'>by <a href="{{ url_for('user', user=creator) }}">{{ creator }}</a></div>
+</h3>
 <div class="already_box">
 {% if g.user %}
 	{% if myTag %}
