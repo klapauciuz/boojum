@@ -1,23 +1,22 @@
 /*Прикрепление тегов к объекту*/
 $(document).ready(function(){
-  $('#add_linked_tag').click(function(event) {
-    if ($('.yeah').val() == null) 
-    {
-      $('.placeholder').append('!');
-      return false;
-    }
+  $('.linked_new a').click(function(event) {
     event.preventDefault();
     var self = $(this);
     var objName = $('h2').text();
-    var tagsValues = $('ul.options').find('li.selected').map(function (i,el) {
+   /* var tagsValues = $('ul.options').find('li.selected').map(function (i,el) {
       return $(el).data('val');
     }).get();
 
-    var tagsNames = $('p.CaptionCont span').text().split(',');
+    var tagsNames = $('p.CaptionCont span').text().split(',');*/
+    tagsValues = [$(this).attr('value')];
+    tagsNames = $(this).text();
+    console.log(tagsValues, ':', tagsNames)
+    $(this).hide();
     var data = {
           data: JSON.stringify({
                             "values": tagsValues,
-                            "names": $('p.CaptionCont span').text()
+                            "names": tagsNames
                         })
        };
     $.ajax({
@@ -26,23 +25,9 @@ $(document).ready(function(){
         data: data,
         success:function(response) {
             console.log(data);
-            $('#add_linked_tag').css('opacity', 0);
-            for (x=0;x<tagsNames.length;x++) {  
-              tagsNames[x] = $.trim(tagsNames[x]);
-              $('.linked_box_in_object .linked').append('<a class="new" href="/tags/'+tagsNames[x]+'">'+tagsNames[x]+'</a>');
-            }
+            $('.linked_box_in_object .linked').append('<a class="new" href="/tags/'+tagsNames+'">'+tagsNames+'</a>');
 
             $('.new').fadeTo('slow', 1);
-            
-            var obj = [];
-            $('option:selected').each(function () {
-                obj.push($(this).index());
-            });
-            for (var i = 0; i < obj.length; i++) {
-                $('.yeah')[0].sumo.unSelectItem(obj[i]);
-                $('.yeah')[0].sumo.disableItem(obj[i]);
-            }
-            $('.CaptionCont span').addClass('placeholder').text('...another one?');
             $('.new').hover(function() {
               $(this).removeClass('new');
             });

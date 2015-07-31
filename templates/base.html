@@ -25,14 +25,15 @@
 </script>
 </head>
 <body>
-<div id="k">
 {% block header %}
+<center>
+<div id='catName'>Boojum</div>
+</center>
 <div id='menu'>
   <big style='float:left;'>
     <a href="/tags/add">add new</a> 
     <a href="/">trends</a>
   </big>
-  <span id='catName' href="">Boojum</span>
   {% if g.user %}
   <big style='float:right;'>
     <a href="/collection" style='padding-right: 0px;'>collection</a> <span id='profile'><sup>[{{ g.user['username'] }}]</sup></span> 
@@ -52,12 +53,11 @@
   {% if flashes %}
     <ul class="flashes">
     {% for message in flashes %}
-      <li>{{ message }}
+      <li>{{ message }}</li>
     {% endfor %}
     </ul>
   {% endif %}
 {% endwith %}
 {% block content %}{% endblock  %}
-</div>
 </body>
 </html>

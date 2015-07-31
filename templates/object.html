@@ -6,21 +6,21 @@
 {% block content %}
 <script type="text/javascript">
 $(document).ready(function(){
-    $('.yeah').SumoSelect({placeholder: '...select tags'});
+/*   $('.yeah').SumoSelect({placeholder: '...select tags'});
 	    $('.SumoSelect').hover(function() {
 	    	$('.optWrapper').addClass('open');
 	    }, function() {
 			$('.optWrapper').removeClass('open');
-	    });
+	    });*/
 
-	    $('ul.options li').click(function() {
+/*	    $('ul.options li').click(function() {
 	    	if ($('ul.options li').hasClass('selected')) {
 			    	$('#add_linked_tag').fadeTo(200, 1);
 		    }
 		    else {
 		    		$('#add_linked_tag').fadeTo(200, 0);
 		    }
-	    });
+	    });*/
 
 	    $('.new').hover(function() {
 	    	$('.linked a').removeClass('new');
@@ -28,31 +28,30 @@ $(document).ready(function(){
 	    var tagsArray =JSON.parse('{{show_tags|tojson|safe}}'); 
 	    console.log(tagsArray);
 		
-	    $('option').each(function () {
+	    $('.linked_new a').each(function () {
 	    	if(jQuery.inArray($(this).text(), tagsArray) !== -1) {
-	    		$('.yeah')[0].sumo.disableItem($(this).index());
+	    		console.log($(this).text())
+	    		$('.linked_new a:contains('+$(this).text()+')').hide();
 	    	} 
 	    });
 
-	    $('#add_linked_tag').click(function() {
-	    	$('#window').show();
-	    });
 
-	    $(document).bind('click', function(e) {
-		  if(!$(e.target).is('#window')) {
-		    $('#window').hide()
-		  }
-		});
+	    function handle1() {
+	        $('#add_linked_tag').addClass('pushed');
+	    	$('#window').css('display', 'inline-block');
+	        $('#add_linked_tag').one('click', handle2);
+	    }
+
+	    function handle2() {
+	        $('#add_linked_tag').removeClass('pushed');
+	    	$('#window').hide();
+	        $('#add_linked_tag').one('click', handle1);
+	    }
+	    $('#add_linked_tag').one('click', handle1);
+
 });
 </script>
 <h2>{{ name }}</h2>
-<div id='window'>
-	<span class='linked_new'>
-		{% for ut in user_tags %}
-			<a value="{{ut._id}}">{{ut.name}}</a>
-		{% endfor %}
-	</span>
-</div>
 <h3 class='description'>{{ description }}
 <div class='source'><img src="/static/external_link.gif"> <a id='source' href="{{ source }}" target='_blank'>{{ source }}</a></div>
 <script type="text/javascript">
@@ -63,14 +62,18 @@ $(document).ready(function(){
 </script>
 </h3>
 <div class='images'>
+{% if images|length == 0 %}
+<div class='noimage'>?</div>
+{% else %}
 <div id="grid" data-columns>
 {% for img in images %}
 <a href="/static/images/{{ img }}" target='_blank'><img src="/static/images/{{ img }}"></a>
 {% endfor %}
 </div>
+{% endif %}
 <form id="upload-file" style='width: 50%;' method="post" enctype="multipart/form-data">
 <div style="text-align: center; overflow: hidden; width: 200%; background-color: #eff1f3; cursor: pointer;">
-<div style="color: #738392; font-size: 20px; font-weight: bold; width: 100%; height: 20px; float: left; cursor: pointer;"><br>add image</div>
+<div class='hi' style="color: rgb(30,30,30); font-size: 35px; margin-top: 10px; margin-bottom: 10px; font-weight: bold; width: 100%; height: 20px; float: left; cursor: pointer;"><img src="/static/upload.png"> upload</div>
 <input type="file" name="file" id="file" size="1" style="margin-top: -50px; margin-left:-410px; -moz-opacity: 0; filter: alpha(opacity=0); opacity: 0; font-size: 150px; height: 100px">
 </div>
 </form>
@@ -105,6 +108,13 @@ $(document).ready(function(){
 	<div id="add_linked_tag" type="submit">add</div>
 	{% else %}
 	{% endif %}
+</div>
+<div id='window'>
+	<span class='linked_new'>
+		{% for ut in user_tags %}
+			<a value="{{ut._id}}">{{ut.name}}</a>
+		{% endfor %}
+	</span>
 </div>
 <script type="text/javascript" src="{{ url_for('static', filename='scripts/salvattore.min.js') }}"></script>
 {% endblock content %}
