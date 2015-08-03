@@ -5,11 +5,12 @@ body {
 }
 
 a {
-    color: #26775b;
+    color: #2C7E76;
+    opacity: 0.9;
 }
 
 a:hover, #profile a:hover {
-    opacity: 0.6;
+    opacity: 1;
     
 }
 
@@ -59,7 +60,7 @@ input[type="submit"]:hover {
     width: 241px;
     height: 264.5px;
     display: inline-block;
-    background-color: #CCFF99;
+    background-color: rgba(230,255,153,1);
     border-radius: 2px 2px 2px 2px;
     padding-top: 12px;
 }
@@ -165,9 +166,9 @@ div.page {
 }
 
 h1 {
-    color: black;
+    color: #2C7E76;
     font-size: 30px;
-    opacity: 0.2;
+    opacity: 0.4;
     cursor: default;
 }
 
@@ -392,60 +393,6 @@ li{
     background: #caecd8 !important;
 }
 
-.dark-class
-{
-position:absolute;
-   z-index: 20;
-   background-repeat:no-repeat;
-   background-position:center;
-   width: 100%;
-   height: 100%;
-
-}
-
-#window {
-    width: auto;
-    max-width: 48%;
-    background-color: #F0FFFF;
-    border: 6px solid #F0FFFF;
-    border-radius: 2px;
-    display: none;
-    opacity: 0.8;
-    height: auto;
-    max-height: 400px;
-    float: left;
-}
-
-.linked_new, .linked_new a {
-    text-decoration: none;
-    color: rgba(44,126,118,0.5);
-    background-color: #F0FFFF ;
-    border: 4px solid #F0FFFF ;
-    border-radius: 2px;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    z-index: 10;
-}
-
-.linked_new {
-    border: 0px;
-}
-
-.linked_new a {
-    margin: 2px 6px;
-    display: inline-block;
-    -webkit-transition: all 0.2s;
-    -moz-transition: all 0.2s;
-    -o-transition: all 0.2s;
-    transition: all 0.2s;
-}
-
-.linked_new a:hover{
-    color: #F0FFFF;
-    cursor: pointer;
-    background-color: #40b78e;
-    border-color: #40b78e;
-}
 
 .alrd {
     cursor: default !important;
@@ -464,13 +411,25 @@ position:absolute;
     font-weight: bold;
 }
 
-
-.linkedform {
-    display:inline-block;
-    margin-left: 11px;
+.linked_box {
+    margin: 15px 0px;
+    display: block;
+    width: 100%;
 }
 
-.linked, .linked a {
+
+.linked_box_in_object {
+    width: auto;
+    max-width: 48%;
+    display: inline-block;
+    background-color: #F0FFFF;
+    border: 6px solid #F0FFFF;
+    border-radius: 2px;
+    margin: 15px 0px;
+}
+
+
+.linked a {
     text-decoration: none;
     color: rgba(44,126,118,0.5);
     background-color: #F0FFFF ;
@@ -479,30 +438,56 @@ position:absolute;
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
     z-index: 10;
-}
-
-.linked {
-    border: 0px;
-}
-
-.linked a {
     margin: 2px 6px;
     display: inline-block;
     -webkit-transition: all 0.2s;
     -moz-transition: all 0.2s;
     -o-transition: all 0.2s;
     transition: all 0.2s;
-/*    box-shadow: 0px 0px 100px rgb(44,126,118);
-*/
-
 }
 
 .linked a:hover{
     color: #F0FFFF;
-    background-color: #40b78e;
-    border-color: #40b78e;
+    background-color: #5DAE91;
+    border-color: #5DAE91;
 }
 
+
+#window {
+    width: auto;
+    max-width: 48%;
+    background-color: #F0FFFF;
+    border: 6px solid #F0FFFF;
+    border-radius: 2px;
+    display: none;
+    opacity: 0.8;
+    height: auto;
+    max-height: 400px;
+}
+
+.linked_new a {
+    text-decoration: none;
+    color: rgba(44,126,118,0.5);
+    background-color: #F0FFFF ;
+    border: 4px solid #F0FFFF ;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    z-index: 10;
+    margin: 2px 6px;
+    display: inline-block;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    transition: all 0.2s;
+}
+
+.linked_new a:hover{
+    color: #F0FFFF;
+    cursor: pointer;
+    background-color: #5DAE91;
+    border-color: #5DAE91;
+}
 
 h5 {
     margin: 20px 0px;
@@ -531,6 +516,9 @@ option {
 
 
 #catName {
+    top: 12px;
+    position: absolute;
+    left: 48%;
     cursor: default;
     display: inline;
     color: rgba(0, 0, 0, 0);
@@ -670,27 +658,6 @@ li a {
     display: inline-block;
 }
 
-img.image {
-    width:50%;
-    float: left;
-}
-
-img.image:hover {
-    opacity: 0.6;
-}
-
-
-.images {
-    background-color: black;
-    width: 49%;
-    float: right;
-    overflow: auto;
-    display: inline-block;
-    height: auto;
-    max-height: 85%;
-}
-
-
 #del_obj, #del_tag {
     cursor: pointer;
     padding: 4px 6px;
@@ -743,13 +710,6 @@ img.image:hover {
     cursor: pointer;
 }
 
-.linked_box {
-    margin: 15px 0px;
-    display: block;
-    width: 100%;
-}
-
-
 .grid-item p { 
    position: absolute; 
    top: 10px; 
@@ -759,16 +719,6 @@ img.image:hover {
    background: rgb(0, 0, 0); /* fallback color */
    background: rgba(0, 0, 0, 0.7);
    padding: 6px; 
-}
-
-.linked_box_in_object {
-    width: auto;
-    max-width: 48%;
-    display: inline-block;
-    background-color: #F0FFFF;
-    border: 6px solid #F0FFFF;
-    border-radius: 2px;
-    margin: 15px 0px;
 }
 
 .already_box {
@@ -800,17 +750,46 @@ img.image:hover {
     margin-top: -3px !important;
 }
 
+.grid-item-o img {
+    width: 200px;
+    opacity: 0.8;
+    float: left;
+    margin-top: -3px !important;
+}
+
 .grid-item:hover {
     opacity: 1;
 }
 
 #grid[data-columns]::before {
-    content: '2 .column.size-1of3';
+    content: '3 .column.size-1of3';
 }
 
 /* These are the classes that are going to be applied: */
 .column { float: left; }
-.size-1of3 { width: 50%; }
+.size-1of3 { width: 30%;}
+
+img.image {
+    width: 50%;
+    float: left;
+}
+
+img.image:hover {
+    opacity: 0.6;
+}
+
+
+.images {
+    background-color: transparent;
+    width: 49%;
+    float: right;
+    overflow: auto;
+    display: inline;
+    height: auto;
+    max-height: 85%;
+    overflow: hidden;
+}
+
 
 #grid img {
     width: 100%;
@@ -850,19 +829,36 @@ img.image:hover {
 
 
 .noimage {
-    font-size: 250px;
+    font-size: 120px;
+    padding-left: 8px;
     color: rgba(0,0,0,0);
-    text-shadow: 0px 0px 25px #caecd8;
+    text-shadow: 0px 0px 15px #F0FFFF;
     font-weight: bold;
     text-align: center;
     font-family: 'Calibri';
     cursor: default;
+    margin-top: 40px;
 }
 
-.hi {
-    -webkit-font-smoothing: subpixel-antialiased !important;
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility:    hidden;
-    -ms-backface-visibility:     hidden;
-    -webkit-font-smoothing: antialiased;
+.prehi {
+    width: 16px;
+    height: 100px;
+    float: left;
+    display: inline-block;
+    color: rgba(44,126,118,0.3);
+    font-weight: bold;
+    background-color: rgba(255,255,255,0.4);
+    border-radius: 5px 0px 0px 5px;
+    padding-left: 13px;
+    padding-top: 63px;
+    margin-top: 5%;
+    font-size: 21px;
+
 }
+
+.prehi:hover {
+    background-color: rgba(255,255,255,0.7);
+    cursor: pointer;
+}
+
+

@@ -1,36 +1,20 @@
 <script type="text/javascript">
 	var object_id = '{{ id }}';
-	console.log(object_id);
+	/*console.log(object_id);*/
 </script>
 {% extends "base.html" %}
 {% block content %}
 <script type="text/javascript">
 $(document).ready(function(){
-/*   $('.yeah').SumoSelect({placeholder: '...select tags'});
-	    $('.SumoSelect').hover(function() {
-	    	$('.optWrapper').addClass('open');
-	    }, function() {
-			$('.optWrapper').removeClass('open');
-	    });*/
-
-/*	    $('ul.options li').click(function() {
-	    	if ($('ul.options li').hasClass('selected')) {
-			    	$('#add_linked_tag').fadeTo(200, 1);
-		    }
-		    else {
-		    		$('#add_linked_tag').fadeTo(200, 0);
-		    }
-	    });*/
-
 	    $('.new').hover(function() {
 	    	$('.linked a').removeClass('new');
 	    })
 	    var tagsArray =JSON.parse('{{show_tags|tojson|safe}}'); 
-	    console.log(tagsArray);
+	    /*console.log(tagsArray);*/
 		
 	    $('.linked_new a').each(function () {
 	    	if(jQuery.inArray($(this).text(), tagsArray) !== -1) {
-	    		console.log($(this).text())
+	    		/*console.log($(this).text())*/
 	    		$('.linked_new a:contains('+$(this).text()+')').hide();
 	    	} 
 	    });
@@ -62,8 +46,14 @@ $(document).ready(function(){
 </script>
 </h3>
 <div class='images'>
+<div id="upload-file" style='width: 100%;' method="post" enctype="multipart/form-data">
+<div class='prehi'>&#9002;
+<input type="file" name="file" id="file" size="1" style="margin-top: -100px; margin-left:-410px; -moz-opacity: 0; filter: alpha(opacity=0); opacity: 0; font-size: 150px; height: 100%;">
+</div>
+</div>
 {% if images|length == 0 %}
-<div class='noimage'>?</div>
+<div id="grid" data-columns>
+</div>
 {% else %}
 <div id="grid" data-columns>
 {% for img in images %}
@@ -71,12 +61,6 @@ $(document).ready(function(){
 {% endfor %}
 </div>
 {% endif %}
-<form id="upload-file" style='width: 50%;' method="post" enctype="multipart/form-data">
-<div style="text-align: center; overflow: hidden; width: 200%; background-color: #eff1f3; cursor: pointer;">
-<div class='hi' style="color: rgb(30,30,30); font-size: 35px; margin-top: 10px; margin-bottom: 10px; font-weight: bold; width: 100%; height: 20px; float: left; cursor: pointer;"><img src="/static/upload.png"> upload</div>
-<input type="file" name="file" id="file" size="1" style="margin-top: -50px; margin-left:-410px; -moz-opacity: 0; filter: alpha(opacity=0); opacity: 0; font-size: 150px; height: 100px">
-</div>
-</form>
 </div>
 <div class="already_box">
 {% if g.user %}

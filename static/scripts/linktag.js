@@ -4,11 +4,15 @@ $(document).ready(function(){
     event.preventDefault();
     var self = $(this);
     var objName = $('h2').text();
-   /* var tagsValues = $('ul.options').find('li.selected').map(function (i,el) {
-      return $(el).data('val');
+    /* 
+
+    var tagsValues = $('ul.options').find('li.selected').map(function (i,el) {
+    return $(el).data('val');
     }).get();
 
-    var tagsNames = $('p.CaptionCont span').text().split(',');*/
+    var tagsNames = $('p.CaptionCont span').text().split(',');
+
+    */
     tagsValues = [$(this).attr('value')];
     tagsNames = $(this).text();
     console.log(tagsValues, ':', tagsNames)
@@ -26,7 +30,6 @@ $(document).ready(function(){
         success:function(response) {
             console.log(data);
             $('.linked_box_in_object .linked').append('<a class="new" href="/tags/'+tagsNames+'">'+tagsNames+'</a>');
-
             $('.new').fadeTo('slow', 1);
             $('.new').hover(function() {
               $(this).removeClass('new');
