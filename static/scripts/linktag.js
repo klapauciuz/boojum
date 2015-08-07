@@ -28,12 +28,19 @@ $(document).ready(function(){
         type: 'POST',
         data: data,
         success:function(response) {
+            if('{{show_tags}}'.length != 0) {
+                $('.linked p').hide()
+            }
             console.log(data);
-            $('.linked_box_in_object .linked').append('<a class="new" href="/tags/'+tagsNames+'">'+tagsNames+'</a>');
-            $('.new').fadeTo('slow', 1);
-            $('.new').hover(function() {
-              $(this).removeClass('new');
+            var iiii = $('<a class="new" href="/tags/'+tagsNames+'">'+tagsNames+'</a>');
+            $('.linked_box_in_object .linked').append(iiii);
+            $(iiii).fadeTo('slow', 1);
+            $(iiii).hover(function() {
+                $(this).removeClass('new');
             });
+            setTimeout(function() {
+                $(iiii).removeClass('new');
+            }, 2000);
         },
         error: function(err) {
           console.log(JSON.stringify(err));

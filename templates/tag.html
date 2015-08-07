@@ -1,32 +1,29 @@
 {% extends "base.html" %}
-
 {% block content %}
-{% if g.user['username'] == creator %}
-<h2>{{ name }}
-<sup><a class="edit" href="/collection"><img style='width:11px;height:11px;' src="/static/edit.png"></a></sup>
-<sup><a id="delete" href="/collection"><img style='width:11px;height:11px;' src="/static/trash.png"></a></sup>
-</h2>
-{% else %}
-<h2>{{ name }}</h2>
-{% endif %}
-<!-- <h3>{{ id }}</h3> -->
-<h3 style='margin-bottom: 12px;'>{{ description }}
-<div class='source'>by <a href="{{ url_for('user', user=creator) }}">{{ creator }}</a></div>
-</h3>
+<div class="all">
+<h2 class='name'>{{ name }}</h2>
 <div class="already_box">
 {% if g.user %}
 	{% if myTag %}
-			<div id="del_tag" class="del universal_button" type="submit"><img src="/static/post_old.gif"> remove from collection</div>
+			<div id="del_tag" class="del universal_button" type="submit"><img src="/static/post_old.gif"> del</div>
 		{% else %}
-			<div id="add_tag" class="add universal_button" type="submit"><img src="/static/post_new.gif"> add to your collection</div>
+			<div id="add_tag" class="add universal_button" type="submit"><img src="/static/post_new.gif"> add</div>
 	{% endif %}
+{% if g.user['username'] == creator %}
+<div class="universal_button share" type="submit"><img src="/static/textedit.png"> edit</div>
+<div class="universal_button share" type="submit"><img src="/static/trash1.gif"> delete</div>
+{% else %}
+<div class="universal_button share" type="submit"><img src="/static/textedit.png"> suggest edit</div>
+{% endif %}
+<div class="universal_button share" type="submit"><img src="/static/share.png"> share</div>
+</div>
 {% else %}
 <span class='simple'>..<a href="/login">login</a> or <a href="/register">sign up</a> and put this tag in your own collection</span>
 {% endif %}
-<div class="universal_button share" type="submit"><img src="/static/textedit.png"> suggest edit</div>
-<div class="universal_button share" type="submit"><img src="/static/share.png"> share</div>
 </div>
-</center>
+<h3>{{ description }}
+<div class='source'>by <a href="{{ url_for('user', user=creator) }}">{{ creator }}</a></div>
+</h3>
 <div class='linked_box'>
 <div class="grid">
     {% for obj in show_objects %}

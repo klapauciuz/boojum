@@ -19,9 +19,11 @@ $(document).ready(function(){
                     var item2= document.createElement('img');
                     item.setAttribute("href", "/static/images/"+ $('input[type=file]')[0].files[0].name)
                         item.setAttribute("target", "_blank");
+                        item.setAttribute("style", "opacity: 0;");
                             item2.setAttribute("src", "/static/images/"+ $('input[type=file]')[0].files[0].name);
                                 item.appendChild(item2);
                                     salvattore.appendElements(grid, [item]);
+                                    $(item).fadeTo(1200, 1);
             },
         });
     })

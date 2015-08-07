@@ -6,19 +6,12 @@
 {% block content %}
 <script type="text/javascript">
 $(document).ready(function(){
-	    $('.new').hover(function() {
-	    	$('.linked a').removeClass('new');
-	    })
-	    var tagsArray =JSON.parse('{{show_tags|tojson|safe}}'); 
-	    /*console.log(tagsArray);*/
-		
+	    var tagsArray =JSON.parse('{{show_tags|tojson|safe}}'); 		
 	    $('.linked_new a').each(function () {
 	    	if(jQuery.inArray($(this).text(), tagsArray) !== -1) {
-	    		/*console.log($(this).text())*/
 	    		$('.linked_new a:contains('+$(this).text()+')').hide();
 	    	} 
 	    });
-
 
 	    function handle1() {
 	        $('#add_linked_tag').addClass('pushed');
@@ -35,9 +28,31 @@ $(document).ready(function(){
 
 });
 </script>
-<h2>{{ name }}</h2>
+<div class="shroomz">
+<div class="all">
+<h2 class='name'>{{ name }}</h2>
+<div class="already_box">
+{% if g.user %}
+	{% if myObj %}
+			<div id="del_obj" class="del universal_button" type="submit"><img src="/static/post_old.gif"> del</div>
+		{% else %}
+			<div id="add_obj" class="add universal_button" type="submit"><img src="/static/post_new.gif"> add</div>
+	{% endif %}
+<div class="universal_button share" type="submit"><img src="/static/textedit.png"> suggest edit</div>
+{% else %}
+<span class='simple'>..<a href="/login">login</a> or <a href="/register">sign up</a> and put this tag in your own collection</span>
+{% endif %}
+<div class="universal_button share" type="submit"><img src="/static/share.png"> share</div>
+</div>
+<div id='upload-file' class="image-upload">
+    <label for="file-input">
+        <img src="/static/upload.png"/>
+    </label>
+    <input id="file-input" type="file"/>
+</div>
+</div>
 <h3 class='description'>{{ description }}
-<div class='source'><img src="/static/external_link.gif"> <a id='source' href="{{ source }}" target='_blank'>{{ source }}</a></div>
+<div class='source'><a id='source' href="{{ source }}" target='_blank'>{{ source }}</a></div>
 <script type="text/javascript">
 	var source = '{{ source }}';
 	var source = decodeURIComponent(source);
@@ -45,60 +60,35 @@ $(document).ready(function(){
 	$('#source').css('opacity', '1');
 </script>
 </h3>
-<div class='images'>
-<div id="upload-file" style='width: 100%;' method="post" enctype="multipart/form-data">
-<div class='prehi'>&#9002;
-<input type="file" name="file" id="file" size="1" style="margin-top: -100px; margin-left:-410px; -moz-opacity: 0; filter: alpha(opacity=0); opacity: 0; font-size: 150px; height: 100%;">
-</div>
-</div>
-{% if images|length == 0 %}
-<div id="grid" data-columns>
-</div>
-{% else %}
-<div id="grid" data-columns>
-{% for img in images %}
-<a href="/static/images/{{ img }}" target='_blank'><img src="/static/images/{{ img }}"></a>
-{% endfor %}
-</div>
-{% endif %}
-</div>
-<div class="already_box">
-{% if g.user %}
-	{% if myObj %}
-			<div id="del_obj" class="del universal_button" type="submit"><img src="/static/post_old.gif"> remove from collection</div>
-		{% else %}
-			<div id="add_obj" class="add universal_button" type="submit"><img src="/static/post_new.gif"> add to your collection</div>
-	{% endif %}
-<div class="universal_button share" type="submit"><img src="/static/share.png"> share</div>
-<div class="universal_button share" type="submit"><img src="/static/textedit.png"> suggest edit</div>
-{% else %}
-<span class='simple'>..<a href="/login">login</a> or <a href="/register">sign up</a> and put this tag in your own collection</span>
-{% endif %}
-</div>
 <div class='linked_box_in_object'>
 	<span class='linked'>
+	{% if show_tags|length == 0 %}
+		<p>add first tag</p>
+		{% else %}
 		{% for tag in show_tags %}
 			<a href="{{ url_for('tag_page', tag=tag) }}">{{ tag }}</a>  
 		{% endfor %}
+	{% endif %}
 	</span>
 	{% if g.user %}
-	<!-- <form class='linkedform'>
-		<select multiple="multiple" class='yeah'>
-			{% for ut in user_tags %}
-				<option value="{{ut._id}}">{{ut.name}}</option>
-			{% endfor %}
-		</select>
-	</form> -->
-	<div id="add_linked_tag" type="submit">add</div>
+	<div id="add_linked_tag" type="submit"><img src="/static/add3.png"></div>
 	{% else %}
 	{% endif %}
 </div>
 <div id='window'>
 	<span class='linked_new'>
-		{% for ut in user_tags %}
-			<a value="{{ut._id}}">{{ut.name}}</a>
-		{% endfor %}
+			{% for ut in user_tags %}
+				<a value="{{ut._id}}">{{ut.name}}</a>
+			{% endfor %}
 	</span>
+</div>
+</div>
+<div class='images'>
+<div id="grid" data-columns>
+{% for img in images %}
+<a href="/static/images/{{ img }}" target='_blank'><img src="/static/images/{{ img }}"></a>
+{% endfor %}
+</div>
 </div>
 <script type="text/javascript" src="{{ url_for('static', filename='scripts/salvattore.min.js') }}"></script>
 {% endblock content %}
