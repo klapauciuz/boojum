@@ -270,6 +270,37 @@ def obj_page(obj):
         )
 
 #_____Objects/
+@app.route('/add', methods=['GET'])
+def add_page():
+    """New tag page/add"""
+
+    my_objs_id = [my_obj_id['_id'] for my_obj_id in g.user['objects']]
+    show_objects = [i for i in db.objects.find({'_id':{'$in': my_objs_id}})]
+    name = request.args.get('name')
+    if 'username' not in session:
+        flash('Log in, please')
+        return redirect('/login')
+    if name == None:
+        name = ''
+    _objects = objects.find()
+    return render_template('add.html', tag_name=name, show_objects=show_objects)
+
+@app.route('/tags/add', methods=['POST'])
+def add_tag():
+    """New tag add"""
+    name = request.form['name']
+    description = request.form['description']
+    linked_objects = []
+    creator = g.user['_id']
+    _id = tags.insert({'name': name, 'description': description, 'objects': linked_objects, 'creator': creator})
+    db.users.update({"username":session["username"]}, 
+             {'$push': { 
+                        "tags":{ "_id": _id } 
+                      }
+             }
+             )
+    response = name
+    return response
 
 @app.route('/objects/add', methods=['POST'])
 def add_object_from_wiki():
@@ -315,96 +346,6 @@ def add_object_from_wiki():
     # response = jsonify(message=str('OK'))
     # response.status_code = 200
     # return response
-
-@app.route('/tags/add', methods=['GET', 'POST'])
-def add_tag_page():
-    """New tag page/add"""
-    if request.method == 'POST':
-        name = request.form['name']
-        description = request.form['description']
-        linked_objects = []
-        creator = g.user['_id']
-        # если есть строка с объектами то берём её и обрезаем, попутно удаляя ненужные пробелы вначале
-        # if request.form['objects']:
-        #     objects = [obj.lstrip() for obj in request.form['objects'].split(',')]
-        # else:
-        #     objects = []
-        # в форме добавления нового тега должен быть динамический выпадающий список объектов, вводим А - выпадают все объекты на А и т.д.
-        # сейчас связанные теги к объектам добавляются только через роут объекта(когда прикрепляем к нему тег)
-        _id = tags.insert({'name': name, 'description': description, 'objects': linked_objects, 'creator': creator})
-        db.users.update({"username":session["username"]}, 
-                 {'$push': { 
-                            "tags":{ "_id": _id } 
-                          }
-                 }
-                 )
-        response = name
-        return response
-
-    name = request.args.get('name')
-    if 'username' not in session:
-        flash('Log in, please')
-        return redirect('/login')
-    if name == None:
-        name = ''
-    _objects = objects.find()
-    return render_template('add_tag.html', tag_name=name, show_objects=[obj['name'] for obj in _objects])
-
-# немного сократили код )
-# @app.route('/api/add/tag', methods=['POST'])
-# def add_tag():
-#     """Add new tag"""
-#     if request.method == 'POST':
-#         name = request.form['name']
-#         description = request.form['description']
-
-#         # если есть строка с объектами то берём её и обрезаем, попутно удаляя ненужные пробелы вначале
-#         # if request.form['objects']:
-#         #     objects = [obj.lstrip() for obj in request.form['objects'].split(',')]
-#         # else:
-#         #     objects = []
-#         objects = []
-#         # в форме добавления нового тега должен быть динамический выпадающий список объектов, вводим А - выпадают все объекты на А и т.д.
-#         # сейчас связанные теги к объектам добавляются только через роут объекта(когда прикрепляем к нему тег)
-#         _id = tags.insert({'name': name, 'description': description, 'objects': objects})
-#         db.users.update({"username":session["username"]}, 
-#                  {'$push': { 
-#                             "tags":{ "_id": _id } 
-#                           }
-#                  }
-#                  )
-#         response = jsonify(message=str('OK'))
-#         response.status_code = 200
-#         return response
-
-# так и не понял что это и зачем
-# @app.route('/api/tags/<name>', methods=['GET', 'PUT', 'DELETE'])
-# def get_tag(name):
-#     if request.method == 'GET':
-#         current_tag = tags.find_one({'name': name})
-#         return dumps(current_tag)
-#     if request.method == 'PUT':
-#         tags.update({'name': name}, {'name': name})
-#     if request.method == 'DELETE':
-#         tags.remove({'name': name}, {justOne: true})
-#_____Tags/
-#_____Objects
-
-# @app.route('/collection/add/<obj>', methods=['GET', 'POST'])
-# def add_object(obj):
-#     """Object add"""
-#     current_object = objects.find_one({'name': obj})
-#     if g.user:
-#         user_objects = [user_obj['_id'] for user_obj in g.user['objects']]
-        
-#     if request.method == 'POST':
-#         # print current_object["_id"]
-#         # print user_tags
-
-
-#     response = jsonify(message=str('OK'))
-#     response.status_code = 200
-#     return response
 
 #_____User
 @app.route('/users/<user>', methods=['GET', 'POST', 'DELETE'])

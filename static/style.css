@@ -89,25 +89,44 @@ input[type="submit"] {
     border: 1px solid #6383a8;
 }
 
+.MainContainer {
+    width: 80%;
+}
+
 #add {
     border-radius: 2px 2px 2px 2px;
     padding: 12px;
     display: inline-block;
-    width: 249px;
+    width: 200px;
     float: left;
-    margin-left: 9px;
+    margin-left: 45px;
+}
+
+#add textarea {
+    overflow: hidden;
+    border-radius: 2px;
+    margin-top: 7px;
+    width: 195px;
+}
+
+#add input[type="text"] {
+    height: 16px;
 }
 
 #add_fromwiki {
-    width: 241px;
+    width: 200px;
     height: 264.5px;
     display: inline-block;
-    border-radius: 2px 2px 2px 2px;
     padding-top: 12px;
+    margin-right: 50px;
 }
 
-.MainContainer {
-    width: 80%;
+#add_fromwiki input[name="urlwiki"] {
+    width: 99px;
+}
+
+#add_fromwiki input[name="urllast"] {
+    width: 115px;
 }
 
 #add input:focus, #add_fromwiki input:focus, textarea:focus{
@@ -160,7 +179,7 @@ div.page {
 
 h1 {
     color: rgba(153, 173, 194, 0.4);
-    font-size: 31px;
+    font-size: 29px;
     font-weight: normal;
     font-family: 'Calibri';
     cursor: default;
@@ -876,4 +895,31 @@ img.image:hover {
     cursor: pointer;
 }
 
+.grid2 .grid-item p { 
+   position: absolute; 
+   top: 10px; 
+   left: 0; 
+   color: white; 
+   font: bold 12px Helvetica, Sans-Serif; 
+   background: rgb(0, 0, 0); /* fallback color */
+   background: rgba(0, 0, 0, 0.7);
+   padding: 4px; 
+}
 
+.grid2 .grid-item {
+    width: 134px;
+    opacity: 0.8;
+    float: left;
+    margin-top: -3px !important;
+}
+
+.grid2 .grid-item-o img {
+    width: 134px;
+    opacity: 0.8;
+    float: left;
+    margin-top: -3px !important;
+}
+
+.grid2 .grid-item:hover {
+    opacity: 1;
+}
