@@ -40,16 +40,19 @@ $(document).ready(function(){
 	{% endif %}
 <div class="universal_button share" type="submit"><img src="/static/textedit.png"> suggest edit</div>
 {% else %}
-<span class='simple'>..<a href="/login">login</a> or <a href="/register">sign up</a> and put this tag in your own collection</span>
+<h3 class="share"><a href="/login">login</a> or <a href="/register">sign up</a> and put this object in your own collection</h3>
 {% endif %}
 <div class="universal_button share" type="submit"><img src="/static/share.png"> share</div>
 </div>
+{% if g.user %}
 <div id='upload-file' class="image-upload">
     <label for="file-input">
         <img src="/static/upload.png"/>
     </label>
     <input id="file-input" type="file"/>
 </div>
+{% else %}
+{% endif %}
 </div>
 <h3 class='description'>{{ description }}
 <div class='source'><a id='source' href="{{ source }}" target='_blank'>{{ source }}</a></div>
@@ -63,7 +66,7 @@ $(document).ready(function(){
 <div class='linked_box_in_object'>
 	<span class='linked'>
 	{% if show_tags|length == 0 %}
-		<p>add first tag</p>
+		<p>empty...</p>
 		{% else %}
 		{% for tag in show_tags %}
 			<a href="{{ url_for('tag_page', tag=tag) }}">{{ tag }}</a>  

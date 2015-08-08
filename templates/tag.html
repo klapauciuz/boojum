@@ -4,22 +4,22 @@
 <h2 class='name'>{{ name }}</h2>
 <div class="already_box">
 {% if g.user %}
-	{% if myTag %}
-			<div id="del_tag" class="del universal_button" type="submit"><img src="/static/post_old.gif"> del</div>
-		{% else %}
-			<div id="add_tag" class="add universal_button" type="submit"><img src="/static/post_new.gif"> add</div>
+		{% if myTag %}
+				<div id="del_tag" class="del universal_button" type="submit"><img src="/static/post_old.gif"> del</div>
+			{% else %}
+				<div id="add_tag" class="add universal_button" type="submit"><img src="/static/post_new.gif"> add</div>
+		{% endif %}
+	{% if g.user['username'] == creator %}
+		<div class="universal_button share" type="submit"><img src="/static/textedit.png"> edit</div>
+		<div class="universal_button share" type="submit"><img src="/static/trash1.gif"> delete</div>
+	{% else %}
+		<div class="universal_button share" type="submit"><img src="/static/textedit.png"> suggest edit</div>
 	{% endif %}
-{% if g.user['username'] == creator %}
-<div class="universal_button share" type="submit"><img src="/static/textedit.png"> edit</div>
-<div class="universal_button share" type="submit"><img src="/static/trash1.gif"> delete</div>
 {% else %}
-<div class="universal_button share" type="submit"><img src="/static/textedit.png"> suggest edit</div>
+	<h3 class="share"><a href="/login">login</a> or <a href="/register">sign up</a> and put this tag in your own collection</h3>
 {% endif %}
-<div class="universal_button share" type="submit"><img src="/static/share.png"> share</div>
+	<div class="universal_button share" type="submit"><img src="/static/share.png"> share</div>
 </div>
-{% else %}
-<span class='simple'>..<a href="/login">login</a> or <a href="/register">sign up</a> and put this tag in your own collection</span>
-{% endif %}
 </div>
 <h3>{{ description }}
 <div class='source'>by <a href="{{ url_for('user', user=creator) }}">{{ creator }}</a></div>
