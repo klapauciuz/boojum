@@ -11,7 +11,7 @@
 		{% endif %}
 	{% if g.user['username'] == creator %}
 		<div class="universal_button share" type="submit"><img src="/static/textedit.png"> edit</div>
-		<div class="universal_button share" type="submit"><img src="/static/trash1.gif"> delete</div>
+		<div class="universal_button share" id="delete" type="submit"><img src="/static/trash1.gif"> delete</div>
 	{% else %}
 		<div class="universal_button share" type="submit"><img src="/static/textedit.png"> suggest edit</div>
 	{% endif %}

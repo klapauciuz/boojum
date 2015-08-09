@@ -288,57 +288,59 @@ def add_page():
 @app.route('/tags/add', methods=['POST'])
 def add_tag():
     """New tag add"""
-    name = request.form['name']
-    description = request.form['description']
-    linked_objects = []
-    creator = g.user['_id']
-    _id = tags.insert({'name': name, 'description': description, 'objects': linked_objects, 'creator': creator})
-    db.users.update({"username":session["username"]}, 
-             {'$push': { 
-                        "tags":{ "_id": _id } 
-                      }
-             }
-             )
-    response = name
-    return response
+    if request.method == 'POST':
+        name = request.form['name']
+        description = request.form['description']
+        linked_objects = []
+        creator = g.user['_id']
+        _id = tags.insert({'name': name, 'description': description, 'objects': linked_objects, 'creator': creator})
+        db.users.update({"username":session["username"]}, 
+                 {'$push': { 
+                            "tags":{ "_id": _id } 
+                          }
+                 }
+                 )
+        response = name
+        return response
 
 @app.route('/objects/add', methods=['POST'])
 def add_object_from_wiki():
     """New object add"""
-    try:
-        if request.form['urlwiki'] == '':
-            print 'fromlastfm, url:', request.form['urllast']
-            r = requests.get(request.form['urllast'])
-            soup = BeautifulSoup(r.text)
-            name = re.sub(r'[\ \n]{2,}', '', soup.find("article", class_='artist-overview').find('h1').text)
-            description = soup.find('div', class_='wiki-text').text
-            source = request.form['urllast']
-            print name
-        else:
-            print 'fromwiki, url:', request.form['urlwiki']
-            r = requests.get(request.form['urlwiki'])
-            soup = BeautifulSoup(r.text)
-            name = soup.find("h1", class_="firstHeading").text
-            descriptions = soup.find("div", id='mw-content-text').find_all("p", recursive=False)
-            description = descriptions[0].text
-            source = request.form['urlwiki']
-    except:
-        flash('Wrong URL')
-        return '/tags/add'
-    if db.objects.find({'name': re.sub(r'(\n|\t)', '', name)}).limit(1).count() > 0:
+    if request.method == 'POST':
+        try:
+            if request.form['urlwiki'] == '':
+                print 'fromlastfm, url:', request.form['urllast']
+                r = requests.get(request.form['urllast'])
+                soup = BeautifulSoup(r.text)
+                name = re.sub(r'[\ \n]{2,}', '', soup.find("article", class_='artist-overview').find('h1').text)
+                description = soup.find('div', class_='wiki-text').text
+                source = request.form['urllast']
+                print name
+            else:
+                print 'fromwiki, url:', request.form['urlwiki']
+                r = requests.get(request.form['urlwiki'])
+                soup = BeautifulSoup(r.text)
+                name = soup.find("h1", class_="firstHeading").text
+                descriptions = soup.find("div", id='mw-content-text').find_all("p", recursive=False)
+                description = descriptions[0].text
+                source = request.form['urlwiki']
+        except:
+            flash('Wrong URL')
+            return '/add'
+        if db.objects.find({'name': re.sub(r'(\n|\t)', '', name)}).limit(1).count() > 0:
+            response = '/objects/' + re.sub(r'(\n|\t)', '', name)
+            return response
+        _id = objects.insert({'name': re.sub(r'(\n|\t)', '', name), 'description': description, 'images': [], 'tags': [], 'source': source})
+        db.users.update({"username":session["username"]}, 
+             {'$push': { 
+                        "objects":{ "_id": _id } 
+                      }
+             }
+             )
         response = '/objects/' + re.sub(r'(\n|\t)', '', name)
+        thanks_string = 'Done. Thank you for another new object, ' + session["username"]
+        flash(thanks_string)
         return response
-    _id = objects.insert({'name': re.sub(r'(\n|\t)', '', name), 'description': description, 'images': [], 'tags': [], 'source': source})
-    db.users.update({"username":session["username"]}, 
-         {'$push': { 
-                    "objects":{ "_id": _id } 
-                  }
-         }
-         )
-    response = '/objects/' + re.sub(r'(\n|\t)', '', name)
-    thanks_string = 'Done. Thank you for another new object, ' + session["username"]
-    flash(thanks_string)
-    return response
 
     # with open('wiki.html', 'w') as wiki:
     #     wiki.write(r.text.encode('utf-8'))
