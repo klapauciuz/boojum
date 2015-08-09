@@ -273,13 +273,12 @@ def obj_page(obj):
 @app.route('/add', methods=['GET'])
 def add_page():
     """New tag page/add"""
-
-    my_objs_id = [my_obj_id['_id'] for my_obj_id in g.user['objects']]
-    show_objects = [i for i in db.objects.find({'_id':{'$in': my_objs_id}})]
-    name = request.args.get('name')
     if 'username' not in session:
         flash('Log in, please')
         return redirect('/login')
+    my_objs_id = [my_obj_id['_id'] for my_obj_id in g.user['objects']]
+    show_objects = [i for i in db.objects.find({'_id':{'$in': my_objs_id}})]
+    name = request.args.get('name')
     if name == None:
         name = ''
     _objects = objects.find()
