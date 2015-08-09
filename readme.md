@@ -1,7 +1,4 @@
 # Сервис рекомендаций Boojum :cactus:
-
-![screenshot-127.0.0.1 5000 2015-06-13 11-39-21.png](https://bitbucket.org/repo/BpxjaA/images/3049805724-screenshot-127.0.0.1%205000%202015-06-13%2011-39-21.png)
-
 ### После каждого пула затираем бд
 ```
 #!mongo
