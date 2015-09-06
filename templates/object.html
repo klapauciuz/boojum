@@ -6,13 +6,20 @@
 {% block content %}
 <script type="text/javascript">
 $(document).ready(function(){
+	console.log($('.linked_box_in_object').width());
+	if($('.linked_box_in_object').width() > 200) {
+		$('.linked_box_in_object').css('border-radius', '0px');
+	}
 	    var tagsArray =JSON.parse('{{show_tags|tojson|safe}}'); 		
 	    $('.linked_new a').each(function () {
 	    	if(jQuery.inArray($(this).text(), tagsArray) !== -1) {
 	    		$('.linked_new a:contains('+$(this).text()+')').hide();
-	    	} 
+	    	}
 	    });
-
+	    if($('.linked_new').children(':visible').length == 0) {
+				$('#window').hide();
+			   // action when all are hidden
+			}
 	    function handle1() {
 	        $('#add_linked_tag').addClass('pushed');
 	    	$('#window').css('display', 'inline-block');
@@ -74,7 +81,6 @@ $(document).ready(function(){
 	{% endif %}
 	</span>
 	{% if g.user %}
-	<div id="add_linked_tag" type="submit"><img src="/static/add3.png"></div>
 	{% else %}
 	{% endif %}
 </div>

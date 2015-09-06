@@ -2,6 +2,7 @@
 from pymongo import MongoClient
 from flask import Flask, render_template, abort, request, url_for, redirect, request, jsonify, flash, session, g, json
 from bson.json_util import dumps
+from bson import json_util
 from werkzeug import check_password_hash, generate_password_hash, secure_filename
 from bson.objectid import ObjectId
 import requests
@@ -66,6 +67,16 @@ def collection():
     return render_template('collection.html', show_tags=[i['name'] for i in db.tags.find({'_id':{'$in': my_tags_id}})], show_objects=[i['name'] for i in db.objects.find({'_id':{'$in': my_objs_id}})], show_friends=[i['username'] for i in db.users.find({'_id':{'$in': my_flws_id}})])
 
 #_____Collection/
+
+#_____Search
+@app.route('/autocomplete')
+def search_university():
+    search = request.args.get('search[term]')
+    yes = [y for y in db.objects.find({"name":{"$regex": search}})]
+    print yes
+    return json.dumps(yes, default=json_util.default)
+#_____Search
+
 #_____Fill
 @app.route('/collection/<TO>/fill', methods=['GET', 'POST'])
 def fill(TO):
@@ -290,9 +301,19 @@ def add_tag():
     if request.method == 'POST':
         name = request.form['name']
         description = request.form['description']
-        linked_objects = []
-        creator = g.user['_id']
-        _id = tags.insert({'name': name, 'description': description, 'objects': linked_objects, 'creator': creator})
+        linked_objects = request.form['objects'].split(',')
+        objects = []
+        for li_obj in linked_objects:
+            objects.append({"_id":ObjectId(li_obj)})
+        creator = g.user['_id']                                                 
+        _id = tags.insert({'name': name, 'description': description, 'objects': objects, 'creator': creator})
+        for li_obj in linked_objects:
+            db.objects.update({"_id":ObjectId(li_obj)}, 
+                     {'$push': { 
+                                "tags": { "_id": ObjectId(_id) } 
+                              }
+                     }
+                     )
         db.users.update({"username":session["username"]}, 
                  {'$push': { 
                             "tags":{ "_id": _id } 

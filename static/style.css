@@ -6,7 +6,7 @@ hr,img{border:0}
 
 body {
     background: #fff;
-    font-family: tahoma, arial, verdana, sans-serif, 'Lucida Sans';    
+    font-family: tahoma, arial, verdana, sans-serif, 'Lucida Sans';
     font-size: 14px;
     color:rgb(119, 119, 119);
 }
@@ -48,6 +48,8 @@ a:hover, #profile a:hover {
 {
     display: none;
 }
+
+textarea,
 input[type="text"],
 input[type="password"] {
     background: white;
@@ -96,17 +98,16 @@ input[type="submit"] {
 #add {
     border-radius: 2px 2px 2px 2px;
     padding: 12px;
-    display: inline-block;
-    width: 200px;
-    float: left;
-    margin-left: 45px;
+    display: block;
+    width: 900px;
 }
 
 #add textarea {
+    display: block;
     overflow: hidden;
     border-radius: 2px;
     margin-top: 7px;
-    width: 195px;
+    width: 300px;
 }
 
 #add input[type="text"] {
@@ -114,20 +115,19 @@ input[type="submit"] {
 }
 
 #add_fromwiki {
-    width: 200px;
+    width: 240px;
     height: 264.5px;
-    display: inline-block;
     padding-top: 12px;
-    margin-right: 50px;
+    display: none;
 }
 
 #add_fromwiki input[name="urlwiki"] {
-    width: 123px;
+    width: 130px;
 }
 
 #add_fromwiki input[name="urllast"] {
     margin-top: 7px;
-    width: 140px;
+    width: 182px;
 }
 
 #add input:focus, #add_fromwiki input:focus, textarea:focus{
@@ -205,7 +205,6 @@ div.page div.navigation a {
 .all {
     background: #E9EDF1;
     border-radius: 2px 0px 0px 2px;
-    margin-bottom: 3px;
 }
 
 h2 {
@@ -334,8 +333,8 @@ ul.flashes li {
 }
 
 .fill img {
-    height: 13px;
-    width: 13px;
+    height: 11px;
+    width: 11px;
 }
 
 .fill {
@@ -351,6 +350,69 @@ ul.flashes li {
     opacity: 0.9;
     cursor: pointer;
 }
+
+
+.fill img {
+-webkit-animation-name: rotation;
+-webkit-animation-duration: 5s;
+-webkit-animation-iteration-count: infinite;
+-webkit-animation-timing-function: linear;
+-moz-animation-name: rotation;
+-moz-animation-duration: 5s;
+-moz-animation-iteration-count: infinite;
+-moz-animation-timing-function: linear;
+-o-animation-name: rotation;
+-o-animation-duration: 5s;
+-o-animation-iteration-count: infinite;
+-o-animation-timing-function: linear;
+animation-name: rotation;
+animation-duration: 5s;
+animation-iteration-count: infinite;
+animation-timing-function: linear;
+}
+
+@-webkit-keyframes rotation {
+0% {-webkit-transform:rotate(0deg);
+-moz-transform:rotate(0deg);
+-o-transform:rotate(0deg);
+transform:rotate(0deg);}
+100% {-webkit-transform:rotate(360deg);
+-moz-transform:rotate(360deg);
+-o-transform:rotate(360deg);
+transform:rotate(360deg);}
+}
+@-moz-keyframes rotation {
+0% {-webkit-transform:rotate(0deg);
+-moz-transform:rotate(0deg);
+-o-transform:rotate(0deg);
+transform:rotate(0deg);}
+100% {-webkit-transform:rotate(360deg);
+-moz-transform:rotate(360deg);
+-o-transform:rotate(360deg);
+transform:rotate(360deg);}
+}
+@-o-keyframes rotation {
+0% {-webkit-transform:rotate(0deg);
+-moz-transform:rotate(0deg);
+-o-transform:rotate(0deg);
+transform:rotate(0deg);}
+100% {-webkit-transform:rotate(360deg);
+-moz-transform:rotate(360deg);
+-o-transform:rotate(360deg);
+transform:rotate(360deg);}
+}
+@keyframes rotation {
+0% {-webkit-transform:rotate(0deg);
+-moz-transform:rotate(0deg);
+-o-transform:rotate(0deg);
+transform:rotate(0deg);}
+100% {-webkit-transform:rotate(360deg);
+-moz-transform:rotate(720deg);
+-o-transform:rotate(360deg);
+transform:rotate(360deg);}
+}
+
+
 
 .fill_example {
     cursor: default;
@@ -384,7 +446,6 @@ li{
     display: inline-block;
     cursor: pointer;
     opacity: 0.5;
-    border: 4px solid #E9EDF1 ;
 }
 
 #add_linked_tag:hover {
@@ -417,18 +478,17 @@ li{
 
 .linked_box_in_object {
     width: auto;
-    max-width: 99%;
+    max-width: 100%;
     display: inline-block;
     background-color: #E9EDF1;
     border: 8px solid #E9EDF1;
-    border-radius: 2px;
     margin: 0px 0px 15px 0px;
 }
 
 
 .linked a {
     text-decoration: none;
-    color: rgba(44,126,118,0.6);
+    color: #4e8397;
     background-color: #E9EDF1 ;
     border: 4px solid #E9EDF1 ;
     border-radius: 2px;
@@ -461,14 +521,11 @@ li{
 
 #window {
     width: auto;
-    max-width: 99%;
+    max-width: 100%;
     background-color: #E9EDF1;
-    border: 6px solid #E9EDF1;
-    border-radius: 2px;
-    border-radius: 2px;
-    display: none;
+    border: 8px solid #E9EDF1;
     opacity: 1;
-    height: auto;
+    display: inline-block;
 }
 
 .linked_new a {
@@ -702,14 +759,16 @@ li a {
 }
 
 .universal_button  {
-    font-family: 'Trebuchet MS', sans-serif;
-    font-size: 12px;
+    font-family: tahoma, arial, verdana, sans-serif, 'Lucida Sans';
+    font-size: 11px;
+    font-weight: normal;
+    line-height: 16.5px;
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
     color: rgb(119, 119, 119);
     display: inline-block;
     cursor: pointer;
-    opacity: 0.5;
+    opacity: 0.7;
 }
 
 .universal_button:hover  {
@@ -729,25 +788,10 @@ li a {
     cursor: pointer;
 }
 
-.grid-item p { 
-   position: absolute; 
-   top: 10px; 
-   left: 0; 
-   color: white; 
-   font: bold 12px Helvetica, Sans-Serif; 
-   background: rgb(0, 0, 0); /* fallback color */
-   background: rgba(0, 0, 0, 0.7);
-   padding: 6px; 
-}
-
 .already_box {
     width: auto;
     display: inline-block;
 }
-
-.already_box:hover {
-}
-
 
 .source {
     opacity: 0.3;
@@ -777,25 +821,31 @@ li a {
     margin-top: -3px !important;
 }
 
+.grid-item:hover {
+    opacity: 1;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    transition: all 0.2s;
+}
+
+.grid-item p { 
+   position: absolute; 
+   top: 10px; 
+   left: 0; 
+   color: white; 
+   font: bold 12px Helvetica, Sans-Serif; 
+   background: rgb(0, 0, 0); /* fallback color */
+   background: rgba(0, 0, 0, 0.7);
+   padding: 6px; 
+}
+
 .grid-item-o img {
     width: 200px;
     opacity: 0.8;
     float: left;
     margin-top: -3px !important;
 }
-
-.grid-item:hover {
-    opacity: 1;
-}
-
-#grid[data-columns]::before {
-    content: '3 .column.size-1of3';
-}
-
-
-/* These are the classes that are going to be applied: */
-.column { float: left; }
-.size-1of3 { width: 33.333%;}
 
 img.image {
     width: 50%;
@@ -821,13 +871,21 @@ img.image:hover {
     overflow: hidden;
 }
 
+#grid[data-columns]::before {
+    content: '2 .column.size-1of2';
+}
+
+
+/* These are the classes that are going to be applied: */
+.column { float: left; }
+.size-1of2 { width: 50%;}
+
 #grid img {
     width: 100%;
 }
 
-#grid a:hover {
-    cursor: default;
-    opacity: 0.8;
+#grid a {
+    opacity: 0.9;
 }
 
 #grid p {
@@ -836,6 +894,16 @@ img.image:hover {
     margin-top: 12px;
     margin-left: 12px;
 }
+
+#grid a:hover {
+    cursor: default;
+    opacity: 1;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    transition: all 0.2s;
+}
+
 
 /*#grid #upload-file img {
     vertical-align: middle;
@@ -881,31 +949,45 @@ img.image:hover {
     cursor: pointer;
 }
 
-.grid2 .grid-item p { 
-   position: absolute; 
-   top: 10px; 
-   left: 0; 
-   color: white; 
-   font: bold 12px Helvetica, Sans-Serif; 
-   background: rgb(0, 0, 0); /* fallback color */
-   background: rgba(0, 0, 0, 0.7);
-   padding: 4px; 
+.ui-widget {
+    display: block;
 }
 
-.grid2 .grid-item {
-    width: 134px;
-    opacity: 0.8;
-    float: left;
-    margin-top: -3px !important;
+ul.ui-autocomplete {
+      width: auto;
+      max-width:334px;
+}
+ul.ui-autocomplete li.ui-menu-item {
+      width: 80px;
+      height: 110px;
+      float: left;
 }
 
-.grid2 .grid-item-o img {
-    width: 134px;
-    opacity: 0.8;
-    float: left;
-    margin-top: -3px !important;
+ul.ui-autocomplete img {
+    width: 90px;
+    height: 90px;
 }
 
-.grid2 .grid-item:hover {
-    opacity: 1;
+.llinked-obj {
+    width: 800px;
+    padding: 0px;
+    display: block;
+}
+
+.llinked-obj li {
+    margin: 11px;
+    display: inline-block;
+    list-style-type: none;
+    padding: 4px 10px;
+    border-radius: 2px;
+    background: #F7F7F7;
+}
+
+
+#university {
+    width: 170px;
+}
+
+.fuck-js {
+    display: none;
 }

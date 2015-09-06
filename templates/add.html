@@ -1,17 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
 <center>
-<h2  class='tagANDobject'>add new {{ tag_name }}</h2><br><h3 class='tagANDobject'>keep in mind, scope - abstract concept and your personal association with objects</h3>
+<h2 class='tagANDobject'>add new {{ tag_name }}</h2><br><h3 class='tagANDobject'>keep in mind, tag - your personal association with objects<br>click <a href="">here</a> to add object</h3>
 <br>
 <br>
-<div style='width: 520px;'>
+
+<div>
 <form id="add">
-    <input type="text" name="name" style="width:150px; margin: 0px 2px;" placeholder="Weird" value="{{ tag_name }}"/>
+    <input type="text" name="name" style="width:200px; margin: 0px 2px;" placeholder="Name" value="{{ tag_name }}"/><br>
 <!--<input type="text" name="name" style="width:150px; margin: 0px 2px;" placeholder="Sparkle" value="{{ tag_name }}"/>-->    
-    <input type="submit" form="add" value="add"/>
-    <textarea rows="11" cols="26" name="description" placeholder="1. adj u would call someone who is strange 
-2. (better definition) horny/kinky
-3. out of the ordinary, unusual but in a good way"></textarea>
+    <textarea rows="11" cols="25" name="description" placeholder="Description"></textarea><br>
+<div class="ui-widget">
+    <label for="university">Objects: </label>
+    <input id="university", name="university" />
+<ul class='llinked-obj'></ul>
+</div>
+<input type="submit" form="add" value="Okay"/>
     <!-- <textarea rows="11" cols="26" name="description" placeholder="A strange feeling inside your soul, whereby you have an inspiration and enthusiasm in your consciousness."></textarea>-->
 </form>
 <form id="add_fromwiki">
@@ -24,31 +28,16 @@
     <input type="submit" form="add_fromwiki" id='wide_submit' value="ok"/>
 </form>
 </div>
-<div class="grid2">
-    {% if show_objects|length == 0 %}
-        <h1>you should add some objects to collection and return to this page</h1>
-    {% else %}
-        {% for obj in show_objects %}
-            <div class="grid-item">
-                <a href="{{ url_for('obj_page', obj=obj['name']) }}">
-                <img style="width:100%; height: 100%;" src="/static/images/{{ obj['images'][0] }}" alt="" onerror="this.src='/static/white.png';" />
-                <p>{{ obj['name'] }}</p>
-                </a>
-            </div>
-        {% endfor %}
-    {% endif %}
-</div>
 </center>
-<!-- потом над будет прикрутить драгндроп что бы удобно было назначать объекты тегу -->
-<!-- <ul class="objects" style="margin-left: 50px;">
-  <h1>objects</h1>
-  {% for obj in show_objects %}
-    <li><a href="{{ url_for('obj_page', obj=obj) }}">{{ obj }}</a>
-  {% endfor %}
-</ul> -->
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#add_fromwiki input').keyup(function() {
+        $('.tagANDobject a').click(function() {
+            $('#add_fromwiki').toggle();
+            $('#add').toggle();
+            return false;
+        });
+
+        /*$('#add_fromwiki input').keyup(function() {
             if($(this).val() != ''){
                 $('#add_fromwiki input[type="text"]').not(this).css('opacity', '0.2').prop( "disabled", false );
                 $('#add input, #add textarea, #add').not(this).css('opacity', '0.2').prop( "disabled", true );
@@ -66,9 +55,11 @@
             else{
                 $('#add_fromwiki input').not(this).css('opacity', '1').prop( "disabled", false );
             }
-        });
+        });*/
     });
 </script>
+
+<!-- на случай важных переговоров -->
 <script type="text/javascript" src="{{ url_for('static', filename='scripts/mansonry.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='scripts/imagesloaded.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='scripts/lazyload/jquery.lazyload.min.js') }}"></script>
