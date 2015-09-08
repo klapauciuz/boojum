@@ -4,6 +4,25 @@ fieldset{border:0}
 a,a *{cursor:pointer}
 hr,img{border:0}
 
+h6 {
+    padding: 4px;
+    background-color: rgba(233,237,241, 1);
+    opacity: 0.6;
+    width: 26px;
+    display: inline-block;
+    float: left;
+}
+
+h6:nth-of-type(2) {
+    width: 320px;
+    display: none;
+    background-color: rgba(233,237,241, 0);
+    font-size: 50px;
+    color: #E9EDF1;
+    opacity: 1;
+    float: none;
+}
+
 body {
     background: #fff;
     font-family: tahoma, arial, verdana, sans-serif, 'Lucida Sans';
@@ -443,9 +462,14 @@ li{
 }
 
 #add_linked_tag {
-    display: inline-block;
+    display: inline;
+    float: left;
     cursor: pointer;
-    opacity: 0.5;
+    font-weight: bold;
+    opacity: 0.4;
+    font-size: 9px;
+    padding: 4px;
+    background-color: rgba(233,237,241, 1);
 }
 
 #add_linked_tag:hover {
@@ -477,14 +501,22 @@ li{
 
 
 .linked_box_in_object {
-    width: auto;
+    width: 100%;
     max-width: 100%;
     display: inline-block;
     background-color: #E9EDF1;
     border: 8px solid #E9EDF1;
-    margin: 0px 0px 15px 0px;
+    margin: 0px 0px 0px 0px;
 }
 
+#window {
+    width: 100%;
+    max-width: 100%;
+    background-color: #E9EDF1;
+    border: 8px solid #E9EDF1;
+    opacity: 1;
+    display: none;
+}
 
 .linked a {
     text-decoration: none;
@@ -518,20 +550,10 @@ li{
     font-size: 11px;
 }
 
-
-#window {
-    width: auto;
-    max-width: 100%;
-    background-color: #E9EDF1;
-    border: 8px solid #E9EDF1;
-    opacity: 1;
-    display: inline-block;
-}
-
 .linked_new a {
     font-size: 11px;
     text-decoration: none;
-    color: rgba(44,126,118,0.6);
+    color: #4e8397;
     background-color: #E9EDF1 ;
     border: 4px solid #E9EDF1 ;
     border-radius: 2px;
@@ -724,9 +746,10 @@ li a {
 }
 
 .description {
-    width: 98%;
+    width: 100%;
     margin-bottom: 12px;
     display: block;
+    padding: 4px;
 }
 
 #del_obj, #del_tag {
@@ -790,7 +813,7 @@ li a {
 
 .already_box {
     width: auto;
-    display: inline-block;
+    display: inline;
 }
 
 .source {
@@ -837,7 +860,7 @@ li a {
    font: bold 12px Helvetica, Sans-Serif; 
    background: rgb(0, 0, 0); /* fallback color */
    background: rgba(0, 0, 0, 0.7);
-   padding: 6px; 
+   padding: 4px 6px; 
 }
 
 .grid-item-o img {
