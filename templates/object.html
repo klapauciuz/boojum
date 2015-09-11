@@ -23,7 +23,8 @@ $(document).ready(function(){
 	    function handle1() {
 	        $('#add_linked_tag').addClass('pushed');
 	    	$('#window').css('display', 'block');
-	    	$('#window').prev().show()
+	    	$('#window').prev().css('display', 'block');
+	    	$('#window').prev().prev().css('display', 'block');
 	        $('#add_linked_tag').one('click', handle2);
 	    }
 
@@ -31,6 +32,7 @@ $(document).ready(function(){
 	        $('#add_linked_tag').removeClass('pushed');
 	    	$('#window').hide();
 	    	$('#window').prev().hide()
+	    	$('#window').prev().prev().hide()	
 	        $('#add_linked_tag').one('click', handle1);
 	    }
 	    $('#add_linked_tag').one('click', handle1);
@@ -72,7 +74,6 @@ $(document).ready(function(){
 	$('#source').css('opacity', '1');
 </script>
 </h3>
-<center>
 <h6>Tags</h6><span id="add_linked_tag">+</span>
 <div class='linked_box_in_object'>
 	<span class='linked'>
@@ -90,6 +91,7 @@ $(document).ready(function(){
 </div>
 
 <h6>&#8645;</h6>
+<h6>Your tags</h6>
 <div id='window'>
 	<span class='linked_new'>
 			{% for ut in user_tags %}
@@ -97,7 +99,6 @@ $(document).ready(function(){
 			{% endfor %}
 	</span>
 </div>
-</center>
 </div>
 <div class='images'>
 <div id="grid" data-columns>

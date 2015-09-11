@@ -10,16 +10,33 @@ h6 {
     opacity: 0.6;
     width: 26px;
     display: inline-block;
-    float: left;
+    margin-left: 4px;
+}
+
+h6.in-tags {
+    padding: 4px;
+    background-color: rgba(233,237,241, 1);
+    opacity: 0.6;
+    width: 38px;
+    display: inline-block;
 }
 
 h6:nth-of-type(2) {
-    width: 320px;
     display: none;
     background-color: rgba(233,237,241, 0);
-    font-size: 50px;
+    font-size: 30px;
     color: #E9EDF1;
     opacity: 1;
+    float: none;
+    margin-left: 1.5%;
+}
+
+h6:nth-of-type(3) {
+    padding: 4px;
+    background-color: rgba(233,237,241, 1);
+    opacity: 0.6;
+    width: 48px;
+    display: none;
     float: none;
 }
 
@@ -59,7 +76,7 @@ a:hover, #profile a:hover {
 
 .image-upload img {
     cursor: pointer !important;
-    margin-top: 11px;
+    margin-top: 10px;
     margin-right: 12px;
 }
 
@@ -222,8 +239,8 @@ div.page div.navigation a {
 }
 
 .all {
+    width: 100%;
     background: #E9EDF1;
-    border-radius: 2px 0px 0px 2px;
 }
 
 h2 {
@@ -239,6 +256,7 @@ h2.name {
     width: auto;
     font-size: 19px;
     color: #4e7097;
+    border-radius: 0px;
     background: #E9EDF1;
     background-image: -webkit-linear-gradient(top, #E9EDF1, #ffffff);
     background-image: -moz-linear-gradient(top, #E9EDF1, #ffffff);
@@ -246,7 +264,7 @@ h2.name {
     background-image: -o-linear-gradient(top, #E9EDF1, #ffffff);
     background-image: linear-gradient(to bottom, #E9EDF1, #ffffff);
     padding: 4px;
-    border-radius: 0px 0px 2px 0px;
+    padding-top: 2px;
     display: inline-block;
 }
 
@@ -463,7 +481,6 @@ li{
 
 #add_linked_tag {
     display: inline;
-    float: left;
     cursor: pointer;
     font-weight: bold;
     opacity: 0.4;
@@ -494,9 +511,12 @@ li{
 
 
 .linked_box {
-    margin: 15px 0px;
+    padding: 3px 0px;
     display: block;
-    width: 97%;
+    height: 600px;
+    width: 100%;
+    max-width: 100%;
+    background-color: #E9EDF1;
 }
 
 
@@ -746,7 +766,7 @@ li a {
 }
 
 .description {
-    width: 100%;
+    width: 99%;
     margin-bottom: 12px;
     display: block;
     padding: 4px;
@@ -838,7 +858,7 @@ li a {
 }
 
 .grid-item {
-    width: 200px;
+    width: 150px;
     opacity: 0.8;
     float: left;
     margin-top: -3px !important;
@@ -881,14 +901,15 @@ img.image:hover {
 
 .shroomz {
     display: inline;
-    width: 60%;
+    width: 61%;
     float: left;
 }
 
 .images {
-    background-color: transparent;
-    width: 40%;
-    float: right;
+    background-color: rgba(233,237,241,0.7);
+    border-left: 2px solid #E9EDF1;
+    width: 38%;
+    float: left;
     display: inline;
     height: 91%;
     overflow: hidden;
@@ -904,7 +925,10 @@ img.image:hover {
 .size-1of2 { width: 50%;}
 
 #grid img {
-    width: 100%;
+    width: 99.2%;
+    margin: 1px;
+    margin-left: 0px;
+    margin-right: 2px;
 }
 
 #grid a {
