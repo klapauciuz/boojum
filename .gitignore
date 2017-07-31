@@ -2,3 +2,4 @@ db/mongod.lock
 *.jpg
 *.png
 *.gif
+*.png

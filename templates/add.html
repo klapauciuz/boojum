@@ -4,7 +4,6 @@
 <h2 class='tagANDobject'>add new {{ tag_name }}</h2><br><h3 class='tagANDobject'>keep in mind, tag - your personal association with objects<br>click <a href="">here</a> to add object</h3>
 <br>
 <br>
-<<<<<<< HEAD
 <div class='MainContainer'>
 <form id="add">
     <h3>Enter name of tag</h3>
@@ -16,8 +15,6 @@
     <input type="submit" form="add" value="add"/>
     <h3>Выберите объекты, которые на ваш взгляд описывает данный тег</h3>
     <input type="text" name="objects" placeholder="Weird" value="{{ tag_name }}"/><br>
-=======
-
 <div>
 <form id="add">
     <input type="text" name="name" style="width:200px; margin: 0px 2px;" placeholder="Name" value="{{ tag_name }}"/><br>
@@ -29,7 +26,6 @@
 <ul class='llinked-obj'></ul>
 </div>
 <input type="submit" form="add" value="Okay"/>
->>>>>>> fc86621c6415a4f0ff3138fa107506ceca1409f4
     <!-- <textarea rows="11" cols="26" name="description" placeholder="A strange feeling inside your soul, whereby you have an inspiration and enthusiasm in your consciousness."></textarea>-->
 </form>
 <form id="add_fromwiki">
@@ -42,7 +38,6 @@
     <input type="submit" form="add_fromwiki" id='wide_submit' value="ok"/>
 </form>
 </div>
-<<<<<<< HEAD
 <br>
 </center>
 <div class="grid2">
@@ -59,9 +54,7 @@
         {% endfor %}
     {% endif %}
 </div>
-=======
 </center>
->>>>>>> fc86621c6415a4f0ff3138fa107506ceca1409f4
 <script type="text/javascript">
     $(document).ready(function() {
         $('.tagANDobject a').click(function() {
@@ -93,7 +86,7 @@
 
                 $('#add_fromwiki input').not(this).css('opacity', '1').prop( "disabled", false );
             }
-<<<<<<< HEAD
+
         });
 
         $('#add textarea').keyup(function() {
@@ -111,9 +104,7 @@
                     }
         });
 
-=======
         });*/
->>>>>>> fc86621c6415a4f0ff3138fa107506ceca1409f4
     });
 </script>
 
