@@ -15,7 +15,7 @@ $('#add_tag, #del_tag').on('click', function(event) {
                 self.fadeTo(speed, 0, function() {
                     self.toggleClass('add del').attr("id","del_tag").html('<img src="/static/post_old.gif"> del');
                 });
-                self.fadeTo(speed, 1);
+                self.fadeTo(speed, 0.5);
                 self.hover(
                   function() {
                     self.css('opacity', 1);
@@ -29,7 +29,7 @@ $('#add_tag, #del_tag').on('click', function(event) {
                 self.fadeTo(speed, 0, function() {
                     self.toggleClass('del add').attr("id","add_tag").html('<img src="/static/post_new.gif"> add');                
                 });
-                self.fadeTo(speed, 1);
+                self.fadeTo(speed, 0.5);
                 self.hover(
                   function() {
                     self.css('opacity', 1);
@@ -59,7 +59,7 @@ $('#add_obj, #del_obj').on('click', function(event) {
                 self.fadeTo(speed, 0, function() {
                     self.toggleClass('add del').attr("id","del_obj").html('<img src="/static/post_old.gif"> del');
                 });
-                self.fadeTo(speed, 1);
+                self.fadeTo(speed, 0.5);
                 self.hover(
                   function() {
                     self.css('opacity', 1);
@@ -73,7 +73,7 @@ $('#add_obj, #del_obj').on('click', function(event) {
                 self.fadeTo(speed, 0, function() {
                     self.toggleClass('del add').attr("id","add_obj").html('<img src="/static/post_new.gif"> add');
                 });
-                self.fadeTo(speed, 1);
+                self.fadeTo(speed, 0.5);
                 self.hover(
                   function() {
                     self.css('opacity', 1);

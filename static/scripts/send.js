@@ -1,23 +1,64 @@
 /*Добавление и удаление тегов*/
 $(document).ready(function(){
-    $('form#add').submit(function(event) {
-        event.preventDefault();
-        var self = $(this),
-        postData = self.serializeArray();
+    if(document.URL.indexOf("add") >= 0){ 
+        var arr = [];
+        $( "#university" ).autocomplete({
+            source: function( request, response ) {
+                $.getJSON("/autocomplete", {
+                    search: request
+                }, function( data ) {
+                    response($.map(data, function (item) {
+                        console.log(item._id['$oid']);
+                        if ( arr.indexOf( item._id['$oid'] ) > -1 ) {
+                            return;
+                        }
+                        if(item.images[0]) {    
+                            var icon = '/static/images/' + item.images[0].toString().split(",");
+                        } else { var icon = ''}
+                        return {
+                            value: item.name.toString().split(","),
+                            label: item.name.toString().split(","),
+                            id: item._id,
+                            icon: icon
+                        };
+                    }));
 
-        $.ajax({
-            url : '/tags/add',
-            type: 'POST',
-            data : postData,
-            success:function(response) {
-                console.log(response);
-                window.location.replace("/tags/"+response);
+                    });
             },
-            error: function(err) {
-              console.log(JSON.stringify(err));
-            }
+            select: function (e, ui) {
+                console.log(ui.item.label[0] + ':' + ui.item.id['$oid']);
+                $('.llinked-obj').append('<li>' + ui.item.label[0] + '</li>');
+                $(this).val(''); 
+                arr.push(ui.item.id['$oid']);
+                return false;
+            },
+            minLength: 2,
+            }).data("ui-autocomplete")._renderItem = function (ul, item) {
+                console.log(item);
+                return $( "<li></li>" )
+                    .data("ui-autocomplete-item", item)
+                    .append("<a class='trigger' maxlength='10'>" + item.label + "<img src='" + item.icon + "' /></a>")
+                    .appendTo(ul);
+        };
+        $('form#add').submit(function(event) {
+            event.preventDefault();
+            var self = $(this),
+            postData = self.serializeArray();
+            postData.push({ name: "objects", value: arr });
+            $.ajax({
+                url : '/tags/add',
+                type: 'POST',
+                data : postData,
+                success:function(response) {
+                    console.log(response);
+                    window.location.replace("/tags/"+response);
+                },
+                error: function(err) {
+                  console.log(JSON.stringify(err));
+                }
+            });
         });
-    });
+    }
     $('#delete').click(function(event) {
         event.preventDefault();
         var self = $(this),

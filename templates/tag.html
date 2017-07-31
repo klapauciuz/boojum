@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="all">
-<h2 class='name'>{{ name }}</h2>
+<h3>{{ name }}</h3>
 <div class="already_box">
 {% if g.user %}
 		{% if myTag %}
@@ -11,7 +10,7 @@
 		{% endif %}
 	{% if g.user['username'] == creator %}
 		<div class="universal_button share" type="submit"><img src="/static/textedit.png"> edit</div>
-		<div class="universal_button share" id="delete" type="submit"><img src="/static/trash1.gif"> delete</div>
+		<div class="universal_button share" id="delete" type="submit"><img src="/static/trash1.gif"> remove</div>
 	{% else %}
 		<div class="universal_button share" type="submit"><img src="/static/textedit.png"> suggest edit</div>
 	{% endif %}
@@ -20,10 +19,19 @@
 {% endif %}
 	<div class="universal_button share" type="submit"><img src="/static/share.png"> share</div>
 </div>
+<<<<<<< HEAD
+<h5>{{ description }}</h5>
+<sup>
+<p>by <a href="{{ url_for('user', user=creator) }}">{{ creator }}</a></p>
+</sup>
+
+=======
 </div>
-<h3>{{ description }}
+<h3 class='description'>{{ description }}
 <div class='source'>by <a href="{{ url_for('user', user=creator) }}">{{ creator }}</a></div>
 </h3>
+<h6 class='in-tags'>Objects</h6>
+>>>>>>> fc86621c6415a4f0ff3138fa107506ceca1409f4
 <div class='linked_box'>
 <div class="grid">
     {% for obj in show_objects %}
@@ -44,13 +52,17 @@ $(document).ready(function() {
 	$('.grid').masonry({
 	  // options
 	  itemSelector: '.grid-item',
-	  columnWidth: 200
+<<<<<<< HEAD
+	  columnWidth: 160
+=======
+	  columnWidth: 150
+>>>>>>> fc86621c6415a4f0ff3138fa107506ceca1409f4
 	});
 	
 	$(".grid-item img").lazyload({
 	    effect: 'fadeIn',
 	    effectspeed: 1000,
-	    threshold: 200
+	    threshold: 150
 	});
 	$('.grid-item img').load(function() {
 	    masonry_update();
@@ -62,7 +74,11 @@ $(document).ready(function() {
 	        $works_list.masonry({
 	            itemSelector: '.grid-item',　
 	            isFitWidth: true,　
-	            columnWidth: 200
+<<<<<<< HEAD
+	            columnWidth: 160
+=======
+	            columnWidth: 150
+>>>>>>> fc86621c6415a4f0ff3138fa107506ceca1409f4
 	        });
 	    });
 	 };

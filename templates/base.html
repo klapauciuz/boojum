@@ -2,12 +2,27 @@
 <html>
 <head>
   <title></title>
+  <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='sumoselect.css') }}">
-  <script type="text/javascript" src="{{ url_for('static', filename='scripts/bower_components/jquery/dist/jquery.js') }}"></script>
+  
+
   <script type="text/javascript" src="{{ url_for('static', filename='scripts/jquery.sumoselect.min.js') }}"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='scripts/send.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='scripts/add.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='scripts/linktag.js') }}"></script>
@@ -17,6 +32,13 @@
   <script type="text/javascript" src="{{ url_for('static', filename='scripts/jQuery-File-Upload-9.10.4/js/vendor/jquery.ui.widget.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='scripts/jQuery-File-Upload-9.10.4/js/jquery.fileupload.js') }}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/packery/1.4.2/packery.pkgd.min.js"></script>
+<<<<<<< HEAD
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+=======
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+>>>>>>> fc86621c6415a4f0ff3138fa107506ceca1409f4
   <script type="text/javascript">
     $(document).ready(function(){
       setTimeout(function(){
@@ -27,38 +49,28 @@
 </head>
 <body>
 {% block header %}
-<center>
-<div id='Boojum'>Boojum</div>
-</center>
 <div id='menu'>
-  <big style='float:left;'>
-    <a href="/add">add new</a> 
+  <div style='float:left;'>
     <a href="/">trends</a>
-  </big>
+  </div>
+  <div id='Boojum'>Boojum</div>
   {% if g.user %}
-  <big style='float:right;'>
-    <a href="/collection" style='padding-right: 0px;'>collection</a> <span id='profile'><sup>[{{ g.user['username'] }}]</sup></span> 
-    <a href="/howtouse">how to use</a> 
-    <a href="/logout">logout</a>
-  </big>
+    <div style='float:right;'>
+      <a href="/collection">your collection</a></span> 
+      <a href="/howtouse">what is it</a> 
+      <a href="/logout" style="opacity: 0.5;">logout</a>
+    </div>
   {% else %}
-  <big style='float:right;'>
-    <a href="/howtouse">how to use</a> 
-    <a href="/login">login</a>/<a href="/register">sign up</a>
-  </big>
+    <div style='float:right;'>
+      <a href="/howtouse">what is it</a> 
+      <a href="/login">login</a>
+      <a href="/register">sign up</a>
+    </div>
   {% endif %}
-  <!-- <hr style="border-color: gray"> -->
 </div>
 {% endblock header %}
-{% with flashes = get_flashed_messages() %}
-  {% if flashes %}
-    <ul class="flashes">
-    {% for message in flashes %}
-      <li>{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
-{% block content %}{% endblock  %}
+<center>
+  {% block content %}{% endblock  %}
+</center>
 </body>
 </html>

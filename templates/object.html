@@ -6,22 +6,33 @@
 {% block content %}
 <script type="text/javascript">
 $(document).ready(function(){
+	console.log($('.linked_box_in_object').width());
+	if($('.linked_box_in_object').width() > 200) {
+		$('.linked_box_in_object').css('border-radius', '0px');
+	}
 	    var tagsArray =JSON.parse('{{show_tags|tojson|safe}}'); 		
 	    $('.linked_new a').each(function () {
 	    	if(jQuery.inArray($(this).text(), tagsArray) !== -1) {
 	    		$('.linked_new a:contains('+$(this).text()+')').hide();
-	    	} 
+	    	}
 	    });
-
+	    if($('.linked_new').children(':visible').length == 0) {
+				$('#window').hide();
+			   // action when all are hidden
+			}
 	    function handle1() {
 	        $('#add_linked_tag').addClass('pushed');
-	    	$('#window').css('display', 'inline-block');
+	    	$('#window').css('display', 'block');
+	    	$('#window').prev().css('display', 'block');
+	    	$('#window').prev().prev().css('display', 'block');
 	        $('#add_linked_tag').one('click', handle2);
 	    }
 
 	    function handle2() {
 	        $('#add_linked_tag').removeClass('pushed');
 	    	$('#window').hide();
+	    	$('#window').prev().hide()
+	    	$('#window').prev().prev().hide()	
 	        $('#add_linked_tag').one('click', handle1);
 	    }
 	    $('#add_linked_tag').one('click', handle1);
@@ -55,7 +66,9 @@ $(document).ready(function(){
 {% endif %}
 </div>
 <h3 class='description'>{{ description }}
+<sup>
 <div class='source'><a id='source' href="{{ source }}" target='_blank'>{{ source }}</a></div>
+</sup>
 <script type="text/javascript">
 	var source = '{{ source }}';
 	var source = decodeURIComponent(source);
@@ -63,6 +76,7 @@ $(document).ready(function(){
 	$('#source').css('opacity', '1');
 </script>
 </h3>
+<h6>Tags</h6><span id="add_linked_tag">+</span>
 <div class='linked_box_in_object'>
 	<span class='linked'>
 	{% if show_tags|length == 0 %}
@@ -74,10 +88,12 @@ $(document).ready(function(){
 	{% endif %}
 	</span>
 	{% if g.user %}
-	<div id="add_linked_tag" type="submit"><img src="/static/add3.png"></div>
 	{% else %}
 	{% endif %}
 </div>
+
+<h6>&#8645;</h6>
+<h6>Your tags</h6>
 <div id='window'>
 	<span class='linked_new'>
 			{% for ut in user_tags %}
@@ -89,7 +105,7 @@ $(document).ready(function(){
 <div class='images'>
 <div id="grid" data-columns>
 {% for img in images %}
-<a href="/static/images/{{ img }}" target='_blank'><img src="/static/images/{{ img }}"></a>
+<a href="/static/images/{{ img }}" target='_blank'><img class='grid-inner-image' src="/static/images/{{ img }}"></a>
 {% endfor %}
 </div>
 </div>

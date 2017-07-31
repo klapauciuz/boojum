@@ -1,29 +1,42 @@
 {% extends "base.html" %}
 {% block content %}
-<center>
-  <h2 class='tagANDobject'>{{ g.user['username'] }}'s</h2>
-  <br><h3 class='tagANDobject'>collection</h3><br>
-  <div class='MainContainer'>
-  <ul class="tags">
-  <h1>scopes<sup class='fill'><img src="/static/update.png"></sup></h1><!-- <div class='fill'>fill from objects</div> -->
-  {% for tag in show_tags %}
-    <li><a href="{{ url_for('tag_page', tag=tag) }}">{{ tag }}</a></li>
-  {% endfor %}
-  </ul>
-  <ul class="objects">
-  <h1>objects<sup class='fill'><img src="/static/update.png"></sup></h1><!-- <div class='fill' style='width: 100%;'>fill from scopes</div> -->
-  {% for obj in show_objects %}
-    <li><a href="{{ url_for('obj_page', obj=obj) }}">{{ obj }}</a></li>
-  {% endfor %}
-  </ul>
-  <ul class="people">
-  <h1>people</h1><!-- <div class='fill' style='width: 100%;'>fill from scopes</div> -->
+  <div class="all">
+	  <div class="panel panel-success scopes">
+	    <!-- Default panel contents -->
+	    <div class="panel-heading"><strong>Tags</strong></div>
+
+
+	    <!-- Table -->
+	    <table class="table">
+	      {% for tag in show_tags %}
+	      <tr>
+	        <td><a href="{{ url_for('tag_page', tag=tag) }}">{{ tag }}</a></td>
+	      </tr>
+	      {% endfor %}
+	    </table>
+	  </div>
+	  <div class="panel panel-warning objects">
+	    <!-- Default panel contents -->
+	    <div class="panel-heading"><STRONG>Objects</STRONG></div>
+
+
+	    <!-- Table -->
+	    <table class="table">
+	      {% for obj in show_objects %}
+	      <tr>
+	        <td><a href="{{ url_for('tag_page', tag=tag) }}">{{ obj }}</a></td>
+	      </tr>
+	      {% endfor %}
+	    </table>
+	  </div>
+  </div>
+  
+  <!-- <ul class="people">
+  <h3>people</h3>
   {% for friend in show_friends %}
     <li><a href="{{ url_for('user', user=friend) }}">{{ friend }}</a></li>
   {% endfor %}
-  </ul>
-  </div>
-</center>
+  </ul> -->
   <script type="text/javascript">
   /*$(document).ready(function(){
     $('.objects').hover(function() {

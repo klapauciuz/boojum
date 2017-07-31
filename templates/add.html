@@ -1,17 +1,35 @@
 {% extends "base.html" %}
 {% block content %}
 <center>
-<h2  class='tagANDobject'>add new {{ tag_name }}</h2><br><h3 class='tagANDobject'>keep in mind, scope - abstract concept and your personal association with objects</h3>
+<h2 class='tagANDobject'>add new {{ tag_name }}</h2><br><h3 class='tagANDobject'>keep in mind, tag - your personal association with objects<br>click <a href="">here</a> to add object</h3>
 <br>
 <br>
-<div style='width: 520px;'>
+<<<<<<< HEAD
+<div class='MainContainer'>
 <form id="add">
-    <input type="text" name="name" style="width:150px; margin: 0px 2px;" placeholder="Weird" value="{{ tag_name }}"/>
-<!--<input type="text" name="name" style="width:150px; margin: 0px 2px;" placeholder="Sparkle" value="{{ tag_name }}"/>-->    
-    <input type="submit" form="add" value="add"/>
-    <textarea rows="11" cols="26" name="description" placeholder="1. adj u would call someone who is strange 
+    <h3>Enter name of tag</h3>
+    <input type="text" name="name" placeholder="Weird" value="{{ tag_name }}"/><br>
+    <h3>Enter description</h3>
+    <textarea rows="11" cols="50" name="description" placeholder="1. adj u would call someone who is strange 
 2. (better definition) horny/kinky
-3. out of the ordinary, unusual but in a good way"></textarea>
+3. out of the ordinary, unusual but in a good way"></textarea><br>
+    <input type="submit" form="add" value="add"/>
+    <h3>Выберите объекты, которые на ваш взгляд описывает данный тег</h3>
+    <input type="text" name="objects" placeholder="Weird" value="{{ tag_name }}"/><br>
+=======
+
+<div>
+<form id="add">
+    <input type="text" name="name" style="width:200px; margin: 0px 2px;" placeholder="Name" value="{{ tag_name }}"/><br>
+<!--<input type="text" name="name" style="width:150px; margin: 0px 2px;" placeholder="Sparkle" value="{{ tag_name }}"/>-->    
+    <textarea rows="11" cols="25" name="description" placeholder="Description"></textarea><br>
+<div class="ui-widget">
+    <label for="university">Objects: </label>
+    <input id="university", name="university" />
+<ul class='llinked-obj'></ul>
+</div>
+<input type="submit" form="add" value="Okay"/>
+>>>>>>> fc86621c6415a4f0ff3138fa107506ceca1409f4
     <!-- <textarea rows="11" cols="26" name="description" placeholder="A strange feeling inside your soul, whereby you have an inspiration and enthusiasm in your consciousness."></textarea>-->
 </form>
 <form id="add_fromwiki">
@@ -24,6 +42,9 @@
     <input type="submit" form="add_fromwiki" id='wide_submit' value="ok"/>
 </form>
 </div>
+<<<<<<< HEAD
+<br>
+</center>
 <div class="grid2">
     {% if show_objects|length == 0 %}
         <h1>you should add some objects to collection and return to this page</h1>
@@ -38,17 +59,18 @@
         {% endfor %}
     {% endif %}
 </div>
+=======
 </center>
-<!-- потом над будет прикрутить драгндроп что бы удобно было назначать объекты тегу -->
-<!-- <ul class="objects" style="margin-left: 50px;">
-  <h1>objects</h1>
-  {% for obj in show_objects %}
-    <li><a href="{{ url_for('obj_page', obj=obj) }}">{{ obj }}</a>
-  {% endfor %}
-</ul> -->
+>>>>>>> fc86621c6415a4f0ff3138fa107506ceca1409f4
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#add_fromwiki input').keyup(function() {
+        $('.tagANDobject a').click(function() {
+            $('#add_fromwiki').toggle();
+            $('#add').toggle();
+            return false;
+        });
+
+        /*$('#add_fromwiki input').keyup(function() {
             if($(this).val() != ''){
                 $('#add_fromwiki input[type="text"]').not(this).css('opacity', '0.2').prop( "disabled", false );
                 $('#add input, #add textarea, #add').not(this).css('opacity', '0.2').prop( "disabled", true );
@@ -61,14 +83,41 @@
 
         $('#add input').keyup(function() {
             if($('#add input').val() != ''){
+                $('#add h3:nth-child(1)').fadeTo('slow', 0);
+                $('#add h3:nth-of-type(2)').fadeTo('slow', 1);
+                $('#add textarea').fadeTo('slow', 1);
                 $('#add_fromwiki input').css('opacity', '0.2').prop( "disabled", true );
             }
             else{
+                $('#add h3:nth-child(1)').fadeTo('slow', 1);
+
                 $('#add_fromwiki input').not(this).css('opacity', '1').prop( "disabled", false );
             }
+<<<<<<< HEAD
         });
+
+        $('#add textarea').keyup(function() {
+            $(this).attr("placeholder", "");
+                if($(this).val() != ''){
+                        $('#add h3:nth-of-type(2)').fadeTo('fast', 0);
+                        $('#add h3:nth-of-type(3)').fadeTo('slow', 1);
+                        $('#add input[name="objects"]').fadeTo('slow', 1);
+                        $('.grid2').fadeTo('slow', 1);
+                        $('#add input[type="submit"]').fadeTo('fast', 1);
+                    }
+                    else{
+                        $('#add h3:nth-of-type(2)').fadeTo('fast', 1);
+                        $('#add h3:nth-of-type(3)').fadeTo('slow', 0);
+                    }
+        });
+
+=======
+        });*/
+>>>>>>> fc86621c6415a4f0ff3138fa107506ceca1409f4
     });
 </script>
+
+<!-- на случай важных переговоров -->
 <script type="text/javascript" src="{{ url_for('static', filename='scripts/mansonry.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='scripts/imagesloaded.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='scripts/lazyload/jquery.lazyload.min.js') }}"></script>

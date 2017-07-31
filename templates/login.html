@@ -1,18 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-<center>
-<h2>try Boojom</h2>
-<h3>association experiment</h3><br>
-<h2>Sign In</h2>
-  {% if error %}<div class="error"><strong>Error:</strong> {{ error }}</div>{% endif %}
-  <form action="" method="post">
-    <dl>
-      <dt>Username
-      <dd><input type="text" name="username" size="30" value="{{ request.form.username }}">
-      <dt>Password
-      <dd><input type="password" name="password" size="30">
-    </dl>
-    <div class="actions"><input type="submit" value="Sign In"></div><br><h3>..not yet with Boojom? <a href="/register">sign up</a>, slowpoke</h3>
-  </form>
-</center>
+<form class="form-signin" method='post'>
+  <label for="inputEmail" class="sr-only">Email address</label>
+  <input name="username" type="username" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+  <label for="inputPassword" class="sr-only">Password</label>
+  <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+  <br>
+  <button class="btn btn-lg btn-block but" type="submit">Sign in</button>
+</form>
 {% endblock content %}
