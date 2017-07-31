@@ -11,9 +11,7 @@ import re
 import os
 
 app = Flask(__name__)
-
 client = MongoClient('localhost', 27017)
-
 db = client['boojom']
 tags = db.tags
 objects = db.objects
